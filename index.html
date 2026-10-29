@@ -1187,7 +1187,7 @@ function fmt(n){
 }
 
 /* --- rebirth çarpanı --- */
-function rebirthMult(){ return 1 + state.rebirths * 0.5; }
+function rebirthMult(){ return 1 + state.rebirths * 0.4; }
 function petMult(){
   let m = 1;
   for (const p of state.pets) m += p.mult;
@@ -1289,7 +1289,7 @@ function tryBuy(i){
   if (state.owned[i] !== null) return;
   const def = STATIONS[i];
   /* rebirth indirimli fiyat */
-  const price = Math.round(def.p * Math.pow(0.88, state.rebirths));
+  const price = Math.round(def.p * Math.pow(0.92, state.rebirths));
   if (state.coins < price) {
     if (!pads[i].denied){
       pads[i].denied = true;
@@ -1354,7 +1354,7 @@ function doRebirth(){
   state.owned.fill(null);
 
   /* sıfırlama maliyetlerini düşür: her rebirth %12 daha hızlı dönüş */
-  const discount = Math.pow(0.88, state.rebirths);
+  const discount = Math.pow(0.92, state.rebirths);
 
   for (const p of pads){
     if (p.obj) { scene.remove(p.obj); p.obj = null; }
@@ -1655,7 +1655,7 @@ function onNet(d, conn){
         if (d.o[i] !== null && state.owned[i] === null){
           state.owned[i] = d.o[i];
           if (d.o[i] === state.myId){
-            state.coins -= Math.round(STATIONS[i].p * Math.pow(0.88, state.rebirths));
+            state.coins -= Math.round(STATIONS[i].p * Math.pow(0.92, state.rebirths));
             toast('+' + fmt(STATIONS[i].i) + '/sn\n' + STATIONS[i].n + '!');
             floater('+' + fmt(STATIONS[i].i) + '/sn', {x:STATIONS[i].x, y:3.2, z:STATIONS[i].z}, '#ffe14d');
             sfxBuy();
