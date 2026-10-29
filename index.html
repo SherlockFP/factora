@@ -210,7 +210,7 @@ document.body.appendChild(renderer.domElement);
 const SKY = 0x8fdcff;
 const scene = new THREE.Scene();
 scene.background = new THREE.Color(SKY);
-scene.fog = new THREE.Fog(SKY, 70, 190);
+scene.fog = new THREE.Fog(SKY, 55, 130);
 
 const camera = new THREE.PerspectiveCamera(60, innerWidth/innerHeight, 0.05, 400);
 camera.rotation.order = 'YXZ';
@@ -533,7 +533,7 @@ const STATIONS = [
 ];
 
 /* Bölge 1: ana plazanın arkasında, offset ile ayrı bir platform */
-const ZONE1_OFFSET = { x: 0, z: -70 };
+const ZONE1_OFFSET = { x: 0, z: -120 };
 
 /* Yerleşim: oyuncu (0,14)'te doğar ve -z yönüne bakar.
    Ön sıra ucuz tezgahlar (yolun tam üstünde Limonata), arka sıra pahalılar. */
@@ -2700,6 +2700,8 @@ function tick(){
       playerPos.set(ZONE1_OFFSET.x, 0, ZONE1_OFFSET.z + 9);
       burst(playerPos.x, 1.6, playerPos.z, [0x9b8bff, 0xffffff, 0xffd400], 24);
       toast('Bölge 2\'ye hoş geldin!');
+      /* sis ve kamera menzilini geçici olarak uzat */
+      state.inZone1 = true;
     }
   }
 
@@ -2713,7 +2715,13 @@ function tick(){
     playerPos.set(-13, 0, 0);
     burst(playerPos.x, 1.6, playerPos.z, [0x54e0d0, 0xffffff], 24);
     toast('Ana Plaza');
+    state.inZone1 = false;
   }
+
+  /* bölgeye göre sis: bölge 2 uzakta olduğu için görüş menzili uzatılır */
+  const fogNear = state.inZone1 ? 55 : 55;
+  const fogFar  = state.inZone1 ? 130 : 95;
+  if (scene.fog.far !== fogFar){ scene.fog.far = fogFar; }
 
   /* su animasyonu */
   for (const w of decorAnimated){ if (w) w.rotation.y += dt * 0.35; }
