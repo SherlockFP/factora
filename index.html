@@ -1037,6 +1037,33 @@ function playSample(name, vol, rateJitter){
   return true;
 }
 
+/* --- arka plan müziği (tek döngü, düşük ses) --- */
+let musicSrc = null, musicGain = null;
+const MUSIC_URL = 'https://cdn.jsdelivr.net/gh/KenneyNL/Starter-Kit-City-Builder@main/sounds/ambience.ogg';
+const sfxWantMusic = localStorage.getItem('tatli_music') !== '0';
+
+function startMusic(){
+  if (!sfxWantMusic) return;
+  const a = audio();
+  if (!a || musicSrc) return;
+  fetch(MUSIC_URL)
+    .then(r => r.ok ? r.arrayBuffer() : Promise.reject(r.status))
+    .then(b => a.decodeAudioData(b))
+    .then(buf => {
+      musicSrc = a.createBufferSource();
+      musicSrc.buffer = buf;
+      musicSrc.loop = true;
+      musicGain = a.createGain();
+      musicGain.gain.value = 0.045;
+      musicSrc.connect(musicGain).connect(a.destination);
+      musicSrc.start();
+    })
+    .catch(() => {});
+}
+function stopMusic(){
+  if (musicSrc){ try { musicSrc.stop(); } catch(e){} musicSrc = null; }
+}
+
 function beep(freq, dur, type, vol){
   const a = audio();
   if (!a) return;
@@ -1254,12 +1281,14 @@ function buildPad(i){
 function tryBuy(i){
   if (state.owned[i] !== null) return;
   const def = STATIONS[i];
-  if (state.coins < def.p) {
+  /* rebirth indirimli fiyat */
+  const price = Math.round(def.p * Math.pow(0.88, state.rebirths));
+  if (state.coins < price) {
     if (!pads[i].denied){
       pads[i].denied = true;
       setTimeout(() => { pads[i].denied = false; }, 2500);
       sfxNo();
-      toast('Daha çok para lazım!\n' + fmt(def.p) + ' 💰');
+      toast('Daha çok para lazım!\n' + fmt(price) + ' 💰');
     }
     return;
   }
@@ -1267,7 +1296,7 @@ function tryBuy(i){
     hostConn?.send({t:'buy', i});
     return;
   }
-  state.coins -= def.p;
+  state.coins -= price;
   state.owned[i] = state.myId;
   if (!state.firstBuyAt && state.sessionStart)
     state.firstBuyAt = performance.now() - state.sessionStart;
@@ -1317,21 +1346,51 @@ function doRebirth(){
   state.coins = 0;
   state.owned.fill(null);
 
+  /* sıfırlama maliyetlerini düşür: her rebirth %12 daha hızlı dönüş */
+  const discount = Math.pow(0.88, state.rebirths);
+
   for (const p of pads){
     if (p.obj) { scene.remove(p.obj); p.obj = null; }
     if (p.ownRing) { scene.remove(p.ownRing); p.ownRing = null; }
     p.built = false;
     p.pad.visible = true;
     p.ring.visible = true;
+    /* etiketi güncelle: indirimli fiyat */
+    scene.remove(p.label);
+    const shown = Math.round(p.def.p * discount);
+    p.label = labelSprite(p.def.n, shown + ' 💰');
+    p.label.position.set(p.def.x, p.def.z > 0 ? 3.9 : 3.4, p.def.z);
+    scene.add(p.label);
   }
 
-  burst(playerPos.x, 3, playerPos.z, [0xffd400, 0xff5b5b, 0x54b8ff, 0x6fdc4f, 0xff9ecb, 0xb06bff], 60);
+  /* rebirth görsel ödülü: karakter etrafında altın halka */
+  const halo = new THREE.Mesh(new THREE.TorusGeometry(2.6, 0.14, 10, 40), M(0xffd400, {emissive:0xffaa00, emissiveIntensity:0.9}));
+  halo.rotation.x = Math.PI/2;
+  halo.position.set(playerPos.x, 0.3, playerPos.z);
+  scene.add(halo);
+  const haloStart = performance.now();
+  (function haloAnim(){
+    const t = (performance.now() - haloStart) / 1400;
+    if (t >= 1){ scene.remove(halo); return; }
+    halo.scale.setScalar(1 + t * 7);
+    halo.material.opacity = 1;
+    halo.material.transparent = true;
+    halo.material.opacity = 1 - t;
+    halo.position.y = 0.3 + t * 5;
+    requestAnimationFrame(haloAnim);
+  })();
+
+  burst(playerPos.x, 3, playerPos.z, [0xffd400, 0xffe14d, 0xffffff], 70);
+  shake(0.24);
+  hitstop = 0.14;
+  punchFov();
   sfxBig();
-  toast('REBIRTH ' + state.rebirths + '!\nGelir x' + rebirthMult().toFixed(1));
+  toast('REBIRTH ' + state.rebirths + '!\nGelir x' + rebirthMult().toFixed(1) + '\nFiyatlar %' + Math.round((1-discount)*100) + ' daha ucuz');
   saveGame();
   updateHud();
   $('winSheet').classList.remove('on');
   $('rebSheet').classList.remove('on');
+  goalKey = '';
   if (state.netMode === 'host') sendState();
 }
 
@@ -1589,7 +1648,7 @@ function onNet(d, conn){
         if (d.o[i] !== null && state.owned[i] === null){
           state.owned[i] = d.o[i];
           if (d.o[i] === state.myId){
-            state.coins -= STATIONS[i].p;
+            state.coins -= Math.round(STATIONS[i].p * Math.pow(0.88, state.rebirths));
             toast('+' + fmt(STATIONS[i].i) + '/sn\n' + STATIONS[i].n + '!');
             floater('+' + fmt(STATIONS[i].i) + '/sn', {x:STATIONS[i].x, y:3.2, z:STATIONS[i].z}, '#ffe14d');
             sfxBuy();
@@ -1835,8 +1894,8 @@ addEventListener('pointerdown', e => {
     return;
   }
 
-  /* oyun içi */
-  if (e.clientX < innerWidth * 0.45 && e.clientY > innerHeight * 0.35){
+  /* oyun içi — joystick yalnızca dokunmatik cihazlarda */
+  if (isTouch && e.clientX < innerWidth * 0.45 && e.clientY > innerHeight * 0.35){
     if (stick.id === null){
       stick.id = e.pointerId;
       stick.cx = e.clientX; stick.cy = e.clientY;
@@ -1844,6 +1903,7 @@ addEventListener('pointerdown', e => {
       return;
     }
   }
+  if (!isTouch) return;   /* masaüstünde bakış fare kilidiyle */
   if (look.id === null){ look.id = e.pointerId; look.x = e.clientX; look.y = e.clientY; }
 }, {passive:true});
 
@@ -1933,6 +1993,8 @@ function startGame(){
 
   if (state.netMode === 'host') setRoomTag(roomCodeEl.textContent);
 
+  startMusic();
+
   /* kayıtlı oyunu yükle (sadece solo) */
   if (state.netMode === 'solo'){
     const d = loadGame();
@@ -2011,6 +2073,7 @@ function backToMenu(){
   multPill.style.display = 'none';
   document.querySelectorAll('.sheet.on').forEach(s => s.classList.remove('on'));
   if (document.pointerLockElement) document.exitPointerLock();
+  stopMusic();
 
   /* isim girişine geri dön */
   setTimeout(() => nameInput.focus(), 100);
