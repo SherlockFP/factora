@@ -171,7 +171,8 @@ import * as THREE from 'three';
    RENDERER + SAHNE
    ================================================================== */
 const renderer = new THREE.WebGLRenderer({antialias:true, powerPreference:'high-performance'});
-renderer.setPixelRatio(Math.min(devicePixelRatio, 2));
+/* DPR sınırı: 2K+ ekranda 2x render maliyeti fayda etmiyor */
+renderer.setPixelRatio(Math.min(devicePixelRatio, 1.75));
 renderer.setSize(innerWidth, innerHeight);
 renderer.shadowMap.enabled = true;
 renderer.shadowMap.type = THREE.PCFSoftShadowMap;
