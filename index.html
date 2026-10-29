@@ -192,6 +192,8 @@
 </script>
 <script type="module">
 import * as THREE from 'three';
+import { buildDecor } from './src/world_decor.js';
+import { createNpcSystem } from './src/npcs.js';
 
 /* ==================================================================
    RENDERER + SAHNE
@@ -208,7 +210,7 @@ document.body.appendChild(renderer.domElement);
 const SKY = 0x8fdcff;
 const scene = new THREE.Scene();
 scene.background = new THREE.Color(SKY);
-scene.fog = new THREE.Fog(SKY, 60, 145);
+scene.fog = new THREE.Fog(SKY, 70, 190);
 
 const camera = new THREE.PerspectiveCamera(60, innerWidth/innerHeight, 0.05, 400);
 camera.rotation.order = 'YXZ';
@@ -515,19 +517,23 @@ for (let i=0;i<12;i++){
    TEZGAHLAR
    ================================================================== */
 /* Denge: her seviye ~3x gelir, satın alma süresi 15→123 sn (toplam ~10 dk).
-   Renkler nadirlik bandı: gri→yeşil→mavi→mor→turuncu→kırmızı→altın→pembe→turkuaz→efsanevi */
+   Renkler nadirlik bandı: gri→yeşil→mavi→mor→turuncu→kırmızı→altın→pembe→turkuaz→efsanevi
+   zone: 0 = ana plaza, 1 = ikinci bölge (ilk rebirth'te açılır) */
 const STATIONS = [
-  {n:'Limonata Standı',   p:15,      i:2,      k:'stand',    c:0xd9d9d9},
-  {n:'Kurabiye Fırını',   p:80,      i:6,      k:'oven',     c:0x8ed36b},
-  {n:'Dondurma Arabası',  p:320,     i:18,     k:'icecream', c:0x6fb8ff},
-  {n:'Meyve Suyu Barı',   p:1200,    i:55,     k:'juice',    c:0xb07bff},
-  {n:'Pasta Atölyesi',    p:4500,    i:160,    k:'cake',     c:0xffb340},
-  {n:'Donut Kulesi',      p:16000,   i:480,    k:'donut',    c:0xff7a59},
-  {n:'Çikolata Fabrikası',p:55000,   i:1400,   k:'choco',    c:0xffd400},
-  {n:'Şeker Diyarı',      p:190000,  i:4200,   k:'candy',    c:0xff6b9d},
-  {n:'Gökkuşağı Kafe',    p:650000,  i:13000,  k:'rainbow',  c:0x54e0d0},
-  {n:'Tatlı Krallığı',    p:2200000, i:40000,  k:'castle',   c:0xff5bf0},
+  {n:'Limonata Standı',   p:15,      i:2,      k:'stand',    c:0xd9d9d9, zone:0},
+  {n:'Kurabiye Fırını',   p:80,      i:6,      k:'oven',     c:0x8ed36b, zone:0},
+  {n:'Dondurma Arabası',  p:320,     i:18,     k:'icecream', c:0x6fb8ff, zone:0},
+  {n:'Meyve Suyu Barı',   p:1200,    i:55,     k:'juice',    c:0xb07bff, zone:0},
+  {n:'Pasta Atölyesi',    p:4500,    i:160,    k:'cake',     c:0xffb340, zone:0},
+  {n:'Donut Kulesi',      p:16000,   i:480,    k:'donut',    c:0xff7a59, zone:0},
+  {n:'Çikolata Fabrikası',p:55000,   i:1400,   k:'choco',    c:0xffd400, zone:1},
+  {n:'Şeker Diyarı',      p:190000,  i:4200,   k:'candy',    c:0xff6b9d, zone:1},
+  {n:'Gökkuşağı Kafe',    p:650000,  i:13000,  k:'rainbow',  c:0x54e0d0, zone:1},
+  {n:'Tatlı Krallığı',    p:2200000, i:40000,  k:'castle',   c:0xff5bf0, zone:1},
 ];
+
+/* Bölge 1: ana plazanın arkasında, offset ile ayrı bir platform */
+const ZONE1_OFFSET = { x: 0, z: -70 };
 
 /* Yerleşim: oyuncu (0,14)'te doğar ve -z yönüne bakar.
    Ön sıra ucuz tezgahlar (yolun tam üstünde Limonata), arka sıra pahalılar. */
@@ -536,8 +542,9 @@ const LAYOUT = [
   [ -7, -6], [  7, -6], [-13, -6], [ 13, -6], [  0, -6],   // Donut, Çikolata, Şeker, Gökkuşağı, Krallık
 ];
 STATIONS.forEach((s, idx) => {
-  s.x = LAYOUT[idx][0];
-  s.z = LAYOUT[idx][1];
+  const off = s.zone === 1 ? ZONE1_OFFSET : {x:0, z:0};
+  s.x = LAYOUT[idx][0] + off.x;
+  s.z = LAYOUT[idx][1] + off.z;
 });
 
 const WOOD = Mtex(TEX.wood);
@@ -705,6 +712,35 @@ const pads = STATIONS.map((s, i) => {
   return { i, def: s, pad, ring, label, built: false, obj: null, pop: 0 };
 });
 
+/* ==================================================================
+   PLAZA DOLGUSU (fıskiye, bank, çiçek, bayrak, tezgah süsleri)
+   ================================================================== */
+let plazaDecor = null, decorAnimated = [];
+try {
+  plazaDecor = buildDecor(THREE, { scene, M, G, add });
+  decorAnimated = plazaDecor.userData.animated || [];
+} catch (e) {
+  console.warn('Süsleme yüklenemedi:', e);
+}
+
+/* ==================================================================
+   NPC MÜŞTERİLER (state tanımlandıktan sonra başlatılır)
+   ================================================================== */
+let npcSystem = null;
+function startNpcs(){
+  if (npcSystem) return;
+  try {
+    npcSystem = createNpcSystem(THREE, {
+      scene,
+      helpers: { M, G, add },
+      count: 9,
+      owned: state.owned,
+    });
+  } catch (e) {
+    console.warn('NPC sistemi yüklenemedi:', e);
+  }
+}
+
 /* sıradaki hedefe zıplayan ok */
 const arrowGroup = new THREE.Group();
 {
@@ -718,6 +754,86 @@ const arrowGroup = new THREE.Group();
   arrowGroup.visible = false;
   scene.add(arrowGroup);
 }
+
+/* ==================================================================
+   BÖLGE 2 (ilk rebirth'te açılır)
+   ================================================================== */
+const zone1Group = new THREE.Group();
+zone1Group.position.set(ZONE1_OFFSET.x, 0, ZONE1_OFFSET.z);
+scene.add(zone1Group);
+
+const zone1LockedMat = M(0x3a3a4a, {transparent:true, opacity:0.85});
+
+{
+  /* platform */
+  const t2 = TEX.plaza.clone(); t2.needsUpdate = true;
+  t2.wrapS = t2.wrapT = THREE.RepeatWrapping; t2.repeat.set(2,2);
+  const plat = new THREE.Mesh(new THREE.CylinderGeometry(15, 15, 0.5, 40), new THREE.MeshLambertMaterial({map:t2}));
+  plat.position.y = -0.22;
+  plat.receiveShadow = true;
+  zone1Group.add(plat);
+
+  const rim = new THREE.Mesh(new THREE.TorusGeometry(15.1, 0.22, 8, 48), M(0xff5bf0, {emissive:0xaa2f9f, emissiveIntensity:0.55}));
+  rim.rotation.x = Math.PI/2;
+  rim.position.y = 0.1;
+  zone1Group.add(rim);
+
+  /* sütunlar */
+  for (let i=0;i<6;i++){
+    const a = i/6*Math.PI*2;
+    add(zone1Group, G.cyl, M(0xffd400), Math.cos(a)*12.5, 2.2, Math.sin(a)*12.5, 0.7, 4.4, 0.7);
+    add(zone1Group, G.sphLo, M(0xff6b9d, {emissive:0xff2f7a, emissiveIntensity:0.6}), Math.cos(a)*12.5, 4.6, Math.sin(a)*12.5, 0.75);
+  }
+
+  /* kilit örtüsü */
+  const dome = new THREE.Mesh(new THREE.SphereGeometry(15.4, 24, 16, 0, Math.PI*2, 0, Math.PI/2), zone1LockedMat);
+  dome.position.y = 0;
+  dome.name = 'zone1Lock';
+  dome.castShadow = false;
+  zone1Group.add(dome);
+
+  /* kilit yazısı */
+  const lockLabel = labelSprite('BÖLGE 2', 'REBIRTH GEREKLİ', 6.0);
+  lockLabel.position.set(0, 7.5, 0);
+  lockLabel.name = 'zone1Label';
+  zone1Group.add(lockLabel);
+}
+
+/* portal (ana plazada kenarda) */
+const portalGroup = new THREE.Group();
+portalGroup.position.set(-16.5, 0, 0);
+scene.add(portalGroup);
+{
+  const ring = new THREE.Mesh(new THREE.TorusGeometry(2.4, 0.28, 10, 36), M(0x9b8bff, {emissive:0x6a4fd8, emissiveIntensity:0.9}));
+  ring.position.y = 2.6;
+  portalGroup.add(ring);
+  const disc = new THREE.Mesh(new THREE.CircleGeometry(2.2, 32), new THREE.MeshBasicMaterial({color:0x8f7bff, transparent:true, opacity:0.42, side:THREE.DoubleSide}));
+  disc.position.y = 2.6;
+  portalGroup.add(disc);
+  for (const s of [-1,1]) add(portalGroup, G.box, M(0x6a4fd8), s*2.0, 1.3, 0, 0.4, 2.6, 0.4);
+  const pl = labelSprite('BÖLGE 2', '', 4.0);
+  pl.position.y = 6.2;
+  pl.name = 'portalLabel';
+  portalGroup.add(pl);
+}
+/* bölge 2 içindeki dönüş portalı */
+const portalBack = new THREE.Group();
+portalBack.position.set(ZONE1_OFFSET.x, 0, ZONE1_OFFSET.z + 12);
+scene.add(portalBack);
+{
+  const ring = new THREE.Mesh(new THREE.TorusGeometry(2.4, 0.28, 10, 36), M(0x54e0d0, {emissive:0x1a9a8f, emissiveIntensity:0.9}));
+  ring.position.y = 2.6;
+  portalBack.add(ring);
+  const disc = new THREE.Mesh(new THREE.CircleGeometry(2.2, 32), new THREE.MeshBasicMaterial({color:0x54e0d0, transparent:true, opacity:0.42, side:THREE.DoubleSide}));
+  disc.position.y = 2.6;
+  portalBack.add(disc);
+  for (const s of [-1,1]) add(portalBack, G.box, M(0x1a9a8f), s*2.0, 1.3, 0, 0.4, 2.6, 0.4);
+  const pl = labelSprite('ANA PLAZA', '', 4.0);
+  pl.position.y = 6.2;
+  portalBack.add(pl);
+}
+
+let portalCooldown = 0;
 
 /* ==================================================================
    KARAKTER
@@ -1797,33 +1913,53 @@ function leaveRoom(){
 function renderLeaderboard(){
   const rows = [];
   const meName = state.myName || 'Sen';
-  rows.push({ name: meName, v: incomePerSec(), me: true });
+  const myScore = incomePerSec();
+  rows.push({ name: meName, v: myScore, me: true });
 
-  if (state.netMode === 'client'){
-    for (const r of remote.values()) rows.push({ name: r.name, v: 0, me: false });
-  } else if (state.netMode === 'host'){
+  if (state.netMode !== 'solo'){
     for (const r of remote.values()) rows.push({ name: r.name, v: 0, me: false });
   } else {
-    const best = Number(localStorage.getItem('tatli_best') || 0);
-    if (best > 0) rows.push({ name: 'En İyi Rekorun', v: best, me: false });
+    /* kalıcı rekorlar */
+    let best = [];
+    try { best = JSON.parse(localStorage.getItem('tatli_board') || '[]'); } catch(e){}
+    for (const b of best.slice(0, 8)) rows.push({ name: b.n, v: b.v, me: false, past:true });
   }
 
   rows.sort((a, b) => b.v - a.v);
   const medals = ['🥇', '🥈', '🥉'];
-  $('lbList').innerHTML = rows.map((r, i) =>
+  $('lbList').innerHTML = rows.slice(0, 12).map((r, i) =>
     `<li class="${r.me ? 'me' : ''}">
       <span class="rk">${medals[i] || (i + 1)}</span>
-      <span class="nm">${r.name}</span>
+      <span class="nm">${r.name}${r.past ? ' <span style="font-size:10px;opacity:.6">geçmiş</span>' : ''}</span>
       <span class="vl">${fmt(r.v)}/sn</span>
     </li>`).join('');
   $('lbSub').textContent = state.netMode === 'solo'
-    ? 'Rekorun ve şu anki gelirin'
+    ? 'Senin rekorların'
     : 'Bu odadaki oyuncular';
+}
+
+/* kalıcı tabloya skor yaz */
+function recordScore(){
+  const score = Math.floor(incomePerSec());
+  if (score <= 1) return;
+  let board = [];
+  try { board = JSON.parse(localStorage.getItem('tatli_board') || '[]'); } catch(e){}
+  const name = state.myName || 'Oyuncu';
+  const existing = board.find(b => b.n === name);
+  if (existing){
+    if (score > existing.v) existing.v = score;
+    else return;
+  } else {
+    board.push({ n: name, v: score });
+  }
+  board.sort((a,b) => b.v - a.v);
+  localStorage.setItem('tatli_board', JSON.stringify(board.slice(0, 20)));
 }
 
 function saveBest(){
   const best = Number(localStorage.getItem('tatli_best') || 0);
   if (incomePerSec() > best) localStorage.setItem('tatli_best', String(Math.floor(incomePerSec())));
+  recordScore();
 }
 
 /* ==================================================================
@@ -1963,6 +2099,25 @@ function refreshMyAvatar(){
     menuHero.position.set(0.6, 0.05, 2.6);
     menuHero.rotation.y = Math.PI * 0.85;
     diorama.add(menuHero);
+  }
+}
+
+function zone1Unlocked(){ return state.rebirths >= 1 || state.netMode === 'client'; }
+
+function setZone1Visual(){
+  const open = zone1Unlocked();
+  const dome = zone1Group.getObjectByName('zone1Lock');
+  const lbl = zone1Group.getObjectByName('zone1Label');
+  if (dome) dome.visible = !open;
+  if (lbl) lbl.visible = !open;
+  const pl = portalGroup.getObjectByName('portalLabel');
+  if (pl && pl.userData.tex !== (open?'open':'locked')){
+    pl.userData.tex = open?'open':'locked';
+    portalGroup.remove(pl);
+    const n = labelSprite('BÖLGE 2', open ? 'İÇERİ GİR' : 'REBIRTH GEREKLİ', 4.0);
+    n.position.y = 6.2;
+    n.name = 'portalLabel';
+    portalGroup.add(n);
   }
 }
 
@@ -2121,7 +2276,11 @@ addEventListener('pointercancel', endPointer, {passive:true});
 /* masaüstü fare bakışı */
 renderer.domElement.addEventListener('click', () => {
   if (state.mode === 'game' && !isTouch && !document.pointerLockElement){
-    renderer.domElement.requestPointerLock?.();
+    /* iframe/gömülü ortamda pointer lock reddedilebilir — sessizce geç */
+    try {
+      const p = renderer.domElement.requestPointerLock?.();
+      if (p && typeof p.catch === 'function') p.catch(() => {});
+    } catch(e){}
   }
 });
 addEventListener('mousemove', e => {
@@ -2160,6 +2319,7 @@ function startGame(){
   ensurePlayerAvatar();
   state.sessionStart = performance.now();
   state.firstBuyAt = 0;
+  startNpcs();
 
   if (isTouch) hintEl.textContent = 'Sol yarı: yürü · Sağ yarı: etrafa bak';
   else hintEl.textContent = 'WASD ile yürü · Fare ile bak · Kırmızı halıya bas';
@@ -2414,8 +2574,18 @@ function tick(){
   if (moving){
     if (wish.length() > 1) wish.normalize();
     playerPos.addScaledVector(wish, SPEED * dt);
-    playerPos.x = Math.max(-LIMIT, Math.min(LIMIT, playerPos.x));
-    playerPos.z = Math.max(-LIMIT, Math.min(LIMIT, playerPos.z));
+
+    /* bölge sınırları: hangi bölgedeysem onun sınırı */
+    const dz1 = Math.hypot(playerPos.x - ZONE1_OFFSET.x, playerPos.z - ZONE1_OFFSET.z);
+    const inZ1 = dz1 < 15.5 && dz1 < Math.abs(playerPos.z + 17);
+    if (inZ1){
+      const dx = playerPos.x - ZONE1_OFFSET.x, dzz = playerPos.z - ZONE1_OFFSET.z;
+      const dist = Math.hypot(dx, dzz), lim = 14;
+      if (dist > lim){ playerPos.x = ZONE1_OFFSET.x + dx/dist*lim; playerPos.z = ZONE1_OFFSET.z + dzz/dist*lim; }
+    } else {
+      playerPos.x = Math.max(-LIMIT, Math.min(LIMIT, playerPos.x));
+      playerPos.z = Math.max(-LIMIT, Math.min(LIMIT, playerPos.z));
+    }
     bob += dt * 12;
     walkPhase += dt * 12;
   }
@@ -2515,6 +2685,42 @@ function tick(){
     }
   }
 
+  /* portal: bölge 2'ye ışınlan */
+  portalCooldown = Math.max(0, portalCooldown - dt);
+  const dPortal = Math.hypot(playerPos.x - portalGroup.position.x, playerPos.z - portalGroup.position.z);
+  if (dPortal < 2.6 && portalCooldown === 0){
+    portalCooldown = 1.6;
+    if (!zone1Unlocked()){
+      sfxNo();
+      toast('Bölge 2 kilitli\nÖnce REBIRTH yap!');
+    } else {
+      burst(playerPos.x, 1.6, playerPos.z, [0x9b8bff, 0xffffff, 0xffd400], 24);
+      whoosh();
+      shake(0.1);
+      playerPos.set(ZONE1_OFFSET.x, 0, ZONE1_OFFSET.z + 9);
+      burst(playerPos.x, 1.6, playerPos.z, [0x9b8bff, 0xffffff, 0xffd400], 24);
+      toast('Bölge 2\'ye hoş geldin!');
+    }
+  }
+
+  /* dönüş portalı */
+  const dBack = Math.hypot(playerPos.x - portalBack.position.x, playerPos.z - portalBack.position.z);
+  if (dBack < 2.6 && portalCooldown === 0){
+    portalCooldown = 1.6;
+    burst(playerPos.x, 1.6, playerPos.z, [0x54e0d0, 0xffffff], 24);
+    whoosh();
+    shake(0.1);
+    playerPos.set(-13, 0, 0);
+    burst(playerPos.x, 1.6, playerPos.z, [0x54e0d0, 0xffffff], 24);
+    toast('Ana Plaza');
+  }
+
+  /* su animasyonu */
+  for (const w of decorAnimated){ if (w) w.rotation.y += dt * 0.35; }
+
+  /* NPC müşteriler */
+  if (npcSystem && npcSystem.update) npcSystem.update(dt);
+
   /* hedef oku: sıradaki açılmamış tezgahın üstünde zıplar */
   let nextIdx = -1;
   for (let i=0;i<STATIONS.length;i++){ if (state.owned[i] === null){ nextIdx = i; break; } }
@@ -2531,6 +2737,7 @@ function tick(){
   updateParticles(dt);
   updateHud();
   updateGoal(dt);
+  setZone1Visual();
   checkAchievements();
 
   /* periyodik kayıt */
