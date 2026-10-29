@@ -1,0 +1,296 @@
+Retail Tycoon 2 is a building tycoon experience created by . It is an improved sequel to Retail Tycoon.
+
+==Gameplay==
+The experience's main objective is for players to build and manage a retail store while managing their cash wisely. Other mechanics are also vital to a store, such as building and shelf stocking. Each store also has a rating, which are dictated by multiple factors, including shelter,  decorations, crowdedness, and cleanliness.
+
+=== Products ===
+Players can sell any of the following products in their store. Each product has a buy price, a sell price, and a unit size. The buy price defines the amount of money the player must spend to purchase one product, whereas the sell price determines the amount of money the player makes when the product is sold. The unit size determines the size in storage of each individual item.
+{| class="wikitable mw-collapsible mw-collapsed sortable"
+|+ Products
+! Category
+! Buy Price
+! Sell Price
+! Unit Size
+|-
+| Toys
+| 20
+| 45
+| 8
+|-
+| Clothing
+| 30
+| 55
+| 2
+|-
+| Shoes
+| 40
+| 75
+| 4
+|-
+| Hats
+| 50
+| 95
+| 6
+|-
+| Candy
+| 8
+| 15
+| 1
+|-
+| Canned Food
+| 10
+| 20
+| 2
+|-
+| Boxed Food
+| 12
+| 24
+| 3
+|-
+| Cold Food
+| 15
+| 30
+| 3
+|-
+| Baked Foods
+| 12
+| 25
+| 4
+|-
+| Fruit
+| 10
+| 22
+| 3
+|-
+| Vegetables
+| 10
+| 22
+| 3
+|-
+| Condiments
+| 10
+| 20
+| 2
+|-
+| Beverages
+| 8
+| 18
+| 4
+|-
+| Small Electronics
+| 400
+| 700
+| 4
+|-
+| Large Electronics
+| 700
+| 1,100
+| 15
+|-
+| PC Electronics
+| 450
+| 800
+| 10
+|-
+| PC Peripherals
+| 85
+| 160
+| 6
+|-
+| Office Electronics
+| 45
+| 85
+| 8
+|-
+| Game Consoles
+| 290
+| 500
+| 15
+|-
+| Videogames
+| 35
+| 60
+| 1
+|-
+| Small Appliances
+| 200
+| 350
+| 15
+|-
+| Large Appliances
+| 1,000
+| 1,500
+| 100
+|-
+| Kitchenware
+| 40
+| 80
+| 12
+|-
+| School Supplies
+| 15
+| 30
+| 2
+|-
+| Luggage
+| 70
+| 150
+| 20
+|-
+| Brass Instruments
+| 500
+| 850
+| 20
+|-
+| String Instruments
+| 500
+| 850
+| 20
+|-
+| Small Outdoor Equipment
+| 130
+| 250
+| 30
+|-
+| Large Outdoor Equipment
+| 500
+| 900
+| 80
+|-
+| Small Power Tools
+| 65
+| 120
+| 8
+|-
+| Large Power Tools
+| 115
+| 250
+| 80
+|-
+| Garden Tools
+| 40
+| 80
+| 30
+|-
+| Paint Supplies
+| 18
+| 40
+| 6
+|-
+| Lumber
+| 20
+| 40
+| 10
+|-
+| Small Furniture
+| 180
+| 400
+| 80
+|-
+| Large Furniture
+| 450
+| 1,000
+| 200
+|-
+| Exercise Equipment
+| 560
+| 1,200
+| 200
+|-
+| Personal Transport
+| 425
+| 800
+| 50
+|-
+| Car Parts
+| 50
+| 100
+| 12
+|-
+| Economy Cars
+| 13,000
+| 15,000
+| 1,500
+|-
+| Jewelry
+| 850
+| 1,200
+| 1
+|-
+| Guns (Gamepass)
+| 850
+| 1,500
+| 15
+|-
+| Ammo (Gamepass)
+| 70
+| 150
+| 5
+|-
+| Military Vehicles (Gamepass)
+| 90,000
+| 100,000
+| 3,000
+|-
+| Armored Vehicles (Gamepass)
+| 485,000
+| 500,000
+| 4,000
+|}
+
+== Workers ==
+In order to obtain a self-sustaining store that doesn't require consistent player intervention, the hiring of workers is necessary. Each worker completes a task necessary to keep your store sustained.
+
+{| class="wikitable"
+! Worker
+! Hire Price
+! Wage
+! Required Station
+! Description
+|-
+| Cashier
+| 200
+| 20/min
+| Checkout Counter / Checkout Register
+| Cashiers maintain the cash registers that customers pay at.
+|-
+| Restocker
+| 200
+| 20/min
+| N/A
+| Restockers refill emptied or partially emptied shelves with their products, as long as products are available in storage.
+|-
+| Janitors
+| 200
+| 20/min
+| Dumpster
+| Janitors clean up trash and empty trash cans.
+|-
+| Manager
+| 400
+| 40/min
+| Manager Desk
+| Managers automatically purchase products in order to keep shelves stocked.
+|-
+| Guard
+| 300
+| 30/min
+| N/A
+| Guards watch out for and arrest robbers.
+|-
+| Delivery Driver
+| 300
+| 30/min
+| Unloading Dock
+| Delivery drivers utilize a given truck to deliver goods from the loading dock to the store.
+|-
+| Finance Rep
+| 400
+| 40/min
+| Finance Rep Desk
+| Finance reps loan money to customers so that they can buy products that were previously unaffordable.
+|}
+
+== Sponsorship events ==
+
+Between November 10, 2022, and November 30, 2022, Retail Tycoon 2 partnered with Norelco to promote Movember, a men's health awareness campaign. A Philips OneBlade product was added to the experience as an item that can be sold in players' stores. Those that played the experience during the sponsorship are still able to purchase and sell the Philips OneBlade product after the event.

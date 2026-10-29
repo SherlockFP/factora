@@ -1,0 +1,2541 @@
+Steal a Brainrot™ is a  game created by  and  under the community  and the corporation Do Big Studios™. Players can purchase, defend, and steal various Brainrot characters. It is also the second biggest game on Roblox.
+
+==Gameplay==
+The Player spawns at one of the 8 bases on the map, and the player earns cash from brainrots in their own base. Upon joining a server, the base is locked for 30 seconds. and can be locked again for 60 seconds once the timer expires. Each rebirth increases the lock time by 10 seconds (e.g. 80 seconds for two rebirths, 110 for five rebirths and 240 seconds for last 18 rebirth), but the initial lock time will still be 30 seconds.
+
+There are two ways of obtaining a brainrot. The first one is purchasing one from the red conveyor in the middle of the map, with its price increasing every time another player tries to get it. Another way is stealing a brainrot from another user's unlocked base. However, when a brainrot is stolen, the thief is slowed, stripped of all items, and the owner is alerted, making the stealer vulnerable to attacks from any other user. Attacking a thief will teleport the brainrot back to its original base. Players defend their brainrots from other players by using items and locking their base.
+
+===Tutorial===
+The player starts off with 100 cash. The game tells the player to buy a Noobini Pizzanini from the red conveyor and wait for it to reach the player's base. Then the game tells to earn cash from that brainrot, and afterwards, the tutorial tells the player to steal brainrots from other players' bases and bring them to the player's base.
+
+===Base===
+The base is the building in which players hold their brainrots and collect money from them. It is a building with a gate consisting of red laser beams. Only the owner (and optionally their Connections) can go through that gate. The second rebirth will add a second floor to the base and an outside staircase on the right side of the base, the 10th rebirth will add another floor with a ladder on the inside of the second floor. The first floor can hold 10 brainrots, the second floor holds 8 and the third floor holds 7 brainrots at their maximum capacity, meaning players can hold up to 27 brainrots in their base (at 18 rebirths). Since the August 1st update, brainrots can be transferred to another slot within the base.
+
+===Rebirth===
+The player can rebirth each time if the player has met the requirements; for example, the first rebirth requires 1 million cash, a Trippi Troppi, and a Gangster Footera <small>(formerly Tung Tung Tung Sahur)</small>. Each rebirth increases base lock time by 10 seconds, raises the money multiplier by 1, and unlocks stronger shop items. Starting from the second rebirth, each rebirth will also add 1 brainrot slot to the player's base. Rebirthing will erase all brainrots in the player's base and the money will be reset to a fixed amount. Items are not affected by rebirths. Players can rebirth up to 18 times.
+
+=====Rebirth Requirements and Item Rewards Table=====
+{| class="mw-collapsible mw-collapsed fandom-table"
+|+Rebirth Table
+!Rebirths
+!Rebirth requirement
+!Item Rewards
+!Price ($)
+|-
+| rowspan="3" |0
+| rowspan="3" |
+* N/A
+|Slap
+|500
+|-
+|Speed Coil
+|750
+|-
+|Trap
+|1,000
+|-
+| rowspan="3" |1
+| rowspan="3" |
+* $1M
+* Trippi Troppi
+* Gangster Footera
+|Iron Slap
+|2,000
+|-
+|Gravity Coil
+|3,000
+|-
+|Bee Launcher
+|10,000
+|-
+| rowspan="3" |2
+| rowspan="3" |
+* $3M
+* Boneca Ambalabu
+* Brr Brr Patapim
+|Gold Slap
+|15,000
+|-
+|Coil Combo
+|20,000
+|-
+|Rage Table
+|25,000
+|-
+| rowspan="3" |3
+| rowspan="3" |
+* $12.5M
+* Trulimero Trulicina
+* Chimpanzini Bananini
+|Diamond Slap
+|50,000
+|-
+|Grapple Hook
+|75,000
+|-
+|Taser Gun
+|100,000
+|-
+| rowspan="3" |4
+| rowspan="3" |
+* $35M
+* Chef Crabracadabra
+* Glorbo Fruttodrillo
+|Emerald Slap
+|200,000
+|-
+|Invisibility Cloak
+|300,000
+|-
+|Boogie Bomb
+|500,000
+|-
+| rowspan="2" |5
+| rowspan="2" |
+* $100M
+* Frigo Camelo
+* Orangutini Ananassini
+|Ruby Slap
+|1,000,000
+|-
+|Medusa's Head
+|5,000,000
+|-
+| rowspan="2" |6
+| rowspan="2" |
+* $350M
+* Bombardiro Crocodilo
+|Dark Matter Slap
+|1,500,000
+|-
+|Web Slinger
+|2,000,000
+|-
+| rowspan="3" |7
+| rowspan="3" |
+* $1B
+* Bombombini Gusini
+|Flame Slap
+|2,500,000
+|-
+|Quantum Cloner
+|3,000,000
+|-
+|All Seeing Sentry
+|5,000,000
+|-
+| rowspan="2" |8
+| rowspan="2" |
+* $5B
+* Te Te Te Sahur
+|Nuclear Slap
+|6,000,000
+|-
+|Rainbowrath Sword
+|10,000,000
+|-
+| rowspan="2" |9
+| rowspan="2" |
+* $25B
+* Cocofanto Elefanto
+|Galaxy Slap
+|15,000,000
+|-
+|Laser Cape
+|20,000,00
+|-s
+| rowspan="2" |10
+| rowspan="2" |
+* $250B
+* Girafa Celestre
+|Glitched Slap
+|25,000,000
+|-
+|Body Swap Potion
+|50,000,000
+|-
+| rowspan="2" |11
+| rowspan="2" |
+* $1T
+* Tralalero Tralala
+|Splatter Slap
+|75,000,000
+|-
+|Paintball Gun
+|100,000,000
+|-
+| rowspan="2" |12
+| rowspan="2" |
+* $7T
+* Odin Din Din Dun
+|Heart Balloon
+|150,000,000
+|-
+|Magnet
+|200,000,000
+|-
+| rowspan="2" |13
+| rowspan="2" |
+* $35T
+* Trenostruzzo Turbo 3000
+|Megaphone
+|250,000,000
+|-
+|Beehive
+|300,000,000
+|-
+| rowspan="2" |14
+| rowspan="2" |
+* $100T
+* Trippi Troppi Troppa Trippa
+|Gummy Bear
+|400,000,000
+|-
+|Subspace Mine
+|500,000,000
+|-
+| rowspan="1" |15
+| rowspan="1" |
+* $500T
+* Pakrahmatmamat
+|Heatseeker
+|750,000,000
+|-
+| rowspan="1" |16
+| rowspan="1" |
+* $1Qa
+* Los Tralaleritos
+|Attack Doge
+|1,000,000,000
+|-
+| rowspan="1" |17
+| rowspan="1" |
+* $2.5Qa
+* Job Job Job Sahur
+* Chicleteira Bicicleteira
+|Giant Potion
+|1,500,000,000
+|-
+| rowspan="1" |18
+| rowspan="1" |
+* $10Qa
+* Graipuss Medussi
+|Flash Teleport
+|3,000,000,000
+|}
+
+===Admin Abuse===
+Admin Abuse is an event hosted on Tuesdays at 6:00pm ET and Saturdays at 3:00pm ET, unless otherwise stated. During an Admin Abuse, various events and lucky blocks spawn along with high-tier brainrots. The events usually last between 30-45 minutes. Hosts will also run luck events, ranging from 4x to 35x server luck multipliers.
+
+==Badges==
+
+==Points of interest==
+
+===Shops===
+There are currently three shops in the middle of the red conveyor. The Shop contains items purchasable with cash, and the Robux Shop containing items that cost Robux. The player can also find a spinning wheel next to the Robux shop, with the wheel choosing one of the six prizes that the player can get.
+
+====Items====
+Items can be used to increase the player's speed, make them jump higher, or attack other players. The starting item that all players have is the Tung Bat which knocks back players and recovers stolen brainrots. Additional items can be bought in the Coins Shop. Players start off with 3 items in the shop and unlock more items with each rebirth. Purchased items disappear from the inventory upon leaving the experience, so they must be rebought after rejoining. This can also be done by an auto-buy feature which buys the desired items immediately upon joining the game. The Tung Bat (and items from the Blackhole Starter Pack) will always remain in the inventory.
+
+The shop items are listed in the Rebirth section.
+
+====Robux Shop items====
+{| class="mw-collapsible mw-collapsed fandom-table"
+|+
+!Category
+!Item
+!Price (Robux)
+|-
+| rowspan="4" |Gear
+|Blackhole Slap
+|199
+|-
+|Flying Carpet
+|499
+|-
+|Laser Gun
+|999
+|-
+|Ban Hammer
+|1,499
+|-
+| rowspan="5" |Money
+|$36,000
+|49
+|-
+|$300,000
+|329
+|-
+|$1,200,000
+|659
+|-
+|$6,000,000
+|1,249
+|-
+|$12,000,000
+|2,999
+|-
+| rowspan="3" |Gamepasses
+|2x Money
+|299
+|-
+|VIP
+|499
+|-
+|Admin Panel
+|4,999
+|-
+|Server Luck
+|2x Server Luck (+15 minutes, if you do it again it goes to +15 minutes and 4x server luck and that’s the limit and you can make it longer)
+|249
+|-
+| rowspan="3" |Lucky Blocks
+|Mythic Lucky Block
+|49
+|-
+|Brainrot God Lucky Block
+|599
+|-
+|Secret Lucky Block
+|2,999
+|-
+| colspan="2" |Blackhole Starter Pack
+
+* Blackhole Slap (permanent)
+* Coil Combo (permanent)
+* $1000
+* Brr Brr Patapim
+|249
+|}
+* Note: Lucky Blocks purchased during events (i.e., the Cyber Event) will have the corresponding event mutation applied. When no event is active, Lucky Blocks appear normally with no mutations. The price remains unchanged during events.
+
+===Fuse Machine===
+The Fuse Machine was located next to the Coins Shop. To activate it, the player had to give 4 brainrots to the machine. More valuable brainrots in the machine extended the fuse time and the money to fuse the brainrot but gave a more valuable brainrot in return. All of the brainrots that could be fused in the fuse machine except couldn't be spawned on the conveyor or obtained in lucky blocks.
+
+Except the following:
+
+* Tukanno Bananno: glitch where it could spawn on the carpet the first 1-3 days after getting added.
+* Brr Es Teh Patipum: get it during admin abuse. (Sammy's Base)
+* Los Orcalitos: during the Orcalero ritual.
+
+However, when the Los Lucky Block was added, Los Tungtungtungcitos and Los Combinasionas became obtainable again.
+
+The Fuse Machine was removed on September 6 and was replaced by the Craft Machine.
+
+====List of Fuse Machine Brainrots====
+<!-- This section needs to be updated! -->
+{| class="mw-collapsible mw-collapsed fandom-table"
+|+Fuse Machine Brainrots
+!Rarity
+!Brainrot
+!$/s
+!Price ($)
+|-
+|Common
+|Pipi Corni
+|14
+|1.7K
+|-
+|Rare
+|Pipi Avocado
+|70
+|9.5K
+|-
+| rowspan="2" |Epic
+|Ti Ti Ti Sahur
+|225
+|37.5K
+|-
+|Penguino Cocosino
+|300
+|45K
+|-
+| rowspan="2" |Legendary
+|Cocosini Mama
+|1.2K
+|285K
+|-
+|Pi Pi Watermelon
+|1.3K
+|315K
+|-
+| rowspan="3" |Mythic
+|Avocadorilla
+|7K
+|2M
+|-
+|Tob Tobi Tobi
+|8.5K
+|3.2M
+|-
+|Ganganzelli Trulala
+|9K
+|3.7M
+|-
+| rowspan="4" |Brainrot God
+|Tukanno Bananno
+|100K
+|225M
+|-
+|Los Tungtungtungcitos     
+|210K
+|37.5M
+|-
+|Brr es Teh Patipum
+|225K
+|40M
+|-
+|Los Orcalitos
+|235K
+|45M
+|-
+| rowspan="4" |Secret
+|Agarrini la Palini
+|425K
+|80M
+|-
+|Los Combinasionas
+|15M
+|2B
+|-
+|Los Hotspotsitos
+|20M
+|3B
+|-
+|La Supreme Combinasion 
+|40M
+|7B
+|}
+
+===Craft Machine===
+The Craft Machine replaced the Fuse Machine and was located next to the coin shop. Every 30 minutes, players would have one option of each rarity to craft. After the thirty minutes was over, the options would shuffle, but sometimes during admin abuses, Sammy would skip the time or add certain brainrots to the machine. Players would put 2-4 brainrots to turn them into a better version or a combination version. The rarer the brainrot, the more expensive and timely it was to craft (Epic: 7m, Legendary: 15m, Mythic: 30m, Brainrot God: 45m, Secret: 1h30m).
+
+Many Craft Machine brainrots were nearly unobtainable because they needed either fuse machine brainrots or limited ones. To get them, you would have had to not delete the brainrot, which many players did not do because the brainrots didn't make much money.
+
+The Craft Machine was removed on October 11 and was replaced by the Witch Fuse.
+====List of Craft Machine Recipes====
+{| class="mw-collapsible mw-collapsed fandom-table"
+|+Craft Machine Recipes
+! Rarity
+! Brainrot
+! Brainrots Required
+!$/s
+!Price ($)
+|-
+| rowspan="12" | Epic
+| rowspan="4" | Bandito Axolito
+| Trippi Troppi
+| rowspan="4" |90
+| rowspan="4" |12.5K
+|-
+| Trippi Troppi
+|-
+| Bandito Bobrito
+|-
+| Bandito Bobrito
+|-
+| colspan="1" rowspan="4" |Malame Amarele
+|Gangster Footera
+| rowspan="4" |140
+| rowspan="4" |23.5K
+|-
+|Gangster Footera
+|-
+|Ta Ta Ta Ta Sahur
+|-
+|Brr Brr Patapim
+|-
+| colspan="1" rowspan="4" |Mangolini Parrocini
+|Pipi Kiwi
+| rowspan="4" |235
+| rowspan="4" |38.5K
+|-
+|Pipi Avocado
+|-
+|Boneca Ambalabu
+|-
+|Perochello Lemonchello
+|-
+| rowspan="16" |Legendary
+| colspan="1" rowspan="4" |Tirilikalika Tirilikalako
+|Cacto Hipopotamo
+| rowspan="4" |450
+| rowspan="4" |75K
+|-
+|Penguino Cocosino
+|-
+|Cappuccino Assassino
+|-
+|Cappuccino Assassino
+|-
+| rowspan="4" | Caramello Filtrello
+| Salamino Penguino
+| rowspan="4" |1K
+| rowspan="4" |255K
+|-
+|Gangster Footera
+|-
+|Ta Ta Ta Ta Sahur
+|-
+|Brr Brr Patapim
+|-
+| rowspan="4" | Signore Carapace
+| Bri Bri Bicus Bombicus
+| rowspan="4" |1.3K
+| rowspan="4" |320K
+|-
+|Penguino Cocosino
+|-
+|Penguino Cocosino
+|-
+|Glorbo Fruttodrillo
+|-
+| rowspan="4" |Sigmа Girl
+|Sigmа Boy
+| rowspan="4" |1.8K
+| rowspan="4" |340K
+|-
+|Bambini Crostini
+|-
+|Bambini Crostini
+|-
+|Bambini Crostini
+|-
+| rowspan="20" | Mythic
+| colspan="1" rowspan="4" |Brutto Gialutto
+| Salamino Penguino
+| rowspan="4" |3K
+| rowspan="4" |600K
+|-
+| Salamino Penguino
+|-
+| Blueberrinni Octopusini
+|-
+| Rhino Toasterino
+|-
+| rowspan="4" | Gorillo Subwoofero
+| Spioniro Golubiro
+| rowspan="4" |7.7K
+| rowspan="4" |2.7M
+|-
+| Spironiro Golubiro
+|-
+| Oragutini Ananassini
+|-
+| Oragutini Ananassini
+|-
+| colspan="1" rowspan="4" |Rhino Helicopterino
+|Bombardiro Crocodilo
+| rowspan="4" |11K
+| rowspan="4" |4.1M
+|-
+|Bombardiro Crocodilo
+|-
+|Rhino Toasterino
+|-
+|Rhino Toasterino
+|-
+| colspan="1" rowspan="4" |Los Noobinis
+|Noobini Pizzanini
+| rowspan="4" |12.5K
+| rowspan="4" |4.3M
+|-
+|Noobini Pizzanini
+|-
+|Noobini Pizzanini
+|-
+|Carrotini Brainini
+|-
+| colspan="1" rowspan="4" |Elefanto Frigo
+|Tob Tobi Tobi
+| rowspan="4" |14K
+| rowspan="4" |4.6M
+|-
+|Frigo Camelo
+|-
+|Rhino Toasterino
+|-
+|Rhino Toasterino
+|-
+| rowspan="32" |Brainrot God
+| colspan="1" rowspan="4" |Antonio
+|Ganganzelli Trulala
+| rowspan="4" |18.5K
+| rowspan="4" |6M
+|-
+|Ganganzelli Trulala
+|-
+|Bombardiro Crocodilo
+|-
+|Frigo Camelo
+|-
+| colspan="1" rowspan="4" |Las Cappuchinas
+|Ballerina Cappuccina
+| rowspan="4" |185K
+| rowspan="4" |32.5M
+|-
+|Ballerina Cappuccina
+|-
+|Tralalita Tralala
+|-
+|Tralalita Tralala
+|-
+| colspan="1" rowspan="4" | Orcalita Orcala
+| Orcalero Orcala
+| rowspan="4" |240K
+| rowspan="4" |45M
+|-
+| Orcalero Orcala
+|-
+| Tralalita Tralala
+|-
+| Espresso Signora
+|-
+| colspan="1" rowspan="4" |Squalanana
+|Tralalero Tralala
+| rowspan="4" |250K
+| rowspan="4" |45M
+|-
+|Tralalero Tralala
+|-
+|Tipi Topi Taco
+|-
+|Tipi Topi Taco
+|-
+| colspan="1" rowspan="4" |Dug Dug Dug
+|Extinct Ballerina
+| rowspan="4" |255K
+| rowspan="4" |45.5M
+|-
+|Matteo
+|-
+|Matteo
+|-
+|Matteo
+|-
+| colspan="1" rowspan="4" |Piccionetta Macchina
+|Piccione Macchina
+| rowspan="4" |270K
+| rowspan="4" |47M
+|-
+|Matteo
+|-
+|Gattatino Nyanino
+|-
+|Gattatino Nyanino
+|-
+| colspan="1" rowspan="4" |Anpali Babel
+|Te Te Te Sahur
+| rowspan="4" |280K
+| rowspan="4" |48M
+|-
+|Te Te Te Sahur
+|-
+|Te Te Te Sahur
+|-
+|Mastodontico Telepiedone
+|-
+| colspan="1" rowspan="4" |Belula Beluga
+|Tralalita Tralala
+| rowspan="4" |290K
+| rowspan="4" |60M
+|-
+|Tralalita Tralala
+|-
+|Matteo
+|-
+|Alessio
+|-
+| rowspan="41" |Secret
+| colspan="1" rowspan="4" |Trenostruzzo Turbo 4000
+|Girafa Celestre
+| rowspan="4" |310K
+| rowspan="4" |100M
+|-
+|Girafa Celestre
+|-
+|Trenostruzzo Turbo 3000
+|-
+|Trenostruzzo Turbo 3000
+|-
+| rowspan="4" |Fragola La La La
+|Odin Din Din Dun
+| rowspan="4" |450K
+| rowspan="4" |125M
+|-
+|Odin Din Din Dun
+|-
+|Odin Din Din Dun
+|-
+|Sammyni Spyderini
+|-
+| colspan="1" rowspan="2" |Los Tortus
+|Torrtuginni Dragonfrutini
+| rowspan="2" |500K
+| rowspan="2" |100M
+|-
+|Torrtuginni Dragonfrutini
+|-
+| colspan="1" rowspan="2" |La Karkerkar Combinasion
+|Karkerkar Kurkur
+| rowspan="2" |600K
+| rowspan="2" |160M
+|-
+|Karkerkar Kurkur
+|-
+| colspan="1" rowspan="3" |Karker Sahur
+|Ta Ta Ta Ta Sahur
+| rowspan="3" |725K
+| rowspan="3" |185M
+|-
+|Karkerkar Kurkur
+|-
+|Karkerkar Kurkur
+|-
+| rowspan="4" | La Sahur Combinasion
+| Ta Ta Ta Ta Sahur
+| rowspan="4" |2M
+| rowspan="4" |550M
+|-
+| Te Te Te Sahur
+|-
+| Graipuss Medussi
+|-
+| Job Job Job Sahur
+|-
+| rowspan="4" | Las Sis
+| Las Capuchinas
+| rowspan="4" |17.5M
+| rowspan="4" |2.5B
+|-
+| Los Combinasionas
+|-
+| Las Tralaleritas
+|-
+| Las Tralaleritas
+|-
+| colspan="1" rowspan="4" |Celularcini Viciosini
+|La Grande Combinasion
+| rowspan="4" |22.5M
+| rowspan="4" |2.7B
+|-
+|La Grande Combinasion
+|-
+|Pot Hotspot
+|-
+|Job Job Job Sahur
+|-
+| colspan="1" rowspan="4" |Los Bros
+|Los Tungtungtungcitos
+| rowspan="4" |24M
+| rowspan="4" |2.6B
+|-
+|Los Combinasionas
+|-
+|La Grande Combinasion
+|-
+|Los Tralaleritos
+|-
+| colspan="1" rowspan="4" |Tralaledon
+|Tralalero Tralala
+| rowspan="4" |27.5M
+| rowspan="4" |3B
+|-
+|Tralalero Tralala
+|-
+|Tralalero Tralala
+|-
+|Nuclearo Dinossauro
+|-
+| colspan="1" rowspan="4" |Los Primos
+|Los Orcalitos
+| rowspan="4" |31M
+| rowspan="4" |3.7B
+|-
+|67
+|-
+|Los Bros
+|-
+|Los Tralaleritos
+|-
+| colspan="1" rowspan="2" |Los Tacoritas
+|Tacorita Bicicleta
+| rowspan="2" |32M
+| rowspan="2" |4B
+|-
+|Tacorita Bicicleta
+|}
+
+===Witch Fuse===
+The Witch Fuse (which replaced the Craft Machine) is a Halloween version of the Fuse Machine, meaning that all of the brainrots are Halloween-themed. It too was placed next to the coin shop. 3-4 days before being released, it was next to the craft machine, with the witch and boiling pot being just a silhouette. There was a countdown saying when the Craft Machine would go and when the Witch Fuse would arrive.
+
+====List of Witch Fuse Brainrots====
+{| class="mw-collapsible mw-collapsed fandom-table"
+|+Witch Fuse Brainrots
+!Rarity
+!Brainrot
+|-
+|Common
+|Tartaragno
+|-
+|Rare
+|Pinealotto Fruttarino
+|-
+| rowspan="2" |Epic
+|Frogato Pirato
+|-
+|Mummio Rappitto
+|-
+| rowspan="2" |Legendary
+|Quackula
+|-
+|Buho De Fuego
+|-
+| rowspan="2" |Mythic
+|Jacko Spaventosa
+|-
+|Magi Ribbitini
+|-
+| rowspan="4" |Brainrot God
+|Jacko Jack Jack
+|-
+|Snailenzo
+|-
+|Frio Ninja
+|-
+|Tentacolo Tecnico
+|-
+| rowspan="6" |Secret
+|Vulturino Skeletono
+|-
+|Los Mobilis
+|-
+|Mieteteira Bicicleteira
+|-
+|Eviledon
+|-
+|Spooky and Pumpky
+|-
+|Headless Horseman
+|}
+
+===Brainrot Dealer===
+
+====List of Brainrot Dealer Brainrots====
+{| class="mw-collapsible mw-collapsed fandom-table"
+|+Brainrot Dealer Brainrots
+!Rarity
+!Brainrot
+!$/s
+!Price ($)
+|-
+|Rare
+|Cupcake Koala
+|60
+|8K
+|-
+|Epic
+|Doi Doi Do
+|260
+|41K
+|-
+|Legendary
+|Clickerino Crabo
+|1K
+|250K
+|-
+|Mythic
+|Stoppo Luminino
+|8K
+|3M
+|-
+| rowspan="2" |Brainrot God
+|Money Money Man
+|65K
+|17.5M
+|-
+|Noo La Polizia
+|280K
+|67M
+|-
+| rowspan="4" |Secret
+|Pirulitoita Bicicleteira
+|2.5M
+|600M
+|-
+|Los Puggies
+|30M
+|3B
+|-
+|Los Spaghettis
+|70M
+|20B
+|-
+|Fragrama and Chocrama
+|100M
+|40B
+|}
+
+==Brainrots==
+There are currently 8 rarities of brainrots: Common, Rare, Epic, Legendary, Mythic, Brainrot God, Secret and OG. The exact spawn rates are not available to the public. A brainrot with a higher rarity will be more expensive but also generate more money. Mutations and traits increase the amount of money it will generate but do not increase the price. A Legendary brainrot is guaranteed to spawn every 5 minutes, while a Mythic brainrot spawns every 15 minutes, and a guaranteed Brainrot God spawns whenever a certain number of likes is reached (this is disabled in private servers). Below are all available brainrots, including how much money they generate per second ($/s; without any mutations or traits) and their purchase price. The sell price is half of the purchase price.
+
+The Lucky Block brainrots can spawn normally as well. An asterisk denotes only admins can spawn this brainrot.
+
+===List of Brainrots===
+{| class="mw-collapsible mw-collapsed fandom-table"
+|+List of Brainrots
+!Rarity
+! colspan="2" |Brainrot
+!$/s
+!Price ($)
+|-
+| rowspan="11" |Common
+| colspan="2" |Noobini Pizzanini
+|1
+|25
+|-
+| colspan="2" |Lirilì Larilà
+|3
+|250
+|-
+| colspan="2" |Tim Cheese
+|5
+|500
+|-
+| colspan="2" |Fluriflura
+|7
+|750
+|-
+| colspan="2" |Talpa Di Fero
+|9
+|1K
+|-
+| colspan="2" |Svinina Bombardino
+|10
+|1.2K
+|-
+| colspan="2" |Noobini Santanini
+|11
+|1.3K
+|-
+| colspan="2" |Raccooni Jandelini
+|12
+|1.3K
+|-
+| colspan="2" |Pipi Kiwi
+|13
+|1.5K
+|-
+| colspan="2" |Tartaragno
+|13
+|1.5K
+|-
+| colspan="2" |Pipi Corni
+|14
+|1.7K
+|-
+| rowspan="11" |Rare
+| colspan="2" |Trippi Troppi
+|20
+|2K
+|-
+| colspan="2" |Gangster Footera
+|30
+|4K
+|-
+| colspan="2" |Bandito Bobritto
+|35
+|4K
+|-
+| colspan="2" |Boneca Ambalabu
+|40
+|5K
+|-
+| colspan="2" |Cacto Hipopotamo
+|50
+|6.5K
+|-
+| colspan="2" |Ta Ta Ta Ta Sahur
+|55
+|7.5K
+|-
+| colspan="2" |Cupkake Koala
+|60
+|8K
+|-
+| colspan="2" |Tric Trac Baraboom
+|65
+|9K
+|-
+| colspan="2" |Frogo Elfo
+|67
+|9.2K
+|-
+| colspan="2" |Pipi Avocado
+|70
+|9.5K
+|-
+| colspan="2" |Pinealotto Fruttarino
+|75
+|9.7K
+|-
+| rowspan="20" |Epic
+| colspan="2" |Cappuccino Assasino
+|75
+|10K
+|-
+| colspan="2" |Bandito Axolito
+|90
+|12.5K
+|-
+| colspan="2" |Brr Brr Patapim
+|100
+|15K
+|-
+| colspan="2" |Avocadini Antilopini
+|115
+|17.5K
+|-
+| colspan="2" |Trulimero Trulicina
+|125
+|20K
+|-
+| colspan="2" |Bambini Crostini
+|135
+|22.5K
+|-
+| colspan="2" |Malame Amarele
+|140
+|23.5K
+|-
+| colspan="2" |Bananita Dolphinita
+|150
+|25K
+|-
+| colspan="2" |Perochello Lemonchello
+|160
+|27.5K
+|-
+| colspan="2" |Brri Brri Bicus Dicus Bombicus
+|175
+|30K
+|-
+| colspan="2" |Avocadini Guffo
+|225
+|35K
+|-
+| colspan="2" |Ti Ti Ti Sahur
+|225
+|37.5K
+|-
+| colspan="2" |Mangolini Parrocini
+|235
+|38.5K
+|-
+| colspan="2" |Frogato Pirato
+|240
+|39K
+|-
+| colspan="2" |Salamino Penguino
+|250
+|40K
+|-
+| colspan="2" |Doi Doi Do
+|260
+|41K
+|-
+| colspan="2" |Penguin Tree
+|270
+|42K
+|-
+| colspan="2" |Wombo Rollo
+|275
+|42.5K
+|-
+| colspan="2" |Penguino Cocosino
+|300
+|45K
+|-
+| colspan="2" |Mummio Rappitto
+|325
+|47.5K
+|-
+| rowspan="24" |Legendary
+| colspan="2" |Burbaloli Loliloli
+|200
+|35K
+|-
+| colspan="2" |Chimpanzini Bananini
+|300
+|50K
+|-
+| colspan="2" |Tirilikalika Tirilikalako
+|450
+|75K
+|-
+| colspan="2" |Ballerina Cappuccina
+|500
+|100K
+|-
+| colspan="2" |Chef Crabracadabra
+|600
+|150K
+|-
+| colspan="2" |Lionel Cactuseli
+|650
+|175K
+|-
+| colspan="2" |Glorbo Fruttodrillo
+|750
+|200K
+|-
+| colspan="2" |Quivioli Ameleonni
+|900
+|225K
+|-
+| colspan="2" |Blueberrinni Octopusini
+|1K
+|250K
+|-
+| colspan="2" |Clickerino Crabo
+|1K
+|250K
+|-
+| colspan="2" |Caramello Filtrello
+|1K
+|255K
+|-
+| colspan="2" |Pipi Potato
+|1.1K
+|265K
+|-
+| colspan="2" |Strawberrelli Flamingelli
+|1.1K
+|275K
+|-
+| colspan="2" |Cocosini Mama
+|1.2K
+|285K
+|-
+| colspan="2" |Pandaccini Bananini
+|1.2K
+|300K
+|-
+| colspan="2" |Quackula
+|1.2K
+|310K
+|-
+| colspan="2" |Pi Pi Watermelon
+|1.3K
+|315K
+|-
+| colspan="2" |Signore Carapace
+|1.3K
+|320K
+|-
+| colspan="2" |Sigmа Boy
+|1.3K
+|325K
+|-
+| colspan="2" |Chocco Bunny
+|1.4K
+|327.5K
+|-
+| colspan="2" |Puffaball
+|1.5K
+|330K
+|-
+| colspan="2" |Sigmа Girl
+|1.8K
+|340K
+|-
+| colspan="2" |Sealo Regalo
+|1.8K
+|342.5K
+|-
+| colspan="2" |Buho de Fuego
+|1.8K
+|345K
+|-
+| rowspan="34" |Mythic
+| colspan="2" |Frigo Camelo
+|1.9K
+|350K
+|-
+| colspan="2" |Orangutini Ananassini
+|2K
+|400K
+|-
+| colspan="2" |Rhino Toasterino
+|2.1K
+|450K
+|-
+| colspan="2" |Bombardiro Crocodilo
+|2.5K
+|500K
+|-
+| colspan="2" |Brutto Gialutto
+|3K
+|600K
+|-
+| colspan="2" |Bombombini Gusini
+|5K
+|1M
+|-
+| colspan="2" |Avocadorilla
+|7K
+|2M
+|-
+| colspan="2" |Cavallo Virtuoso
+|7.5K
+|2.5M
+|-
+| colspan="2" |Gorillo Subwoofero
+|7.7K
+|2.7M
+|-
+| colspan="2" |Gorilla Watermelondrillo
+|8K
+|3M
+|-
+| colspan="2" |Stoppo Luminino
+|8K
+|3M
+|-
+| colspan="2" |Tob Tobi Tobi
+|8.5K
+|3.2M
+|-
+| colspan="2" |Lerulerulerule
+|8.7K
+|3.5M
+|-
+| colspan="2" |Ganganzelli Trulala
+|9K
+|3.7M
+|-
+| colspan="2" |Te Te Te Sahur
+|9.5K
+|4M
+|-
+| colspan="2" |Rhino Helicopterino
+|11K
+|4.1M
+|-
+| colspan="2" |Magi Ribbitini
+|11.5K
+|4.2M
+|-
+| colspan="2" |Tracoducotulu Delapeladustuz
+|12K
+|4.2M
+|-
+| colspan="2" |Jingle Jingle Sahur
+|12.2K
+|4.3M
+|-
+| colspan="2" |Los Noobinis
+|12.5K
+|4.3M
+|-
+| colspan="2" |Cachorrito Melonito
+|13K
+|4.4M
+|-
+| colspan="2" |Spongini Quackini
+|13K
+|4.4M
+|-
+| colspan="2" |Carloo
+|13.5K
+|4.5M
+|-
+| colspan="2" |Elephanto Frigo
+|14K
+|4.6M
+|-
+| colspan="2" |Centrucci Nuclucci
+|15.5K
+|4.8M
+|-
+| colspan="2" |Toiletto Focaccino
+|16K
+|4.8M
+|-
+| colspan="2" |Jacko Spaventosa
+|16.2K
+|4.8M
+|-
+| colspan="2" |Tree Tree Tree Sahur
+|17K
+|4.9M
+|-
+| colspan="2" |Fizzy Soda
+|17.2K
+|4.9M
+|-
+| rowspan="5" |Lucky Block
+|Spioniro Golubiro
+|3.5K
+|750K
+|-
+|Zibra Zubra Zibralini
+|6K
+|1M
+|-
+|Tigrilini Watermelini
+|6.5K
+|1M
+|-
+|Carrotini Brainini
+|15K
+|4.7M
+|-
+|Bananito Bandito
+|16.5K
+|4.9M
+|-
+| rowspan="76" |Brainrot God
+| colspan="2" |Cocofanto Elefanto
+|17.5K
+|5M
+|-
+| colspan="2" |Antonio
+|18.5K
+|6M
+|-
+| colspan="2" |Girafa Celestre
+|20K
+|7.5M
+|-
+| colspan="2" |Gattatino Nyanino
+|35K
+|7.5M
+|-
+| colspan="2" |Chihuanini Taconini
+|45K
+|8.5M
+|-
+| colspan="2" |Tralalero Tralala
+|50K
+|10M
+|-
+| colspan="2" |Matteo
+|50K
+|10M
+|-
+| colspan="2" |Los Crocodillitos
+|55K
+|12.5M
+|-
+| colspan="2" |Money Money Man
+|65K
+|17.5M
+|-
+| colspan="2" |Espresso Signora
+|70K
+|25M
+|-
+| colspan="2" |Odin Din Din Dun
+|75K
+|15M
+|-
+| colspan="2" |Unclito Samito
+|75K
+|20M
+|-
+| colspan="2" |Tipi Topi Taco
+|75K
+|20M
+|-
+| colspan="2" |Alessio
+|85K
+|17.5M
+|-
+| colspan="2" |Tralalita Tralala
+|100K
+|20M
+|-
+| colspan="2" |Tukanno Bananno
+|100K
+|22.5M
+|-
+| colspan="2" |Extinct Ballerina
+|125K
+|23.5M
+|-
+| colspan="2" |Vampira Cappucina
+|125K
+|24.5M
+|-
+| colspan="2" |Trenostruzzo Turbo 3000
+|150K
+|25M
+|-
+| colspan="2" |Urubini Flamenguini
+|150K
+|30M
+|-
+| colspan="2" |Jacko Jack Jack
+|150K
+|30M
+|-
+| colspan="2" |Capi Taco
+|155K
+|31M
+|-
+| colspan="2" |Los Chihuaninis
+|160K
+|32M
+|-
+| colspan="2" |Gattito Tacoto
+|165K
+|32.5M
+|-
+| colspan="2" |Trippi Troppi Troppa Trippa
+|175K
+|30M
+|-
+| colspan="2" |Las Cappuchinas
+|185K
+|32.5M
+|-
+| colspan="2" |Ballerino Lololo
+|200K
+|35M
+|-
+| colspan="2" |Los Tungtungtungcitos
+|210K
+|37.5M
+|-
+| colspan="2" |Pakrahmatmamat
+|215K
+|37.5M
+|-
+| colspan="2" |Ballerina Peppermintina
+|215K
+|37.5M
+|-
+| colspan="2" |Los Bombinitos
+|220K
+|42.5M
+|-
+| colspan="2" |Piccione Macchina
+|225K
+|40M
+|-
+| colspan="2" |Brr es Teh Patipum
+|225K
+|40M
+|-
+| colspan="2" |Pakrahmatmatina
+|225K
+|40.5M
+|-
+| colspan="2" |Bombardini Tortini
+|225K
+|50M
+|-
+| colspan="2" |Tractoro Dinosauro
+|230K
+|42.5M
+|-
+| colspan="2" |Los Orcalitos
+|235K
+|45M
+|-
+| colspan="2" |Crabbo Limonetta
+|235K
+|46M
+|-
+| colspan="2" |Cacasito Satalito
+|240K
+|45M
+|-
+| colspan="2" |Orcalita Orcala
+|240K
+|45M
+|-
+| colspan="2" |Aquanaut
+|245K
+|45.5M
+|-
+| colspan="2" |Tartaruga Cisterna
+|250K
+|45M
+|-
+| colspan="2" |Corn Corn Corn Sahur
+|250K
+|45M
+|-
+| colspan="2" |Squalanana
+|250K
+|45M
+|-
+| colspan="2" |Snailenzo
+|250K
+|45M
+|-
+| colspan="2" |Mummy Ambalabu
+|250K
+|45M
+|-
+| colspan="2" |Dug Dug Dug
+|255K
+|45.5M
+|-
+| colspan="2" |Yeti Claus
+|257.5K
+|45.7M
+|-
+| colspan="2" |Ginger Globo
+|257.5K
+|45.7M
+|-
+| colspan="2" |Los Tipi Tacos
+|260K
+|46M
+|-
+| colspan="2" |Granchiello Spiritell
+|260K
+|46M
+|-
+| colspan="2" |Tootini Shrimpini
+|260K
+|46M
+|-
+| colspan="2" |Frio Ninja
+|265K
+|46.5M
+|-
+| colspan="2" |Buho de Noelo
+|267.5K
+|46.7M
+|-
+| colspan="2" |Piccionetta Macchina
+|270K
+|47M
+|-
+| colspan="2" |Boba Panda
+|270K
+|47M
+|-
+| colspan="2" |Bambu Bambu Sahur
+|275K
+|47.5M
+|-
+| colspan="2" |Los Gattitos
+|275K
+|47.5M
+|-
+| colspan="2" |Chrismasmamat
+|277.5K
+|47.7M
+|-
+| colspan="2" |Anpali Babel
+|280K
+|48M
+|-
+| colspan="2" |Noo La Polizia
+|280K
+|67M
+|-
+| colspan="2" |Cappuccino Clownino
+|285K
+|48.5M
+|-
+| colspan="2" |Brasilini Berimbini
+|285K
+|55M
+|-
+| colspan="2" |Belula Beluga
+|290K
+|60M
+|-
+| colspan="2" |Krupuk Pagi Pagi
+|290K
+|60M
+|-
+| colspan="2" |Skull Skull Skull
+|290K
+|60M
+|-
+| colspan="2" |Cocoa Assassino
+|291K
+|61M
+|-
+| colspan="2" |Tentacolo Tecnico
+|292.5K
+|62.5M
+|-
+| colspan="2" |Ginger Cisterna
+|293.5K
+|63.5M
+|-
+| colspan="2" |Pandanini Frostini
+|294K
+|64M
+|-
+| colspan="2" |Dolphini Jetskini
+|294.5K
+|64.5M
+|-
+| rowspan="5" |Lucky Block
+|Tigroligre Frutonni
+|60K
+|14M
+|-
+|Orcalero Orcala
+|100K
+|25M
+|-
+|Bulbito Bandito Traktorito
+|205K
+|35M
+|-
+|Mastodontico Telepiedone
+|275K
+|47.5M
+|-
+|Pop Pop Sahur
+|295K
+|65M
+|-
+| rowspan="154" |Secret
+| colspan="2" |La Vacca Saturno Saturnita
+|300K
+|50M
+|-
+| colspan="2" |Bisonte Giuppitere
+|300K
+|75M
+|-
+| colspan="2" |Karkerkar Kurkur
+|300K
+|100M
+|-
+| colspan="2" |Los Matteos
+|300K
+|100M
+|-
+| colspan="2" |Trenostruzzo Turbo 4000
+|310K
+|100M
+|-
+| colspan="2" |Jackorilla
+|315K
+|80M
+|-
+| colspan="2" |Sammyni Spyderini
+|325K
+|75M
+|-
+| colspan="2" |Dul Dul Dul
+|375K
+|150M
+|-
+| colspan="2" |Blackhole Goat
+|400K
+|75M
+|-
+| colspan="2" |Chachechi
+|400K
+|85M
+|-
+| colspan="2" |Agarrini la Palini
+|425K
+|80M
+|-
+| colspan="2" |Los Spyderinis
+|425K
+|125M
+|-
+| colspan="2" |Fragola La La La
+|450K
+|125M
+|-
+| colspan="2" |Extinct Tralalero
+|450K
+|125M
+|-
+| colspan="2" |La Cucaracha
+|475K
+|110M
+|-
+| colspan="2" |Los Tralaleritos
+|500K
+|100M
+|-
+| colspan="2" |Los Tortus
+|500K
+|100M
+|-
+| colspan="2" |Zombie Tralala
+|500K
+|100M
+|-
+| colspan="2" |Vulturino Skeletono
+|500K
+|110M
+|-
+| colspan="2" |Boatito Auratito
+|525K
+|115M
+|-
+| colspan="2" |Guerriro Digitale
+|550K
+|120M
+|-
+| colspan="2" |Yess my examine 
+|575K
+|130M
+|-
+| colspan="2" |La Karkerkar Combinasion
+|600K
+|160M
+|-
+| colspan="2" |La Vacca Prese Presente
+|600K
+|160M
+|-
+| colspan="2" |Reindeer Tralala
+|600K
+|160M
+|-
+| colspan="2" |Extinct Matteo
+|625K
+|140M
+|-
+| colspan="2" |Las Tralaleritas
+|650K
+|150M
+|-
+| colspan="2" |Rocco Disco
+|650K
+|150M
+|-
+| colspan="2" |Pumpkini Spyderini
+|650K
+|165M
+|-
+| colspan="2" |Job Job Job Sahur
+|700K
+|175M
+|-
+| colspan="2" |Frankentteo
+|700K
+|175M
+|-
+| colspan="2" |Los Trios
+|700K
+|175M
+|-
+| colspan="2" |Karker Sahur
+|725K
+|185M
+|-
+| colspan="2" |Las Vaquitas Saturnitas
+|750K
+|200M
+|-
+| colspan="2" |Los Karkeritos
+|750K
+|200M
+|-
+| colspan="2" |Santteo
+|800K
+|210M
+|-
+| colspan="2" |La Vacca Jacko Linterino
+|850K
+|225M
+|-
+| colspan="2" |Triplito Tralaleritos
+|875K
+|230M
+|-
+| colspan="2" |Trickolino
+|900K
+|235M
+|-
+| colspan="2" |Giftini Spyderini
+|999.9K
+|240M
+|-
+| colspan="2" |Graipuss Medussi
+|1M
+|250M
+|-
+| colspan="2" |Perrito Burrito
+|1M
+|250M
+|-
+| colspan="2" |1x1x1x1
+|1.1M
+|255.5M
+|-
+| colspan="2" |Los Cucarachas
+|1.2M
+|300M
+|-
+| colspan="2" |Please my Present
+|1.3M
+|350M
+|-
+| colspan="2" |Cuadramat and Pakrahmatmamat
+|1.4M
+|400M
+|-
+| colspan="2" |Noo My Hotspot
+|1.5M
+|500M
+|-
+| colspan="2" |Los Jobcitos
+|1.5M
+|500M
+|-
+| colspan="2" |Tung Tung Tung Sahur
+|1.5M
+|500M
+|-
+| colspan="2" |Bunnyman
+|1.5M
+|500M
+|-
+| colspan="2" |Noo my examine
+|1.7M
+|525M
+|-
+| colspan="2" |La Sahur Combinasion 
+|2M
+|550M
+|-
+| colspan="2" |Telemorte
+|2M
+|550M
+|-
+| colspan="2" |List List List Sahur
+|2M
+|550M
+|-
+| colspan="2" |To to to Sahur
+|2.2M
+|575M
+|-
+| colspan="2" |Pirulitoita Bicicleteira
+|2.5M
+|600M
+|-
+| colspan="2" |25
+|2.5M
+|600M
+|-
+| colspan="2" |Santa Hotspot
+|2.6M
+|625M
+|-
+| colspan="2" |Horegini Boom
+|2.7M
+|650M
+|-
+| colspan="2" |Quesadilla Crocodila
+|3M
+|700M
+|-
+| colspan="2" |Pot Pumpkin
+|3M
+|700M
+|-
+| colspan="2" |Naughty Naughty
+|3M
+|700M
+|-
+| colspan="2" |Bunito Bunito Spinito
+|3M
+|900M
+|-
+| colspan="2" |Ho Ho Ho Sahur
+|3.2M
+|725M
+|-
+| colspan="2" |Chicleteira Bicicleteira
+|3.5M
+|750M
+|-
+| colspan="2" |Quesadillo Vampiro
+|3.5M
+|750M
+|-
+| colspan="2" |Brunito Marsito
+|3.5M
+|750M
+|-
+| colspan="2" |Chicleteirina Bicicleteirina
+|4M
+|850M
+|-
+| colspan="2" |Burrito Bandito
+|4M
+|850M
+|-
+| colspan="2" |Chill Puppy
+|4M
+|850M
+|-
+| colspan="2" |Los Quesadillas
+|4.5M
+|875M
+|-
+| colspan="2" |Noo my Candy
+|5M
+|900M
+|-
+| colspan="2" |Arcadopus
+|5M
+|900M
+|-
+| colspan="2" |Los Nooo My Hotspotsitos
+|5.5M
+|1B
+|-
+| colspan="2" |Rang Ring Bus
+|6M
+|1.1B
+|-
+| colspan="2" |Noo my Present
+|6M
+|1.1B
+|-
+| colspan="2" |Guest 666
+|6.6M
+|1.1B
+|-
+| colspan="2" |Los Chicleteiras
+|7M
+|1.2B
+|-
+| colspan="2" |67
+|7.5M
+|1.2B
+|-
+| colspan="2" |Donkeyturbo Express
+|7.5M
+|1.2B
+|-
+| colspan="2" |Los Burritos
+|8.5M
+|1.4B
+|-
+| colspan="2" |La Grande Combinasion
+|10M
+|1B
+|-
+| colspan="2" |Los 25
+|10M
+|1.5B
+|-
+| colspan="2" |Mariachi Corazoni
+|12.5M
+|1.7B
+|-
+| colspan="2" |Swag Soda
+|13M
+|1.8B
+|-
+| colspan="2" |Chimnino
+|14M
+|1.9B
+|-
+| colspan="2" |Los Combinasionas
+|15M
+|2B
+|-
+| colspan="2" |Chicleteira Noelteira
+|15M
+|2B
+|-
+| colspan="2" |Nuclearo Dinossauro
+|15M
+|2.5B
+|-
+| colspan="2" |Fishino Clownino
+|15.5M
+|2.1B
+|-
+| colspan="2" |Tacorita Bicicleta
+|16.5M
+|2.2B
+|-
+| colspan="2" |Spinny Hammy
+|17M
+|2.3B
+|-
+| colspan="2" |Las Sis
+|17.5M
+|2.5B
+|-
+| colspan="2" |Los Planitos
+|18.5M
+|2.7B
+|-
+| colspan="2" |Los Hotspotsitos
+|20M
+|3B
+|-
+| colspan="2" |Los Spooky Combinasionas
+|20M
+|3B
+|-
+| colspan="2" |Los Jolly Combinasionas
+|20M
+|3B
+|-
+| colspan="2" |Money Money Puggy
+|21M
+|2.6B
+|-
+| colspan="2" |Los Mobilis
+|22M
+|2.7B
+|-
+| colspan="2" |Celularcini Viciosini
+|22.5M
+|2.7B
+|-
+| colspan="2" |Los 67
+|22.5M
+|2.7B
+|-
+| colspan="2" |Los Candies
+|23M
+|3B
+|-
+| colspan="2" |La Extinct Grande
+|23.5M
+|3.2B
+|-
+| colspan="2" |Los Bros
+|24M
+|2.6B
+|-
+| colspan="2" |Bacuru and Egguru
+|24M
+|3.8B
+|-
+| colspan="2" |La Spooky Grande
+|24.5M
+|2.9B
+|-
+| colspan="2" |Chillin Chili
+|25M
+|2.5B
+|-
+| colspan="2" |Chipso and Queso
+|25M
+|2.5B
+|-
+| colspan="2" |Money Money Reindeer
+|25M
+|2.5B
+|-
+| colspan="2" |Mieteteira Bicicleteira
+|26M
+|2.7B
+|-
+| colspan="2" |Tuff Toucan
+|26M
+|2.7B
+|-
+| colspan="2" |Gobblino Uniciclino
+|27.5M
+|2.8B
+|-
+| colspan="2" |Tralaledon 
+|27.5M
+|3B
+|-
+| colspan="2" |Los Puggies
+|30M
+|3B
+|-
+| colspan="2" |W or L
+|30M
+|3B
+|-
+| colspan="2" |La Jolly Grande
+|30M
+|3.5B
+|-
+| colspan="2" |Los Primos
+|31M
+|3.7B
+|-
+| colspan="2" |Eviledon
+|31.5M
+|3.8B
+|-
+| colspan="2" |Los Tacoritas
+|32M
+|4B
+|-
+| colspan="2" |Tang Tang Keletang
+|33.5M
+|4.5B
+|-
+| colspan="2" |Ketupat Kepat
+|35M
+|5B
+|-
+| colspan="2" |La Taco Combinasion
+|35M
+|5B
+|-
+| colspan="2" |Tictac Sahur
+|37.5M
+|6B
+|-
+| colspan="2" |Orcaledon
+|40M
+|7B
+|-
+| colspan="2" |Swaggy Bros
+|40M
+|7B
+|-
+| colspan="2" |Ketchuru and Masturu
+|42.5M
+|7.5B
+|-
+| colspan="2" |Jolly Jolly Sahur
+|45M
+|8B
+|-
+| colspan="2" |Lavadorito Spinito
+|45M
+|30B
+|-
+| colspan="2" |Garama and Madundung
+|50M
+|10B
+|-
+| colspan="2" |Popuru and Fizzuru
+|55M
+|12.5B
+|-
+| colspan="2" |Festive 67
+|67M
+|16B
+|-
+| colspan="2" |Los Spaghettis
+|70M
+|20B
+|-
+| colspan="2" |Ginger Gerat
+|75M
+|22.5B
+|-
+| colspan="2" |La Ginger Sekolah
+|75M
+|23B
+|-
+| colspan="2" |Spooky and Pumpky
+|80M
+|25B
+|-
+| colspan="2" |Los Sekolahs
+|85M
+|30B
+|-
+| colspan="2" |La Casa Boo
+|100M
+|40B
+|-
+| colspan="2" |Fragrama and Chocrama
+|100M
+|40B
+|-
+| colspan="2" |Reinito Sleighito
+|140M
+|60B
+|-
+| colspan="2" |Ketupat Bros
+|145M
+|65B
+|-
+| colspan="2" |Burguro And Fryuro
+|150M
+|75B
+|-
+| colspan="2" |Cooki and Milki
+|155M
+|100B
+|-
+| colspan="2" |Capitano Moby
+|160M
+|125B
+|-
+| colspan="2" |Cerberus
+|175M
+|150B
+|-
+| colspan="2" |La Supreme Combinasion
+|200M
+|200B
+|-
+| colspan="2" |Dragon Cannelloni
+|250M
+|250B
+|-
+| colspan="2" |Dragon Gingerini
+|300M
+|300B
+|-
+| colspan="2" |Headless Horseman
+|325M
+|325B
+|-
+| colspan="2" |Hydra Dragon Cannelloni
+|350M
+|350B
+|-
+| rowspan="5" |Lucky Block
+|Torrtuginni Dragonfrutini
+|350K
+|125M
+|-
+|Pot Hotspot
+|2.5M
+|600M
+|-
+|Esok Sekolah
+|30M
+|3.5B
+|-
+|Spaghetti Tualetti
+|60M
+|15B
+|-
+|La Secret Combinasion
+|125M
+|50B
+|-
+| rowspan="3" |OG
+| colspan="2" |Skibidi Toilet
+|450M
+|450B
+|-
+| colspan="2" |John Pork
+|500M
+|500B
+|-
+| colspan="2" |Meowl
+|600M
+|650B
+|-
+| colspan="2" |Strawberry Elephant
+|750M
+|750B
+|}
+
+====Unobtainable Brainrots====
+* Developini Braziliaspidini
+* Kings Coleslaw
+* Chimpanzini Spiderini
+* Crocodildo Penisini
+* Statutino Libertino
+Still in Index
+
+*Raccooni Jandelini
+
+===Mutations and Traits===
+
+==== Mutations ====
+As of April 2026, brainrots can naturally have one of these 4 mutations:  
+
+* Gold (Multiplier x1.25)
+* Diamond (Multiplier x1.5)
+* Divine (Multiplier x10)
+* Rainbow (Multiplier x10)
+Other mutations were in previous versions and are no longer available to get, unless spawned by an admin:
+* Bloodrot (Multiplier x2)
+* Celestial (Multiplier x4)
+* Candy (Multiplier x4)
+* Lava (Multiplier x6)
+* Galaxy (Multiplier x7)
+* Yin Yang (Multiplier x7.5)
+* Radioactive (Multiplier x8.5)
+* Cursed (Multiplier x9)
+Mutations are not stackable. (A brainrot can have only one mutation)
+
+====Traits====
+Traits are obtained by brainrots as they go along the conveyor when an event is going on. They are denoted by a symbol that appears along their info above them. Traits are stackable, and mutated brainrots can obtain traits too.
+
+As of September 27, there are 7 events that can be spawned by performing a ritual:
+*<u>La Vacca Saturno Saturnita (Galalctic)</u> (Multiplier x4) 3 people must grab a La Vacca Saturno Saturnita and form a triangle while holding them.
+** Spawns a Las Vaquitas Saturnitas.
+** Map will be galaxy themed.
+** An asteroid will occasionally strike a brainrot and give it a purple aura.
+** Has an asteroid symbol.
+* <u>Bombardiro</u> (Multiplier x4): 3 people must grab a Bombardiro Crocodilo and line up at the start of the red conveyor.
+** Spawns a Los Crocodillitos.
+** Bombardiro Crocodilos fly over the map, dropping explosive Svinina Bombardinos. Brainrots that get hit will get the trait. The bombs also knock back players.
+** Has a Bombardiro Crocodilo symbol.
+* <u>Orcalero (Shark Fin)</u> (Multiplier x4): 4 people must grab an Orcalero Orcala and stand next to each other.
+** Spawns a Los Orcalitos.
+** The map is submerged in water, reducing gravity.
+** A bunch of Orcalero Orcalas and Tralalero Tralalas swim in the water and occasionally bite a brainrot. That brainrot will get a shark fin on its back.
+** Has a shark fin symbol.
+*<u>Matteo</u> (Multiplier x5): 3 people must grab a Matteo and stand on top of each other on the red conveyor.
+**Spawns a Los Matteos.
+**The Matteos will turn into a giant tree, its roots growing across the map and spawning multiple smaller trees; and the weather will turn to thunderstorm. Players can pick up those trees and use them as weapons to fight for the Los Matteos.
+**If lightning strikes a brainrot, the brainrot will get a black hat on its head.
+**Has a hat symbol.
+*<u>Spyderini</u> <u>(</u>Multiplier x5): 4 people must grab a Sammyni Spyderini and form a square in the middle of the track.
+**Spawns a Los Spyderinis.
+*<u>Chicleteira (Paint)</u> (Multiplier x6): 2 people must grab a Chicleteira Bicicleteira and stand next to each other at the spawn.
+** Spawns a Los Chicleteiras.
+** The map is submerged in water, reducing gravity.
+** The Red Carpet will be replaced with a Highway, Chicleteiras will appear on the side and buildings will appear on the background.
+** If a Chicleteira sprays a Brainrot, they get a paint mutation.
+** Has a Chicleteira Graffiti symbol.
+
+*
+
+The following traits are currently only available if an admin spawns them.
+
+* <u>Raining Tacos</u> (Multiplier x3)
+** The song It's Raining Tacos will play and it's raining tacos on the map
+** A cannon appears above the conveyor entrance and occasionally shoots a taco onto a brainrot's head.
+** Has a taco symbol.
+* <u>Glitch</u> (Multiplier x5, Multiplier x133.7)
+** Map will turn black and glitch-themed.
+** A brainrot will occasionally fall into a glitch hole, getting a glitch-like aura
+** Has a glitch symbol.
+** A brainrot has a 0.01% chance of getting hit by a glitched light and becoming Elusified.
+* <u>Crab Rave</u> (Multiplier x5)
+** The Crab Rave song will play, the map will be beach themed and dancing crabs appear which occasionally pinch brainrots, applying the trait. They can also attack players.
+** The affected brainrot gets crab claws/pincers.
+** Has a crab claw symbol.
+* <u>Fire</u> (Multipler 5x)
+** A sun appears above the map and shoots solar flares which move along the map, potentially hitting a brainrot. They can also knock back players.
+** The affected brainrot is on fire.
+** Has a fire symbol.
+* <u>4th of July (Fireworks)</u> (Multiplier x6)
+** The map is lined with firework launchers which shoot fireworks. Brainrots will get the trait when they get hit by fireworks.
+** The affected brainrot gets a firework aura.
+** Three sparkles symbol.
+* <u>Nyan Cats</u> (Multiplier x6)
+** Map will go dark and get circled by Nyan Cats which occasionally hit a brainrot, applying the trait.
+** Affected brainrot has a rainbow trail (only visible when brainrot is on the conveyor or being stolen).
+** Spawns a Gattatino Nyanino.
+** Has a Nyan Cat logo.
+* <u>Concert</u> (Multiplier x5)
+**The map goes dark for a short time and then neon lights turn on, and DJ's Tralalero Tralala and Chimpanzini Bananini appear on the map.
+** Affected brainrot has a white glow effect.
+** Has white flash symbol.
+*<u>Strawberry</u> (Multiplier x10)
+*Strawberry bushes appear across the map, the floor turns red, and the carpet turns green.
+*Affected Brainrot gets a strawberry reskin.
+*Can only happen when a Strawberry Elephant spawns.
+Since the August 1st update, weather events may appear randomly:
+
+* Rain (Multiplier x4)
+* Snow (Multiplier x3)
+* Starfall (Multiplier x4)
+
+===Index===
+The player can view the brainrots and their rarities that they have collected by clicking on the index button. Each primary mutation possesses its own index. The completion of any index adds 0.5× to the money multiplier. The achievement of a mutation's index will also give the player a base in the color of the mutation. For example, a golden base for the golden index, and so on.
+
+==Update Log (UPDATE NEEDED)==
+Update 35 (January 24): OG Fuse Machine, New Tsunami Event
+
+* Escape Tsunami LTM
+* Fuse Machine
+* New Best Secret (Hydra Dragon)
+
+Update 16 (September 13): Limited Quantity, Extinct Mutation, New Ritual
+
+* Extinct Tralalelo (Secret)
+* Extinct Ballerina (Brainrot God)
+* Extinct Matteo (Secret)
+* La Extinct Grande (Secret)
+* Los Chicleteiras (Secret)
+* Las Sis (Secret)
+* Celuarcini Viciosini (Secret)
+* Rhino Helicopterino (Mythic)
+* Belula Beluga (Brainrot God)
+* Tractoro Dinossauro (Brainrot God)
+* Chacheci (Secret)
+
+Other:
+
+* To peform the Chicleteira Bicicleteira ritual, you have to go to the cave, put two Chicleteira Bicicleteira beside but spread out.
+* The La Extinct Grande was the first limited.
+* The new Extinct event will happen every 2 hours with 1 of 3 Brainrots spawning.
+* Prior to this update, there was another limited named "Tacorita Bicicleta" for Taco Tuesday, to craft it you needed Quesadilla Crocodilla, Capi Taco, Bombardini Tortinii
+
+Update 15 (September 5): 4 New Brainrots, Taco Lucky Block
+
+* Chihuanini Taconini (Brainrot God)
+* Gattito Tacico (Brainrot God)
+* Los Tipi Tacos (Brainrot God)
+* Los Noo My Hotspotsitos (Secret)
+
+Update 14 (August 31): 9 New Brainrots, OG Rarity and Spyderini Rutial
+
+* Avocadini Antilopini (Epic)
+* Quivoli Ameleonni (Legendary)
+* Carrotini Brainini (Mythic Lucky Block)
+* Mastodontico Tellepiedone (Brainrot God Lucky Block)
+* Cacasito Satalito (Brainrot God)
+* Crabbo Limonetta (Brainrot God)
+* Spaghetti Tualetti (Secret Lucky Block)
+* Los Noo My Hotspotsitos (Secret)
+* Strawberry Elephant (OG)
+Update 13 (August 24): 10 New Brainrots, Admin Abuse + Admin Lucky Block and Rebirth 14
+
+* Pipi Potato (Legendary)
+* Lerulerulerule (Mythic)
+* Pakrahmatmamat (Brainrot God)
+* Tartaruga Cisterna (Brainrot God)
+* Brr es Teh Patipum (Brainrot God)
+* Los Spiderinis (Secret)
+* Admin Lucky Block Brainrots:
+* Carloo (Mythic)
+* Alessio (Brainrot God)
+* Los Bombinitos (Brainrot God)
+* Blackhole Goat (Secret)
+* La Grande Combinasion and La Supreme Combinasion can be also obtained in Admin Lucky Blocks.
+Update 12 (August 15): 5 New Brainrots, Galaxy Mutation and Matteo Ritual
+
+* Tracotucotulu Delapeladuztuz (Mythic)
+* Tralalita Tralala (Brainrot God)
+* Brr es Teh Patipum (Brainrot God Fuse Machine)
+* Bisonte Gluppitere (Secret Galaxy Spin Exclusive!)
+* Los Matteos (Secret)
+** The Galaxy mutation gives brainrots a ×7 cash muitiplier.
+Update 11 (August 8): 6 New Brainrots
+
+* Tob Tobi Tobi (Mythic Fuse Machine)
+* Te Te Te Sahur (Mythic)
+* Bulbito Bandito Traktorito (Brainrot God Lucky Block)
+* Los Orcalitos (Brainrot God Fuse Machine)
+* Karkerkar Kurkur (Secret)
+* Los Hotspotsitos (Secret Fuse Machine)
+* Esok Sekolah (Secret Lucky Block)
+
+Update 10 (August 1): 12 New Brainrots and Fuse Machine
+
+Fuse Machine Brainrots:
+
+* Pipi Corni (Common)
+* Pipi Avocado (Rare)
+* Ti Ti Ti Sahur (Epic)
+* Penguino Cocosino (Epic)
+* Cocosini Mama (Legendary)
+* Pi Pi Watermelon (Legendary)
+* Avocadorilla (Mythic)
+* Ganganzelli Trulala (Mythic)
+* Los Tungtungtungcitos (Brainrot God)
+* Agarrini La Palini (Secret)
+* La Combinasionas (Secret)
+* La Supreme Combinasion (Secret)
+** Put four brainrots in the Fuse Machine to fuse a better brainrot!
+
+Update 9 (July 25): 5 New Brainrots, Lava Mutation and Rebirth 13
+
+* Salamino Penguino (Epic)
+* Gorillo Watermelondrillo (Mythic)
+* Piccione Macchina (Brainrot God)
+* Las Vaquitas Saturnitas (Secret)
+* Chicleteira Bicicletera (Secret)
+** The Lava mutation gives brainrots a ×6 cash muitiplier.
+Update 8 (July 18): 4 New Brainrots and Bubblegum Machine
+
+* Avocadini Guffo (Epic)
+* Strawberrelli Flamingelli (Legendary)
+* Ballerino Lololo (Brainrot God)
+* Nuclearo Dinossauro (Secret)
+** Insert 10 Candy Brainrots to activate the Bubblegum Machine, the brainrots with bubblegums with have a ×4 cash muitlplier.
+** The bubblegum machine only lasts for 7 days.
+Update 7 (July 11): 7 New Brainrots and Lucky Block
+
+Lucky Block Brainrots:
+
+* Spioniro Golubiro (Mythic)
+* Zibra Zubra Zirbalini (Mythic)
+* Tigrilini Watermelini (Mythic)
+* Tigroligre Frutonni (Brainrot God)
+* Orcalero Orcala (Brainrot God)
+* Torrtuginni Dragonfrutini (Secret)
+* Pot Hotspot (Secret)
+** There are three types of Lucky Blocks, including Mythic, Brainrot God and Secret.
+
+Update 6 (July 4): 6 New Brainrots, Candy Mutation
+
+* Bandito Bobritto (Rare)
+* Lionel Cactuseli (Legendary)
+* Cavello Virtuoso (Mythic)
+* Unclito Samito (Brainrot God)
+* Chimpanzini Spiderini (Secret)
+* Garama and Madundung (Secret)
+** The Candy mutation gives brainrots a ×4 cash muitiplier.
+
+*
+
+Update 5 (June 28): 6 New Brainrots, Rebirth 11, Index Rewards and Traits
+
+* Pipi Kiwi (Common)
+* Tric Trac Baraboom (Rare)
+* Perochello Lemonchello (Epic)
+* Gattatino Nyanino (Brainrot God)
+* Matteo (Brainrot God)
+* Trenostruzzo Turbo 3000 (Brainrot God)
+Update 4 (June 21): 2 New Brainrots and Rebirth 10
+
+* Graipuss Medussi (Secret)
+* La Grande Combinasion (Secret)
+
+Update 3 (June 14): 4 New Brainrots, Bloodmoon Event Extension and Rebirth 9
+
+* Talpa Di Fero (Common)
+* Brri Brri Bicus Dicus Bombicus (Epic)
+* Rhino Toasterino (Mythic)
+* Los Tralaleritos (Secret)
+** The extension of the bloodmoon event is one week.
+Update 2 (June 7):
+
+Update 1 (May 31):
+*
+
+==Trivia==
+
+*If 3 people each steal a La Vacca Saturno Saturnitas and make a triangle, they will start a ritual that triggers the Galactic event and spawns Las Vaquitas Saturnitas. This will consume the 3 La Vaccas used and the one summoned will generate $750k/s, equivalent to 2.5 La Vaccas.
+*The income of La Vacca Saturno Saturnita was 250K before. Then, it got increased to 275K, then 300K.
+**A similar thing happened to Karkerkar Kurkur; it started as a 275K but was increased to 300K.
+*The name of the brainrot Sammyni Spyderini was Chimpanzini Spiderini before.
+*The income of Cocofanto Elefanto was changed from 10K to 17.5K in an update due to the fact that three Mythics (Tracoducotulu Delapeladustuz, Carloo, and Carrotini Brainini) made more than it.
+*Los Tungtungtungcitos and Los Combinasionas used to be unobtainable until they were added to the Los Lucky Block.
+*Gattaino Nyanino used to be Gattatino Neonino.
+*Unclito Samito used to be Statutino Libertino.
+*If you collect one of every brainrot in a normal, gold, diamond, rainbow, yin-yang, bloodrot, halloween, candy, lava, galaxy, or radioactive variant, you get a 0.5x multiplier increase each and a special-colored base besides the normal one.
+**For a short time after the Radioactive Event was added, the YinYang base was deleted. 
+*The original post for the developer exclusive "Kings Coleslaw" is here: https://www.youtube.com/shorts/KSFrca7iD04, which was posted about 3 months after the brainrots creation, where the brainrot itself was created around April 24, 2025.
+*The Strawberry Elephant is part of the 2023 brainrot animals, alongside the Smurf Cat and Pineapple Owl, among many others.
+*In terms of CCU, the game is often in the top five games within the Top Playing Now section on Roblox, averaging multiple six-figure CCU numbers, as of May 11, 2026.
+*There are currently 1y rebirths in the game, each granting special perks.
+*The game is highly popular in Latin America, even surpassing Grow a Garden in the region. The international chat in the game's Discord server has many users speaking Spanish or Portuguese, and several users in the most income per second leaderboard are from Latin American countries (including the number one).
+* The game holds the record for most visits gained in a day being 605,558,264.
+* Tung Tung Tung Sahur was temporarily removed due to copyright issues.
+** On November 29, 2025, he was added back as a secret who makes $1.5M/s.
+* Steal a Brainrot holds the record for the most concurrent players in a video game at once with 25,836,222 on October 11, 2025, even beating Grow a Garden.
+* Brainrots used to have their $/s updated when they were in your base.
+
+==Gallery==
+
+cs:Steal a Brainrot
+de:BRAZILIAN SPYDER/Steal a Brainrot
+pl:Ukraść Brainrot
+hi:
+ru:BRAZILIAN SPYDER/Steal a Brainrot
+zh:Steal a Brainrot
