@@ -78,6 +78,21 @@
   #cross{position:fixed;left:50%;top:50%;width:9px;height:9px;margin:-4.5px 0 0 -4.5px;border-radius:50%;background:#fff9;box-shadow:0 0 0 2px #0003;pointer-events:none;display:none;z-index:9}
   #cross.on{display:block}
 
+  /* emoji çubuğu */
+  #emojiBar{position:fixed;bottom:calc(16px + env(safe-area-inset-bottom));left:50%;transform:translateX(-50%) translateY(20px);display:none;gap:6px;padding:8px 10px;border-radius:20px;background:#fffd;box-shadow:0 6px 0 #0002,0 12px 30px #0004;z-index:13;opacity:0;transition:.22s cubic-bezier(.2,1.5,.4,1)}
+  #emojiBar.on{display:flex;opacity:1;transform:translateX(-50%) translateY(0)}
+  #emojiBar button{border:0;background:#f4efe3;border-radius:13px;width:44px;height:44px;font-size:23px;cursor:pointer;transition:transform .1s}
+  #emojiBar button:active{transform:scale(.9);background:#ffe9a8}
+
+  /* kozmetik seçici */
+  #cosRow{display:flex;gap:8px;justify-content:center;flex-wrap:wrap;margin-top:14px}
+  #cosRow button{border:3px solid #f0eade;background:#fffdf7;border-radius:15px;width:52px;height:52px;font-size:24px;cursor:pointer;transition:.12s;display:grid;place-items:center}
+  #cosRow button.sel{border-color:#ffb300;background:#fff3c4;transform:scale(1.08)}
+  #cosRow button:active{transform:scale(.94)}
+  .colorRow{display:flex;gap:7px;justify-content:center;margin-top:10px;flex-wrap:wrap}
+  .colorRow button{border:3px solid #fff;border-radius:50%;width:38px;height:38px;cursor:pointer;transition:.12s;box-shadow:0 3px 0 #0002}
+  .colorRow button.sel{border-color:#333;transform:scale(1.12)}
+
   #loading{position:fixed;inset:0;display:grid;place-items:center;background:#8fdcff;z-index:40;font-weight:900;font-size:19px;color:#fff;text-shadow:0 3px 0 #0003}
   #loading .sp{width:34px;height:34px;border:5px solid #fff5;border-top-color:#fff;border-radius:50%;animation:spin .8s linear infinite;margin:0 auto 14px}
   @keyframes spin{to{transform:rotate(360deg)}}
@@ -101,6 +116,7 @@
 
 <div id="topRight">
   <div id="roomTag"><b id="roomCode"></b></div>
+  <button class="icobtn" id="emojiBtn" title="Emoji">😀</button>
   <button class="icobtn" id="achBtn" title="Başarımlar">⭐</button>
   <button class="icobtn" id="lbBtn" title="Sıralama">🏆</button>
   <button class="icobtn" id="eggBtn" title="Pet">🥚</button>
@@ -108,9 +124,19 @@
   <button class="icobtn" id="leaveBtn" title="Çık">✖</button>
 </div>
 
+<div id="emojiBar"></div>
+
 <div id="hint">Halıya yürü, satın al!</div>
 <div id="toast"></div>
 <div id="floaters"></div>
+
+<div class="sheet" id="cosSheet"><div class="card">
+  <h2>🎨 Görünümün</h2>
+  <p class="s">Şapka ve renk seç</p>
+  <div id="cosRow"></div>
+  <div id="cosColors" class="colorRow"></div>
+  <button class="btn ghost" data-close>Tamam</button>
+</div></div>
 
 <div class="sheet" id="achSheet"><div class="card">
   <h2>⭐ Başarımlar</h2>
@@ -699,7 +725,50 @@ const arrowGroup = new THREE.Group();
 const SKIN = [0xffd9b0, 0xf1c27d, 0xc68642, 0x8d5524, 0xffe0bd];
 const SHIRT = [0xff7a59, 0x54b8ff, 0x6fdc4f, 0xffb340, 0xb06bff, 0xff5b9d, 0x2ec4b6, 0xffd400];
 
-function makeAvatar(ci){
+/* Şapkalar — kozmetik listesi (0 = yok) */
+const HATS = [
+  {id:'none',  name:'Şapkasız',  icon:'👤'},
+  {id:'cap',   name:'Keps',      icon:'🧢'},
+  {id:'chef',  name:'Aşçı Şapkası', icon:'👨‍🍳'},
+  {id:'crown', name:'Taç',       icon:'👑'},
+  {id:'party', name:'Parti Şapkası', icon:'🎉'},
+  {id:'wizard',name:'Büyücü Şapkası', icon:'🧙'},
+];
+
+function buildHat(parent, hatId){
+  switch(hatId){
+  case 'cap':
+    add(parent, G.cyl, M(0xff5b5b), 0, 2.12, 0, 0.66, 0.24, 0.66);
+    add(parent, G.box, M(0xd94a4a), 0, 2.06, 0.42, 0.56, 0.08, 0.42);
+    break;
+  case 'chef':
+    add(parent, G.cyl, M(0xffffff), 0, 2.06, 0, 0.56, 0.2, 0.56);
+    add(parent, G.sphLo, M(0xffffff), 0, 2.34, 0, 0.94);
+    add(parent, G.sphLo, M(0xf7f7f7), -0.3, 2.3, 0.1, 0.6);
+    add(parent, G.sphLo, M(0xf7f7f7),  0.3, 2.3, 0.1, 0.6);
+    break;
+  case 'crown':
+    add(parent, G.cyl, M(0xffd400), 0, 2.1, 0, 0.72, 0.2, 0.72);
+    for (let i=0;i<5;i++){
+      const a = i/5*Math.PI*2;
+      add(parent, G.cone, M(0xffd400), Math.cos(a)*0.34, 2.3, Math.sin(a)*0.34, 0.2, 0.34, 0.2);
+      add(parent, G.sphLo, M(0xff5b5b), Math.cos(a)*0.34, 2.48, Math.sin(a)*0.34, 0.11);
+    }
+    break;
+  case 'party':
+    add(parent, G.cone, M(0xff6b9d), 0, 2.4, 0, 0.6, 0.8, 0.6);
+    add(parent, G.sphLo, M(0xffd400), 0, 2.82, 0, 0.16);
+    add(parent, G.sphLo, M(0x54b8ff), 0.12, 2.22, 0.1, 0.13);
+    break;
+  case 'wizard':
+    add(parent, G.cyl, M(0x5b3fa8), 0, 2.06, 0, 0.86, 0.1, 0.86);
+    add(parent, G.cone, M(0x5b3fa8), 0, 2.6, 0, 0.66, 1.0, 0.66);
+    add(parent, G.sphLo, M(0xffd400), 0.1, 3.12, 0, 0.14);
+    break;
+  }
+}
+
+function makeAvatar(ci, hatId){
   const g = new THREE.Group();
   const shirt = M(SHIRT[ci % SHIRT.length]);
   const skin = M(SKIN[ci % SKIN.length]);
@@ -716,8 +785,7 @@ function makeAvatar(ci){
   const armR = add(g, G.capsule, shirt,  0.56, 0.95, 0, 0.34, 0.3, 0.34);
   armL.userData.base = -0.56; armR.userData.base = 0.56;
 
-  const hat = add(g, G.cyl, M(0xffd400), 0, 2.14, 0, 0.62, 0.3, 0.62);
-  add(g, G.sphLo, M(0xff5b5b), 0, 2.32, 0, 0.16);
+  buildHat(g, hatId || 'cap');
 
   g.userData.arms = [armL, armR];
   return g;
@@ -934,6 +1002,7 @@ function make3DButton(text, color, x, y, z, w, h, action){
 make3DButton('TEK OYNA',    0x4cb42f, 0, -1.30, 0, 4.4, 1.05, () => beginSolo());
 make3DButton('ODA KUR',     0xf08c00, 0, -2.55, 0, 4.4, 1.05, () => beginHost());
 make3DButton('ODAYA KATIL', 0x2b8fe0, 0, -3.80, 0, 4.4, 1.05, () => openJoin());
+make3DButton('🎨 GÖRÜNÜM',  0x9b8bff, 0, -5.05, 0, 4.4, 0.85, () => openCosmetics());
 
 /* --- isim alanı (3D panel + HTML input overlay) --- */
 const namePanel = new THREE.Group();
@@ -1159,6 +1228,7 @@ const state = {
   myId: 'me',
   myName: 'Oyuncu',
   myColor: 0,
+  myHat: 'cap',
   lastSeen: Date.now(),
   dailyDay: 0,
   dailyLast: 0,
@@ -1244,6 +1314,7 @@ function saveGame(){
       dailyLast: state.dailyLast,
       name: state.myName,
       color: state.myColor,
+      hat: state.myHat,
     }));
   } catch(e){}
 }
@@ -1649,6 +1720,11 @@ function onNet(d, conn){
         sendState();
         checkWin();
       }
+    } else if (d.t === 'emo'){
+      /* host: herkese ilet, gönderen hariç */
+      for (const c of clientConns) if (c !== conn && c.open) c.send({t:'emo', e:d.e, id:conn.peer});
+      const r = remote.get(conn.peer);
+      if (r) showEmojiAbove(r.group.position, d.e);
     }
   } else if (state.netMode === 'client'){
     if (d.t === 's'){
@@ -1683,18 +1759,21 @@ function onNet(d, conn){
       for (const id of [...remote.keys()]) if (!seen.has(id)) removeRemote(id);
       if (d.r > state.rebirths){ state.rebirths = d.r; }
       checkWin();
+    } else if (d.t === 'emo'){
+      const src = d.id ? remote.get(d.id) : null;
+      showEmojiAbove(src ? src.group.position : playerPos, d.e);
     }
   }
 }
 
-function addRemote(id, name, colorIdx){
-  const g = makeAvatar(colorIdx ?? 0);
+function addRemote(id, name, colorIdx, hatId){
+  const g = makeAvatar(colorIdx ?? 0, hatId || 'cap');
   g.position.set(0, 0, 0);
   scene.add(g);
   const label = labelSprite(name || 'Oyuncu', '', 2.2);
   label.position.y = 2.9;
   g.add(label);
-  const r = { group:g, name:name || 'Oyuncu', color:colorIdx ?? 0, x:0, z:0, yaw:0, tx:0, tz:0, tyaw:0, walk:0 };
+  const r = { group:g, name:name || 'Oyuncu', color:colorIdx ?? 0, hat:hatId||'cap', x:0, z:0, yaw:0, tx:0, tz:0, tyaw:0, walk:0 };
   remote.set(id, r);
   return r;
 }
@@ -1797,6 +1876,97 @@ function renderAchievements(){
 }
 
 /* ==================================================================
+   EMOJİ + KOZMETİK
+   ================================================================== */
+const EMOJIS = ['😀','😂','😍','🎉','🔥','👍','😎','🤩','💰','🍰','❤️','👋'];
+
+function buildEmojiBar(){
+  const bar = $('emojiBar');
+  bar.innerHTML = EMOJIS.map(e => `<button data-e="${e}">${e}</button>`).join('');
+  bar.querySelectorAll('button').forEach(b => {
+    b.onclick = () => {
+      sendEmoji(b.dataset.e);
+      bar.classList.remove('on');
+    };
+  });
+}
+buildEmojiBar();
+
+function sendEmoji(emoji){
+  showEmojiAbove(playerPos, emoji);
+  if (state.netMode === 'host'){
+    for (const c of clientConns) if (c.open) c.send({t:'emo', e:emoji, id:state.myId});
+  } else if (state.netMode === 'client'){
+    hostConn?.open && hostConn.send({t:'emo', e:emoji});
+  }
+}
+
+function showEmojiAbove(pos, emoji){
+  const el = document.createElement('div');
+  el.textContent = emoji;
+  el.style.cssText = 'position:fixed;font-size:52px;pointer-events:none;z-index:14;transition:transform 1.2s ease-out,opacity 1.2s;transform:translate(-50%,-50%) scale(.5);opacity:1';
+  const v = new THREE.Vector3(pos.x, pos.y + 2.8, pos.z);
+  v.project(camera);
+  el.style.left = ((v.x*0.5+0.5)*innerWidth) + 'px';
+  el.style.top = ((-v.y*0.5+0.5)*innerHeight) + 'px';
+  document.body.appendChild(el);
+  requestAnimationFrame(() => {
+    el.style.transform = 'translate(-50%,-50%) translateY(-70px) scale(1.5)';
+    el.style.opacity = '0';
+  });
+  setTimeout(() => el.remove(), 1300);
+}
+
+$('emojiBtn').onclick = () => {
+  $('emojiBar').classList.toggle('on');
+  sfxClick();
+};
+
+/* --- kozmetik paneli (menüde) --- */
+function openCosmetics(){
+  const hats = HATS.map(h =>
+    `<button data-hat="${h.id}" class="${state.myHat===h.id?'sel':''}" title="${h.name}">${h.icon}</button>`
+  ).join('');
+  const colors = SHIRT.map((c, i) =>
+    `<button data-col="${i}" class="${state.myColor===i?'sel':''}" style="background:#${c.toString(16).padStart(6,'0')}"></button>`
+  ).join('');
+  $('cosRow').innerHTML = hats;
+  $('cosColors').innerHTML = colors;
+  $('cosRow').querySelectorAll('button').forEach(b => {
+    b.onclick = () => {
+      state.myHat = b.dataset.hat;
+      saveGame();
+      openCosmetics();
+      refreshMyAvatar();
+      sfxClick();
+    };
+  });
+  $('cosColors').querySelectorAll('button').forEach(b => {
+    b.onclick = () => {
+      state.myColor = Number(b.dataset.col);
+      saveGame();
+      openCosmetics();
+      refreshMyAvatar();
+      sfxClick();
+    };
+  });
+  $('cosSheet').classList.add('on');
+}
+
+function refreshMyAvatar(){
+  if (playerAvatar){ scene.remove(playerAvatar); playerAvatar = null; }
+  if (state.mode === 'game') ensurePlayerAvatar();
+  /* menüdeki diorama karakterini de güncelle */
+  if (typeof menuHero !== 'undefined' && menuHero && diorama){
+    diorama.remove(menuHero);
+    menuHero = makeAvatar(state.myColor, state.myHat);
+    menuHero.position.set(0.6, 0.05, 2.6);
+    menuHero.rotation.y = Math.PI * 0.85;
+    diorama.add(menuHero);
+  }
+}
+
+/* ==================================================================
    HEDEF SİSTEMİ (onboarding + sürekli yönlendirme)
    ================================================================== */
 const goalEl = $('goal'), goalTextEl = $('goalText'), goalIconEl = $('goalIcon');
@@ -1863,7 +2033,7 @@ let yaw = 0, pitch = -0.05, bob = 0, walkPhase = 0;
 let playerAvatar = null;
 function ensurePlayerAvatar(){
   if (playerAvatar) return;
-  playerAvatar = makeAvatar(state.myColor);
+  playerAvatar = makeAvatar(state.myColor, state.myHat);
   scene.add(playerAvatar);
 }
 
@@ -2017,6 +2187,8 @@ function startGame(){
       state.dailyDay = d.dailyDay || 0;
       state.dailyLast = d.dailyLast || 0;
       if (d.name) state.myName = d.name;
+      if (d.hat) state.myHat = d.hat;
+      if (typeof d.color === 'number') state.myColor = d.color;
       if (Array.isArray(d.owned)){
         for (let i=0;i<d.owned.length && i<STATIONS.length;i++){
           if (d.owned[i] !== null){
@@ -2152,7 +2324,7 @@ function tick(){
     /* kamera: sabit mesafe, FOV hem yükseklik hem genişliğe göre seçilir */
     const aspect = innerWidth / innerHeight;
     const dist = 12;
-    const needH = 8.6, needW = 5.8;   // UI kutusu (birim)
+    const needH = 9.8, needW = 5.8;   // UI kutusu (birim)
     const fovH = 2 * Math.atan(needH / 2 / dist);
     const fovW = 2 * Math.atan(needW / 2 / (dist * aspect));
     menuCam.fov = Math.min(80, Math.max(fovH, fovW) * 180 / Math.PI * 1.06);
