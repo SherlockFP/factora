@@ -35,7 +35,7 @@
   #hint{display:none;font-size:11px;font-weight:800;color:#fff;text-shadow:0 1px 0 #0007;padding-left:2px;transition:opacity .5s}
   #hint.on{display:block}
 
-  #topRight{display:none;margin-left:auto;align-items:flex-start;gap:6px;flex-wrap:wrap;justify-content:flex-end;pointer-events:auto}
+  #topRight{position:fixed;top:calc(10px + env(safe-area-inset-top));right:10px;z-index:10;display:none;align-items:flex-start;gap:6px;flex-wrap:wrap;justify-content:flex-end;pointer-events:auto}
   #topRight.on{display:flex}
   .grp{display:flex;gap:5px}
   .grp + .grp{position:relative;padding-left:8px}

@@ -69,9 +69,18 @@ export function buildDecor(THREE, helpers){
     const w2 = put(g, 'cyl24', water, 0, 2.36, 0, 1.75, .05, 1.75);
     put(g, 'cyl', gold, 0, 2.62, 0, .3, .5, .3);
     put(g, 'sph', gold, 0, 3.0, 0, .55);
+    /* boosted jet ring — hidden until the player interacts */
+    const ring = new THREE.Group();
+    for (let i = 0; i < 6; i++){
+      const a = i / 6 * Math.PI * 2;
+      put(ring, 'sphLo', gold, Math.cos(a) * 2.6, 1.5, Math.sin(a) * 2.6, .34);
+    }
+    ring.visible = false;
+    g.add(ring);
     g.position.set(0, 0, 0);
     root.add(g);
     root.userData.animated = [w1, w2];
+    Object.assign(rt, { fountain: { g, w1, w2, ring, k: 1 } });
   }
 
   /* ---------- taş döşeli yürüyüş yolu (spawn → çeşme → tezgah sıraları) ----------
@@ -191,9 +200,12 @@ export function buildDecor(THREE, helpers){
     put(g, 'cyl', metal, .55, .33, 0, .65, .16, .65).rotation.z = Math.PI / 2;
     put(g, 'cyl', metal, 0, 2.1, 0, .08, 1.7, .08);
     [[0,3.0,0],[.35,2.85,.15],[-.35,2.9,.1],[.15,2.75,-.3],[-.2,2.7,-.25]]
-      .forEach(([bx, by, bz], i) => put(g, 'sph', POP[(i + 1) % POP.length], bx, by, bz, .45));
+      .forEach(([bx, by, bz], i) => balloons.push({
+        m: put(g, 'sph', POP[(i + 1) % POP.length], bx, by, bz, .45), s: .45, t: 0, alive: true,
+      }));
     g.position.set(-9, 0, 1.5);
     root.add(g);
+    balloonCart = g;
   }
   /* flower stand */
   {
@@ -250,7 +262,114 @@ export function buildDecor(THREE, helpers){
     put(g, 'sph', gold, 3, 5.55, 0, .55);
     g.position.set(0, 0, 17);
     root.add(g);
+    board.material = cream.clone();          // own material so the glow pulse can't leak onto shared cream
+    board.material.emissive.setHex(0xffe066);
+    board.material.emissiveIntensity = 0;
     root.userData.signBoard = board;
+    signMat = board.material;
+    signG = g;
+  }
+
+  /* ---------- 3 flagpoles ---------- */
+  [[-16, 6.8], [16, 6.8], [0, -12]].forEach(([x, z], i) => {
+    const g = new THREE.Group();
+    const poleMat = M(0x59606c, { emissive: 0xffd400, emissiveIntensity: 0 });
+    put(g, 'cyl', poleMat, 0, 2.4, 0, .22, 4.8, .22);
+    put(g, 'sph', gold, 0, 4.92, 0, .42);
+    const pivot = new THREE.Group();
+    pivot.position.set(0, 4.0, 0);
+    put(pivot, 'box', [POP[0], POP[2], POP[3]][i], 1.05, 0, 0, 2.1, 1.15, .06);
+    g.add(pivot);
+    g.position.set(x, 0, z);
+    root.add(g);
+    flags.push({ g, pivot, poleMat, spin: 0, ph: i * 1.7 });
+  });
+  flags.forEach((f, i) => reg({
+    id: 'flag' + i,
+    object3D: f.g,
+    radius: 2.4,
+    label: 'Bayrak ' + (i + 1),
+    onInteract(){ f.spin = 1.2; },
+    onNear(state, dt){
+      f.pivot.rotation.z = Math.sin(rt.t * 2 + f.ph) * .13;      // idle wave
+      if (f.spin > 0){
+        f.spin = Math.max(0, f.spin - dt);
+        f.pivot.rotation.y = (1 - f.spin / 1.2) * Math.PI * 2;   // full turn on interact
+        f.poleMat.emissiveIntensity = Math.min(1, f.spin * 1.6);
+      } else {
+        f.pivot.rotation.y = 0;
+        f.poleMat.emissiveIntensity = 0;
+      }
+    },
+  }));
+
+  /* ---------- wishing well by the spawn ---------- */
+  {
+    const g = new THREE.Group();
+    put(g, 'cyl', stoneD, 0, .28, 0, 2.2, .56, 2.2);
+    put(g, 'cyl', stone, 0, .6, 0, 1.9, .16, 1.9);
+    put(g, 'cyl24', water, 0, .58, 0, 1.7, .05, 1.7);
+    put(g, 'cyl', woodD, -.95, 1.55, 0, .18, 2.0, .18);
+    put(g, 'cyl', woodD, .95, 1.55, 0, .18, 2.0, .18);
+    put(g, 'box', terra, 0, 2.55, 0, 2.5, .16, 1.2);
+    put(g, 'sph', gold, 0, 2.72, 0, .3);
+    const coin = put(g, 'cyl', gold, 0, .9, 0, .34, .07, .34);
+    coin.rotation.x = Math.PI / 2;
+    coin.visible = false;
+    g.position.set(3.6, 0, 10.6);
+    root.add(g);
+    wellG = g;
+    let cd = 0, coinT = 0;
+    reg({
+      id: 'well', object3D: g, radius: 2.2, label: 'Dilek Kuyusu',
+      onInteract(state){
+        if (cd > 0) return;                       // shortcut: 8 s locale cooldown, no UI hint yet
+        cd = 8; coinT = .7; coin.visible = true;
+        state.wellCoins = (state.wellCoins || 0) + 1;
+      },
+      onNear(state, dt){
+        if (cd > 0) cd = Math.max(0, cd - dt);
+        if (coinT > 0){
+          coinT = Math.max(0, coinT - dt);
+          const k = 1 - coinT / .7;
+          coin.position.y = .9 + Math.sin(k * Math.PI) * 1.5;
+          coin.rotation.y += dt * 14;
+          if (coinT === 0){ coin.visible = false; coin.position.y = .9; }
+        }
+      },
+    });
+  }
+
+  /* ---------- swing set ---------- */
+  {
+    const g = new THREE.Group();
+    put(g, 'cyl', woodD, -1.8, 1.3, 0, .18, 2.6, .18);
+    put(g, 'cyl', woodD, 1.8, 1.3, 0, .18, 2.6, .18);
+    put(g, 'cyl', woodD, 0, 2.55, 0, .16, 3.8, .16).rotation.z = Math.PI / 2;
+    [-.95, .95].forEach((sx, i) => {
+      const p = new THREE.Group();
+      p.position.set(sx, 2.5, 0);
+      put(p, 'cyl', rope, -.35, -1.0, 0, .07, 2.0, .07);
+      put(p, 'cyl', rope, .35, -1.0, 0, .07, 2.0, .07);
+      put(p, 'box', POP[i ? 2 : 5], 0, -2.0, 0, .9, .12, .5);
+      g.add(p);
+      swings.push({ p, ph: i * 2.1, wild: 0 });
+    });
+    g.position.set(-12, 0, 8);
+    g.rotation.y = .3;
+    root.add(g);
+    reg({
+      id: 'swing', object3D: g, radius: 3, label: 'Salıncaklar',
+      onInteract(){ for (const s of swings) s.wild = 2; },
+      onNear(state, dt){
+        for (const s of swings){
+          if (s.wild > 0) s.wild = Math.max(0, s.wild - dt);
+          const amp = .2 + (s.wild > 0 ? .55 : 0);
+          const spd = 2.2 + (s.wild > 0 ? 5.5 : 0);
+          s.p.rotation.x = Math.sin(rt.t * spd + s.ph) * amp;
+        }
+      },
+    });
   }
 
   /* ---------- ground details ---------- */

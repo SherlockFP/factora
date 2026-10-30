@@ -17,10 +17,12 @@ export const TUNING = {
   upgradeBase: 0.75,
   upgradeGrowth: 1.75,
 
-  /* kuyruk: 2 kişi, her 2 seviyede +1, en fazla 6 */
-  queueBase: 2,
+  /* kuyruk: 4 kişi, her 2 seviyede +1, en fazla 8.
+     2 kişilik kuyruk 3.6 sn'lik müşteri akışını karşılamıyordu:
+     müşteri gelir gelmez kaçıyordu (59 kaçtı / 2 servis). */
+  queueBase: 4,
   queuePerLevels: 2,
-  queueMax: 6,
+  queueMax: 8,
 
   /* sabır: 26 sn, seviye başına +1.4 sn. Çocuk oyuncu tezgaha yürürken
      müşteri kaçmasın; 11 sn 7 yaş için acımasızdı (55 kaçan / 0 servis). */
@@ -195,7 +197,7 @@ if (isMain) {
   near(levelServeValue(100, 1), 100, 1e-6, 'level1 value');
   near(levelServeValue(100, 10), 550, 1e-6, 'level10 value');
   ok(levelServeValue(100, 0) === 100 && levelServeValue(100, 99) === 550, 'level clamp');
-  ok(levelQueue(1) === 2 && levelQueue(3) === 3 && levelQueue(10) === 6, 'queue curve');
+  ok(levelQueue(1) === 4 && levelQueue(3) === 5 && levelQueue(10) === 8, 'queue curve');
   ok(levelPatience(1) === 26 && levelPatience(10) > 36, 'patience curve');
   ok(levelSpawnGap(10) < levelSpawnGap(1), 'spawn gap speeds up');
 
