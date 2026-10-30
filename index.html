@@ -223,33 +223,36 @@
 
 <div id="loading"><div style="text-align:center"><div class="sp"></div>Tatlı Tycoon yükleniyor…</div></div>
 
-<div id="goal" style="position:fixed;top:calc(66px + env(safe-area-inset-top));left:50%;transform:translateX(-50%) scale(.9);display:none;z-index:12;pointer-events:none;opacity:0;transition:.3s">
-  <div style="display:flex;align-items:center;gap:8px;padding:9px 15px;border-radius:16px;background:#fff;box-shadow:0 5px 0 #0002,0 10px 26px #0003;font-weight:900;font-size:14px;color:#4a4238;white-space:nowrap;max-width:92vw;overflow:hidden">
-    <span id="goalIcon" style="font-size:18px">🎯</span>
-    <span id="goalText">Hedef</span>
+<div id="topbar">
+  <div id="hud">
+    <div class="hudRow">
+      <div class="pill">💰 <span id="coins">0</span><small id="rate">+1 /sn</small></div>
+      <div class="pill" style="display:none" id="multPill">✨ <span id="mult">x1</span><small>rebirth</small></div>
+    </div>
+    <div id="xp"></div>
   </div>
-</div>
 
-<div id="hud">
-  <div class="pill">💰 <span id="coins">0</span><small id="rate">+1 /sn</small></div>
-  <div class="pill" style="display:none" id="multPill">✨ <span id="mult">x1</span><small>rebirth</small></div>
+  <div id="topRight">
+    <div id="roomTag"><b id="roomCode"></b></div>
+    <div class="grp">
+      <button class="icobtn" id="eggBtn" title="Pet">🥚</button>
+      <button class="icobtn" id="skillBtn" title="Yetenekler">⚡</button>
+    </div>
+    <div class="grp">
+      <button class="icobtn" id="achBtn" title="Başarımlar">⭐</button>
+      <button class="icobtn" id="lbBtn" title="Sıralama">🏆</button>
+    </div>
+    <div class="grp">
+      <button class="icobtn" id="rebBtn" title="Rebirth">🔄</button>
+      <button class="icobtn" id="emojiBtn" title="Emoji">😀</button>
+      <button class="icobtn" id="setBtn" title="Ayarlar">⚙️</button>
+      <button class="icobtn" id="leaveBtn" title="Çık">✖</button>
+    </div>
+  </div>
+  <div id="goal"><div class="goalIn"><span id="goalIcon">🎯</span><span id="goalText">Hedef</span></div></div>
+  <div id="hint">Halıya yürü, satın al!</div>
 </div>
-
-<div id="topRight">
-  <div id="roomTag"><b id="roomCode"></b></div>
-  <button class="icobtn" id="emojiBtn" title="Emoji">😀</button>
-  <button class="icobtn" id="skillBtn" title="Yetenekler">⚡</button>
-  <button class="icobtn" id="achBtn" title="Başarımlar">⭐</button>
-  <button class="icobtn" id="lbBtn" title="Sıralama">🏆</button>
-  <button class="icobtn" id="eggBtn" title="Pet">🥚</button>
-  <button class="icobtn" id="setBtn" title="Ayarlar">⚙️</button>
-  <button class="icobtn" id="rebBtn" title="Rebirth">🔄</button>
-  <button class="icobtn" id="leaveBtn" title="Çık">✖</button>
-</div>
-
 <div id="emojiBar"></div>
-
-<div id="hint">Halıya yürü, satın al!</div>
 <div id="toast"></div>
 <div id="floaters"></div>
 <div id="comboGlow"></div>
@@ -259,8 +262,12 @@
 <button id="serveBtn">🍰 SERVİS<small>dokun / E</small></button>
 
 <div id="stationPanel">
-  <div class="spHead"><b id="spName">Tezgah</b><span class="spLv" id="spLv">Sv 1</span></div>
-  <div class="spInfo" id="spInfo"></div>
+  <div class="spHead"><span class="spIco" id="spIco">🍋</span><b id="spName">Tezgah</b><span class="spLv" id="spLv">Sv 1</span></div>
+  <div class="spStats">
+    <div>Servis<b id="spServe">0 💰</b></div>
+    <div>Kuyruk<b id="spQueue">0/2</b></div>
+  </div>
+  <div class="spNext" id="spNext"></div>
   <div class="spBtns">
     <button class="btn orange" id="spUp">Yükselt</button>
     <button class="btn blue" id="spStaff">Personel</button>
@@ -1426,7 +1433,7 @@ const pads = STATIONS.map((s, i) => {
   ring.position.set(s.x, 0.22, s.z);
   scene.add(ring);
 
-  const label = labelSprite(s.n, s.p + ' 💰', 2.35);
+  const label = labelSprite(s.n, fmt(s.p) + ' 💰', 2.35);
   /* tabelalar Blender modellerinin üstünde kalsın (en yüksek model ~3.7) */
   label.position.set(s.x, 4.15, s.z);
   scene.add(label);
@@ -2423,11 +2430,12 @@ function finishServe(i, score, label){
   state.bestCombo = Math.max(state.bestCombo, combo.count);
 
   const fast = info.wait < 1.1;
-  const perfect = timed > 1.5;
+  const perfect = score >= 0.95;
+  const good = score >= 0.7;
   vmKick = 1;
   spawnCoinFx(new THREE.Vector3(npc.x, 1.5, npc.z));
-  floater((vip ? '⭐ ' : '') + (perfect ? 'MÜKEMMEL ' : timed > 1 ? 'İYİ ' : fast ? 'HIZLI ' : '') + '+' + fmt(gain),
-    { x: def.x, y: 3.1, z: def.z }, vip ? '#ffb300' : perfect ? '#7bf06a' : timed > 1 ? '#b6ff8f' : '#ffe14d');
+  floater((vip ? '⭐ ' : '') + (perfect ? 'MÜKEMMEL ' : good ? 'İYİ ' : fast ? 'HIZLI ' : '') + '+' + fmt(gain),
+    { x: def.x, y: 3.1, z: def.z }, vip ? '#ffb300' : perfect ? '#7bf06a' : good ? '#b6ff8f' : '#ffe14d');
   if (perfect){ sfxPerfect(); burst(def.x, 2.6, def.z, [0xffffff, 0x7bf06a], 16); }
   else if (fast) sfxServed(combo.count + 6);
   if (combo.count > 1) floater('x' + combo.mult.toFixed(1), { x: def.x, y: 3.9, z: def.z }, '#ff9ecb');
@@ -2631,8 +2639,21 @@ function renderSkills(){
   $('skillSub').textContent = total + ' seviye açık · rebirth\'te korunur';
 }
 
+/* --- HUD: tezgah ilerleme çubuğu (10 parça) --- */
+const xpEl = $('xp');
+for (let i = 0; i < STATIONS.length; i++) xpEl.appendChild(document.createElement('i'));
+const xpTxtEl = document.createElement('span');
+xpTxtEl.id = 'xpTxt';
+xpEl.appendChild(xpTxtEl);
+function updateXp(){
+  const owned = state.owned.filter(o => o !== null).length;
+  for (let i = 0; i < STATIONS.length; i++) xpEl.children[i].classList.toggle('on', i < owned);
+  xpTxtEl.textContent = owned + '/' + STATIONS.length + ' tezgah';
+}
+
 /* --- servis arayüzü --- */
-const spEl = $('stationPanel'), spNameEl = $('spName'), spLvEl = $('spLv'), spInfoEl = $('spInfo');
+const spEl = $('stationPanel'), spNameEl = $('spName'), spLvEl = $('spLv'), spIcoEl = $('spIco');
+const spServeEl = $('spServe'), spQueueEl = $('spQueue'), spNextEl = $('spNext');
 const spUpEl = $('spUp'), spStaffEl = $('spStaff');
 const serveBtnEl = $('serveBtn');
 const rushEl = $('rushBanner');
@@ -2663,7 +2684,11 @@ function popCoins(){
   coinsPillEl.classList.remove('pop');
   void coinsPillEl.offsetWidth;
   coinsPillEl.classList.add('pop');
+  coinsEl.classList.remove('pulse');
+  void coinsEl.offsetWidth;
+  coinsEl.classList.add('pulse');
 }
+coinsEl.addEventListener('animationend', () => coinsEl.classList.remove('pulse'));
 
 function flashScreen(power){
   flashEl.style.transition = 'none';
@@ -2712,12 +2737,17 @@ function updateServiceUI(){
     spEl.classList.add('on');
     if (sig !== spSig){
       spSig = sig;
+      spIcoEl.textContent = STATIONS[i].e;
       spNameEl.textContent = STATIONS[i].n;
       spLvEl.textContent = 'Sv ' + lv + (lv >= MAX_LEVEL ? ' ★' : '');
-      /* sıradaki görsel kademe: yükseltmenin ne getireceği panelde görünsün */
+      spServeEl.textContent = fmt(serveValueAt(i)) + ' 💰';
+      spQueueEl.textContent = q + '/' + levelQueue(lv);
+      /* sıradaki seviyenin ne getireceği panelde görünsün */
       const nextTier = TIER_STEPS.find(s => s.lv > lv);
-      spInfoEl.innerHTML = 'Servis ' + fmt(serveValueAt(i)) + ' 💰 · Kuyruk ' + q + '/' + levelQueue(lv)
-        + (nextTier ? '<br><span style="color:#e08b00">Sv ' + nextTier.lv + ': ' + nextTier.text + '</span>' : '');
+      const nextServe = lv >= MAX_LEVEL ? serveValueAt(i) : levelServeValue(STATIONS[i].i, lv + 1);
+      spNextEl.textContent = lv >= MAX_LEVEL ? 'En yüksek seviye!'
+        : 'Sv ' + (lv + 1) + ': ' + fmt(serveValueAt(i)) + ' → ' + fmt(nextServe) + ' 💰'
+          + (nextTier ? ' · ' + nextTier.text : '');
       spUpEl.innerHTML = lv >= MAX_LEVEL ? 'TAM SEVİYE' : 'Yükselt<small>' + fmt(upCost) + ' 💰</small>';
       spUpEl.disabled = !canUp;
       spStaffEl.innerHTML = state.staff[i] ? 'Personel ✓' : 'Personel<small>' + (lv < TUNING.staffLevel ? 'Sv ' + TUNING.staffLevel + ' gerek' : fmt(sCost) + ' 💰') + '</small>';
@@ -3557,7 +3587,7 @@ function updateGoal(dt){
     goalTextEl.textContent = g.text;
     goalEl.style.display = 'block';
     goalEl.style.opacity = '1';
-    goalEl.style.transform = 'translateX(-50%) scale(1)';
+    goalEl.style.transform = 'scale(1)';
     goalAge = 0;
     beep(880, 0.08, 'sine', 0.06);
   }
@@ -3569,7 +3599,7 @@ function updateGoal(dt){
   goalAge += dt;
   /* uzun süre aynı hedefse nefes animasyonu */
   const pulse = goalAge > 6 ? 1 + Math.sin(goalAge * 3) * 0.02 : 1;
-  goalEl.style.transform = `translateX(-50%) scale(${pulse})`;
+  goalEl.style.transform = `scale(${pulse})`;
 }
 
 function hideGoal(){ goalEl.style.opacity = '0'; setTimeout(() => { goalEl.style.display = 'none'; }, 320); }
@@ -3577,12 +3607,19 @@ function hideGoal(){ goalEl.style.opacity = '0'; setTimeout(() => { goalEl.style
 /* ==================================================================
    HUD GÜNCELLE
    ================================================================== */
-let hudCoinsShown = 0;
+let hudCoinsShown = 0, hudCoinsPrev = 0;
 function updateHud(){
   const target = state.coins;
   hudCoinsShown += (target - hudCoinsShown) * 0.35;
   if (Math.abs(target - hudCoinsShown) < 1) hudCoinsShown = target;
   coinsEl.textContent = fmt(hudCoinsShown);
+  updateXp();
+  if (target > hudCoinsPrev * 1.01){
+    coinsEl.classList.remove('pulse');
+    void coinsEl.offsetWidth;
+    coinsEl.classList.add('pulse');
+  }
+  hudCoinsPrev = target;
   if (combo.count > 0 && state.mode === 'game'){
     rateEl.textContent = '🔥 x' + combo.mult.toFixed(1) + ' kombo';
     rateEl.style.color = '#e08b00';
@@ -3995,12 +4032,20 @@ function tick(){
     /* kamera: masaüstünde menü solda → diorama sağda; dikeyde ortada */
     const aspect = innerWidth / innerHeight;
     const portrait = aspect < 1.0;
+    const narrow = aspect < 1.45;
     if (portrait){
-      menuCam.fov = 65;
-      menuCam.position.set(Math.sin(menuAngle * 0.3) * 0.5, 4.4, 11);
-      menuCam.lookAt(0, 4.4, -9);
-      diorama.scale.setScalar(1.15);
-      diorama.position.set(0, 2.6, -10);
+      menuCam.fov = 66;
+      menuCam.position.set(Math.sin(menuAngle * 0.3) * 0.4, 5.2, 12);
+      menuCam.lookAt(0, 4.2, -9);
+      diorama.scale.setScalar(1.05);
+      diorama.position.set(0, 3.4, -10);
+    } else if (narrow){
+      /* kare/dar viewport: menü üstte, diorama arkada ortada */
+      menuCam.fov = 74;
+      menuCam.position.set(Math.sin(menuAngle * 0.3) * 0.4, 6.2, 15);
+      menuCam.lookAt(0, 5.0, -9);
+      diorama.scale.setScalar(1.05);
+      diorama.position.set(0, 4.6, -10);
     } else {
       menuCam.fov = 50;
       menuCam.position.set(Math.sin(menuAngle * 0.3) * 0.6, 4.9, 11);
