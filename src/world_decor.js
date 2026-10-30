@@ -1,6 +1,8 @@
 /* Tatlı Tycoon — plaza decoration builder.
    buildDecor(THREE, helpers) → THREE.Group (attached to helpers.scene, already positioned).
    userData.animated: water discs (caller rotates them); userData.signBoard: entrance board mesh.
+   userData.interactives: [{id, object3D, radius, near, label, onInteract(state), onNear(state, dt)}]
+   userData.updateInteractives(dt, playerPos, state): her karede çağrılır, tüm animasyonu sürer.
    Layout: plaza 38x38, fence ±19, station pads at the 10 given spots (keep 2.5 clear),
    corridor x=0 from z=12 to z=-6 stays walkable — only the fountain sits in it (path splits around). */
 export function buildDecor(THREE, helpers){
@@ -24,6 +26,8 @@ export function buildDecor(THREE, helpers){
   const root = new THREE.Group();
   root.userData.animated = [];
   root.userData.signBoard = null;
+  root.userData.interactives = [];
+  const reg = (o) => { o.near = false; root.userData.interactives.push(o); return o; };
 
   const put = (parent, k, mat, x, y, z, sx, sy, sz) => {
     let m = add ? add(parent, geo(k), mat, x, y, z, sx, sy, sz) : null;

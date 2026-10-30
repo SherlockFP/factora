@@ -22,9 +22,10 @@ export const TUNING = {
   queuePerLevels: 2,
   queueMax: 6,
 
-  /* sabır: 11 sn, seviye başına +0.7 sn */
-  patienceBase: 11,
-  patiencePerLevel: 0.7,
+  /* sabır: 26 sn, seviye başına +1.4 sn. Çocuk oyuncu tezgaha yürürken
+     müşteri kaçmasın; 11 sn 7 yaş için acımasızdı (55 kaçan / 0 servis). */
+  patienceBase: 26,
+  patiencePerLevel: 1.4,
 
   /* hızlı servis bonusu: beklemeden servis edersen +%50'ye kadar */
   speedBonusMax: 0.5,
@@ -195,7 +196,7 @@ if (isMain) {
   near(levelServeValue(100, 10), 550, 1e-6, 'level10 value');
   ok(levelServeValue(100, 0) === 100 && levelServeValue(100, 99) === 550, 'level clamp');
   ok(levelQueue(1) === 2 && levelQueue(3) === 3 && levelQueue(10) === 6, 'queue curve');
-  ok(levelPatience(1) === 11 && levelPatience(10) > 17, 'patience curve');
+  ok(levelPatience(1) === 26 && levelPatience(10) > 36, 'patience curve');
   ok(levelSpawnGap(10) < levelSpawnGap(1), 'spawn gap speeds up');
 
   /* maliyetler */
