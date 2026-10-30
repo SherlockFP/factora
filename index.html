@@ -348,6 +348,7 @@ import { createNpcSystem } from './src/npcs.js?v=8';
 import { createQuestSystem } from './src/quests.js?v=7';
 import { TUNING, MAX_LEVEL, levelServeValue, levelQueue, levelSpawnGap, upgradeCost, staffCost, servePayout, speedFactor, createCombo, createRush } from './src/service.js?v=7';
 import { createAudioJuice } from './src/audio_juice.js?v=1';
+import { createProgression } from './src/progression.js?v=1';
 
 /* ==================================================================
    RENDERER + SAHNE
@@ -1445,7 +1446,7 @@ function refreshPadLabel(i){
   p.badge.position.y = top + 1.47;
   const sub = owned
     ? 'Sv ' + stationLevel(i) + ' · ' + fmt(serveValueAt(i)) + ' 💰'
-    : Math.round(p.def.p * Math.pow(0.92, state.rebirths)) + ' 💰';
+    : Math.round(p.def.p * (1 - priceDiscount())) + ' 💰';
   const oldMap = p.label.material.map;
   p.label.material.map = textTex(p.def.n, {sub, w:512, h:256, size:60, subSize:58, lw:12});
   p.label.material.needsUpdate = true;
@@ -2136,7 +2137,13 @@ function fmt(n){
 }
 
 /* --- rebirth çarpanı --- */
-function rebirthMult(){ return 1 + state.rebirths * 0.4; }
+const prog = createProgression({});
+function rebirthMult(){
+  const b = prog.rebirthBonus(state.rebirths);
+  const empire = prog.permanentPerks(state.rebirths).find(p => p.id === 'imparatorluk');
+  return b.mult * (empire ? 2 : 1);
+}
+function priceDiscount(){ return prog.rebirthBonus(state.rebirths).priceDiscount || 0; }
 function petMult(){
   let m = 1;
   for (const p of state.pets) m += p.mult;
@@ -2634,6 +2641,7 @@ function saveGame(){
       color: state.myColor,
       hat: state.myHat,
       quest: quest.serialize(),
+      prog: prog.serialize(),
     }));
   } catch(e){}
 }
@@ -2689,7 +2697,7 @@ function tryBuy(i){
   if (state.owned[i] !== null) return;
   const def = STATIONS[i];
   /* rebirth indirimli fiyat */
-  const price = Math.round(def.p * Math.pow(0.92, state.rebirths));
+  const price = Math.round(def.p * (1 - priceDiscount()));
   if (state.coins < price) {
     if (!pads[i].denied){
       pads[i].denied = true;
@@ -2746,10 +2754,7 @@ function checkWin(){
    ================================================================== */
 /* Rebirth için yalnızca ana plazadaki 6 tezgah gerekir; Bölge 2 ödüldür. */
 function canRebirth(){
-  for (let i=0;i<STATIONS.length;i++){
-    if (STATIONS[i].zone === 0 && state.owned[i] === null) return false;
-  }
-  return true;
+  return prog.canRebirth({ owned: state.owned, rebirths: state.rebirths, stations: STATIONS });
 }
 
 function doRebirth(){
@@ -2790,13 +2795,28 @@ function doRebirth(){
   hitstop = 0.14;
   punchFov();
   sfxBig();
-  const discountPct = Math.round((1 - Math.pow(0.92, state.rebirths)) * 100);
+  const discountPct = Math.round((1 - (1 - priceDiscount())) * 100);
   toast('REBIRTH ' + state.rebirths + '!\nGelir x' + rebirthMult().toFixed(1) + '\nFiyatlar %' + discountPct + ' daha ucuz');
   saveGame();
   updateHud();
   $('winSheet').classList.remove('on');
   $('rebSheet').classList.remove('on');
   goalKey = '';
+
+  /* rebirth ödülü: yeni içerik mi açıldı? */
+  const unlock = prog.rebirthBonus(state.rebirths).newUnlock;
+  const gained = prog.claimMilestones(state.rebirths);
+  setTimeout(() => {
+    if (unlock){
+      toast('🔓 YENİ AÇILDI\n' + unlock.name);
+      sfxBig();
+      burstAhead([0xffd400, 0xffffff, 0x54e0d0], 50);
+    }
+    for (const m of gained){
+      setTimeout(() => toast('🎁 ' + m.name), 900);
+    }
+  }, 1400);
+
   if (state.netMode === 'host') sendState();
 }
 
@@ -3088,7 +3108,7 @@ function onNet(d, conn){
         if (d.o[i] !== null && state.owned[i] === null){
           state.owned[i] = d.o[i];
           if (d.o[i] === state.myId){
-            state.coins -= Math.round(STATIONS[i].p * Math.pow(0.92, state.rebirths));
+            state.coins -= Math.round(STATIONS[i].p * (1 - priceDiscount()));
             toast('Servis başı +' + fmt(serveValueAt(i)) + ' 💰\n' + STATIONS[i].n + '!');
             floater('+' + fmt(serveValueAt(i)) + ' 💰', {x:STATIONS[i].x, y:3.2, z:STATIONS[i].z}, '#ffe14d');
             sfxBuy();
@@ -3642,6 +3662,7 @@ function startGame(){
       /* görev zinciri: eski kayıtta indeks yoksa hak edilenleri ödülsüz geç */
       if (d.quest) quest.load(d.quest);
       else { quest.reset(); quest.fastForward(questStats()); }
+      if (d.prog) prog.load(d.prog);
       /* çevrimdışı kazanç */
       const away = Math.max(0, (Date.now() - (d.lastSeen || Date.now())) / 1000);
       /* Çevrimdışı: pasif gelir + potansiyelin küçük bir kısmı (personel etkisi). */
@@ -3970,7 +3991,7 @@ function tick(){
       if (p.pop === 0) p.obj.scale.setScalar(1);
     }
     if (p.ring.visible && !p.built){
-      const afford = state.coins >= Math.round(p.def.p * Math.pow(0.92, state.rebirths));
+      const afford = state.coins >= Math.round(p.def.p * (1 - priceDiscount()));
       const col = afford ? 0x54e85c : 0xffffff;
       p.ring.material.color.setHex(col);
       p.ring.material.emissive.setHex(col);

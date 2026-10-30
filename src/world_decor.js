@@ -51,6 +51,11 @@ export function buildDecor(THREE, helpers){
         rope = M(0x8a5a30);
   const POP = [M(0xff5b5b), M(0xffd400), M(0x3aa0ff), M(0x4fbf5f), M(0xb06bff), M(0xff8ad0)];
 
+  /* ---------- interaction runtime (all driven by updateInteractives) ---------- */
+  const rt = { t: 0, fountain: null };
+  const flags = [], balloons = [], swings = [];
+  let balloonCart = null, signG = null, signMat = null, wellG = null;
+
   /* ---------- central fountain (0,0) ---------- */
   {
     const g = new THREE.Group();

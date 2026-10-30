@@ -175,9 +175,11 @@ if (isMain) {
   for (const [at, id] of gates) {
     const hit = p.rebirthBonus(at).newUnlock;
     ok(hit && hit.id === id, 'kilit tam eşikte ' + id);
-    ok(p.rebirthBonus(at - 1).newUnlock === null, 'eşikten önce kilit yok ' + id);
-    const after = p.rebirthBonus(at + 1).newUnlock;
-    ok(!after || after.id !== id, 'kilit bir kez ' + id);
+    for (let r = 0; r <= 15; r++) {
+      if (r === at) continue;
+      const other = p.rebirthBonus(r).newUnlock;
+      ok(!other || other.id !== id, 'kilit bir kez ' + id + ' r=' + r);
+    }
   }
   ok(p.getTier({ rebirths: 4 }).id === 'altin-tezgah', 'kademe 4');
   ok(p.getTier({ rebirths: 12 }).id === 'imparatorluk', 'kademe 12');
