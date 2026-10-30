@@ -14,9 +14,9 @@
 
   /* ---------- HUD ---------- */
   #topbar{position:fixed;top:calc(10px + env(safe-area-inset-top));left:10px;right:10px;display:flex;align-items:flex-start;gap:var(--gap);z-index:10;pointer-events:none;flex-wrap:wrap}
-  #hud{display:none;flex-direction:column;gap:6px;max-width:min(58vw,300px)}
+  #hud{display:none;flex-direction:column;gap:6px}
   #hud.on{display:flex}
-  .hudRow{display:flex;gap:var(--gap);align-items:flex-start;flex-wrap:wrap}
+  .hudRow{display:flex;gap:var(--gap);align-items:flex-start;flex-wrap:wrap;max-width:min(58vw,300px)}
   .pill{padding:8px 15px;border-radius:var(--r);background:var(--paper);box-shadow:var(--sh);font-weight:800;font-size:20px;line-height:1.15;color:var(--ink)}
   .pill small{display:block;font-size:12px;font-weight:800;color:var(--muted);letter-spacing:.2px}
   #mult{color:#e08b00}
@@ -133,6 +133,18 @@
   #stationPanel{position:fixed;right:calc(16px + env(safe-area-inset-right));bottom:calc(144px + env(safe-area-inset-bottom));width:min(320px,72vw);display:none;z-index:13;background:var(--paper);border-radius:var(--r);box-shadow:0 7px 0 #0002,0 18px 40px #0005;padding:11px 13px;opacity:0;transform:translateY(10px);transition:opacity .18s,transform .18s}
   #stationPanel.on{display:block;opacity:1;transform:translateY(0)}
   @media (max-width:430px){
+    .icobtn{width:30px;height:30px;border-radius:9px;font-size:14px}
+    .grp{gap:3px}
+    .grp + .grp{padding-left:5px}
+    #topRight{gap:5px}
+    .pill{font-size:16px;padding:6px 10px;border-radius:10px}
+    .pill small{font-size:10px}
+    #multPill small{display:none}
+    .hudRow{max-width:58vw}
+    #xp i{height:5px}
+    #xpTxt{font-size:9.5px}
+    #goal .goalIn{font-size:11.5px;padding:6px 10px}
+    #hint{font-size:10px}
     #stationPanel{width:min(270px,74vw);padding:9px 10px;border-radius:var(--r);bottom:calc(212px + env(safe-area-inset-bottom))}
     #stationPanel .spHead{font-size:13.5px}
     #stationPanel .spStats b{font-size:12.5px}
@@ -3768,6 +3780,7 @@ function startGame(){
 
   if (isTouch) hintEl.textContent = 'Sol yarı: yürü · Sağ yarı: bak · SERVİS ile müşteriye dokun';
   else hintEl.textContent = 'WASD yürü · Fare bak · E servis · U yükselt';
+  hintEl.style.opacity = '';
   setTimeout(() => hintEl.style.opacity = '0', 7000);
 
   /* hedef sistemi sıfırla */
