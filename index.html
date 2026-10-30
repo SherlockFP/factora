@@ -8,7 +8,8 @@
 <title>Tatlı Tycoon</title>
 <style>
   *{box-sizing:border-box;margin:0;padding:0}
-  html,body{height:100%;overflow:hidden;font-family:system-ui,'Segoe UI',sans-serif;user-select:none;-webkit-user-select:none;-webkit-tap-highlight-color:transparent;touch-action:none;overscroll-behavior:none;background:#8fdcff;color:#4a4238}
+  :root{--r:14px;--gap:8px;--ink:#4a4238;--muted:#9a8f7d;--paper:#fffdf7;--sun:#ffb300;--pop:#ff5b5b;--sh:0 4px 0 #0002}
+  html,body{height:100%;overflow:hidden;font-family:system-ui,'Segoe UI',sans-serif;user-select:none;-webkit-user-select:none;-webkit-tap-highlight-color:transparent;touch-action:none;overscroll-behavior:none;background:#8fdcff;color:var(--ink)}
   canvas{display:block;position:fixed;inset:0}
 
   /* ---------- HUD ---------- */
@@ -22,6 +23,10 @@
   #topRight.on{display:flex}
   .icobtn{width:42px;height:42px;border:0;border-radius:14px;background:#fff;box-shadow:0 4px 0 #0002;font-size:19px;cursor:pointer;display:grid;place-items:center;transition:transform .08s}
   .icobtn:active{transform:translateY(3px);box-shadow:0 1px 0 #0002}
+  .setRow{display:flex;align-items:center;justify-content:space-between;padding:11px 4px;border-bottom:1px solid #00000012;font-weight:800;font-size:15px;color:#4a4238}
+  .setRow:last-of-type{border-bottom:0}
+  .tog{border:0;border-radius:11px;padding:7px 15px;font-weight:900;font-size:13px;cursor:pointer;background:#d8d0c2;color:#8b8272;transition:.15s}
+  .tog.on{background:#5ddc6b;color:#fff;box-shadow:0 3px 0 #34a844}
   #topRight{gap:5px}
   @media (max-width:430px){
     .icobtn{width:29px;height:29px;border-radius:10px;font-size:13.5px}
@@ -212,6 +217,7 @@
   <button class="icobtn" id="achBtn" title="Başarımlar">⭐</button>
   <button class="icobtn" id="lbBtn" title="Sıralama">🏆</button>
   <button class="icobtn" id="eggBtn" title="Pet">🥚</button>
+  <button class="icobtn" id="setBtn" title="Ayarlar">⚙️</button>
   <button class="icobtn" id="rebBtn" title="Rebirth">🔄</button>
   <button class="icobtn" id="leaveBtn" title="Çık">✖</button>
 </div>
@@ -289,6 +295,16 @@
   <p class="s" id="rwSub"></p>
   <div style="text-align:center;font-size:40px;font-weight:900;color:#ffb300;margin:8px 0" id="rwAmt"></div>
   <button class="btn" id="rwBtn">Topla!</button>
+</div></div>
+
+<div class="sheet" id="setSheet"><div class="card">
+  <h2>⚙️ Ayarlar</h2>
+  <div class="setRow"><span>🎵 Müzik</span><button class="tog on" id="togMusic">Açık</button></div>
+  <div class="setRow"><span>🔊 Efektler</span><button class="tog on" id="togSfx">Açık</button></div>
+  <div class="setRow"><span>✨ Işıltı</span><button class="tog on" id="togGlow">Açık</button></div>
+  <div class="setRow"><span>🖼️ Gölgeler</span><button class="tog on" id="togShadow">Açık</button></div>
+  <p class="s" style="margin-top:14px;text-align:center;opacity:.55;font-size:12px">Tatlı Tycoon · v3.0</p>
+  <button class="btn ghost" data-close>Kapat</button>
 </div></div>
 
 <div class="sheet" id="winSheet"><div class="card">
@@ -373,7 +389,7 @@ scene.add(camera);
    ================================================================== */
 const viewmodel = new THREE.Group();
 camera.add(viewmodel);
-const vmItem = { group: null, cake: null, cup: null, baseY: -0.335 };
+const vmItem = { group: null, cake: null, cup: null, baseY: -0.40 };
 {
   const wood = new THREE.MeshLambertMaterial({ color: 0xc4854a });
   const woodD = new THREE.MeshLambertMaterial({ color: 0x8f5c2e });
@@ -407,9 +423,9 @@ const vmItem = { group: null, cake: null, cup: null, baseY: -0.335 };
   vmItem.cake = icing.material;
   vmItem.cup = cup.material;
 
-  viewmodel.position.set(0.27, vmItem.baseY, -0.62);
+  viewmodel.position.set(0.34, vmItem.baseY, -0.8);
   viewmodel.rotation.set(0.12, -0.18, 0.06);
-  viewmodel.scale.setScalar(0.78);
+  viewmodel.scale.setScalar(0.62);
   viewmodel.traverse(o => { if (o.isMesh){ o.castShadow = false; o.receiveShadow = false; } });
 }
 let vmKick = 0;
@@ -419,9 +435,9 @@ function updateViewmodel(dt, moving){
   vmKick *= Math.exp(-9 * dt);
   const bobY = moving ? Math.sin(bob) * 0.012 : Math.sin(elapsed * 1.6) * 0.004;
   viewmodel.position.set(
-    0.27 - vmKick * 0.05,
+    0.34 - vmKick * 0.05,
     vmItem.baseY + bobY - vmKick * 0.06,
-    -0.62 - vmKick * 0.22
+    -0.8 - vmKick * 0.22
   );
   viewmodel.rotation.set(0.12 + vmKick * 0.55, -0.18 + vmKick * 0.12, 0.06);
   const i = nearStation;
@@ -526,8 +542,8 @@ function updateDayNight(dt) {
   _dnB.copy(C_SUN_DAY).lerp(C_SUN_DUSK, dusk).lerp(C_SUN_NIGHT, night);
   sun.color.copy(_dnB);
   sun.intensity = 0.2 + 1.6 * day;
-  hemi.intensity = 0.4 + 0.9 * day;
-  fillLight.intensity = 0.3 - 0.16 * night;
+  hemi.intensity = 0.6 + 0.75 * day;
+  fillLight.intensity = 0.32 - 0.08 * night;
   hemi.color.copy(C_HEMI_DAY).lerp(C_HEMI_NIGHT, night);
   hemi.groundColor.copy(C_GROUND_DAY).lerp(C_GROUND_NIGHT, night);
 
@@ -929,6 +945,14 @@ function tierM(hex, glow){
 }
 const stallDims = (kind) => STALL_DIMS[kind] || { w: 2.9, h: 3.2, d: 2.4 };
 
+/* ışık veren süsler (ampul, taç taşı) ışıktan bağımsız parlak kalsın */
+const tierGlowCache = new Map();
+function tierGlowM(hex){
+  let m = tierGlowCache.get(hex);
+  if (!m){ m = new THREE.MeshBasicMaterial({ color: hex }); tierGlowCache.set(hex, m); }
+  return m;
+}
+
 /* iki nokta arasında sarkan bir hat (flama/ampul dizisi) */
 function sagPoints(ax, ay, az, bx, by, bz, sag, n){
   const pts = [];
@@ -951,36 +975,34 @@ function buildStallTier(kind, lv){
   const { w, h, d } = stallDims(kind);
   const half = Math.min(1.55, w * 0.52);
   const frontZ = Math.min(1.2, d * 0.48);
-  const poleX = half + 0.2, poleZ = frontZ + 0.22;
-  const poleTop = Math.min(3.0, h * 0.88);
+  const flagX = half * 0.98, flagZ = frontZ - 0.05;
+  const flagY = h * 0.62;
 
-  /* --- 2: flama kemeri (iki direk + sarkan flamalar) --- */
+  /* --- 2: tentenin ön kenarına asılı flamalar (direk yok, süs tezgaha ait) --- */
   if (lv >= 2){
-    const woodM = tierM(0xe0a94f);
-    for (const s of [-1, 1]) add(g, G.cyl, woodM, s * poleX, poleTop / 2, poleZ, 0.07, poleTop, 0.07);
-    const pts = sagPoints(-poleX, poleTop, poleZ, poleX, poleTop, poleZ, 0.28, 16);
+    const pts = sagPoints(-flagX, flagY, flagZ, flagX, flagY, flagZ, 0.14, 16);
     const wire = new THREE.Mesh(
-      new THREE.TubeGeometry(new THREE.CatmullRomCurve3(pts), 18, 0.022, 4, false),
+      new THREE.TubeGeometry(new THREE.CatmullRomCurve3(pts), 18, 0.018, 4, false),
       tierM(0xf2e6cf));
     wire.castShadow = false;
     wire.userData.own = true;
     g.add(wire);
     for (let k = 1; k < 15; k++){
       const t = k / 15;
-      const y = poleTop - Math.sin(Math.PI * t) * 0.28;
+      const y = flagY - Math.sin(Math.PI * t) * 0.14;
       const f = add(g, G.cone, tierM(FLAG_COLORS[k % FLAG_COLORS.length]),
-        -poleX + 2 * poleX * t, y - 0.17, poleZ, 0.34, 0.32, 0.05);
+        -flagX + 2 * flagX * t, y - 0.16, flagZ, 0.3, 0.3, 0.05);
       f.rotation.x = Math.PI;
       f.castShadow = false;
     }
   }
 
-  /* --- 4: tente altı ampuller --- */
+  /* --- 4: tabelanın üstünde ampul dizisi --- */
   if (lv >= 4){
-    const bulb = tierM(0xfff4cf, 0xffcf5a);
-    const ax = -half, bx = half, ay = h * 0.60, by = ay;
-    const az = frontZ - 0.06;
-    const pts = sagPoints(ax, ay, az, bx, by, az, 0.16, 14);
+    const bulb = tierGlowM(0xffdf7a);
+    const ax = -half * 0.86, bx = half * 0.86, ay = Math.min(h * 0.88, 3.25), by = ay;
+    const az = -0.26;
+    const pts = sagPoints(ax, ay, az, bx, by, az, 0.14, 14);
     const wire2 = new THREE.Mesh(
       new THREE.TubeGeometry(new THREE.CatmullRomCurve3(pts), 16, 0.018, 4, false),
       tierM(0x6b5a3f));
@@ -989,8 +1011,8 @@ function buildStallTier(kind, lv){
     g.add(wire2);
     for (let k = 0; k <= 12; k++){
       const t = k / 12;
-      const y = ay - Math.sin(Math.PI * t) * 0.16;
-      const b = add(g, G.sph, bulb, -half + 2 * half * t, y - 0.07, az, 0.13);
+      const y = ay - Math.sin(Math.PI * t) * 0.14;
+      const b = add(g, G.sph, bulb, ax + (bx - ax) * t, y - 0.06, az, 0.1);
       b.castShadow = false;
     }
   }
@@ -1041,12 +1063,12 @@ function buildStallTier(kind, lv){
   /* --- 9: tabelanın tepesinde taç --- */
   if (lv >= 9){
     const gold = tierM(0xffd54a, 0x9a6a00);
-    const cy = Math.min(h + 0.02, 3.42), cz = -0.3;
-    add(g, G.cyl, gold, 0, cy, cz, 0.46, 0.1, 0.46);
+    const cy = Math.min(h + 0.16, 3.62), cz = -0.34;
+    add(g, G.cyl, gold, 0, cy, cz, 0.5, 0.12, 0.5);
     for (let k = -2; k <= 2; k++){
-      const tip = add(g, G.cone, gold, k * 0.17, cy + 0.17, cz, 0.14, 0.26, 0.14);
+      const tip = add(g, G.cone, gold, k * 0.18, cy + 0.2, cz, 0.16, 0.3, 0.16);
       tip.castShadow = false;
-      add(g, G.sph, tierM(0xff5b9d, 0x882244), k * 0.17, cy + 0.31, cz, 0.07);
+      add(g, G.sph, tierGlowM(0xff9ec4), k * 0.18, cy + 0.36, cz, 0.075);
     }
   }
 
@@ -1348,9 +1370,9 @@ const pads = STATIONS.map((s, i) => {
   ring.position.set(s.x, 0.22, s.z);
   scene.add(ring);
 
-  const label = labelSprite(s.n, s.p + ' 💰');
+  const label = labelSprite(s.n, s.p + ' 💰', 2.35);
   /* tabelalar Blender modellerinin üstünde kalsın (en yüksek model ~3.7) */
-  label.position.set(s.x, 4.35, s.z);
+  label.position.set(s.x, 4.15, s.z);
   scene.add(label);
 
   /* kuyruk rozeti: uzaktan hangi tezgahta müşteri var görünür */
@@ -1358,7 +1380,7 @@ const pads = STATIONS.map((s, i) => {
     map: queueBadgeTex(1, false), transparent: true, depthWrite: false, depthTest: false,
   }));
   badge.scale.set(0.95, 0.95, 1);
-  badge.position.set(s.x, 5.2, s.z);
+  badge.position.set(s.x, 4.95, s.z);
   badge.visible = false;
   scene.add(badge);
 
@@ -1375,6 +1397,12 @@ const pads = STATIONS.map((s, i) => {
 function refreshPadLabel(i){
   const p = pads[i];
   const owned = state.owned[i] !== null && state.owned[i] !== undefined;
+  /* tabela ve kuyruk rozeti tezgahın tepesine göre yerleşir: yükselen
+     tezgah etiketin içine girmesin, etiket hep üstünde kalsın. */
+  const sc = owned ? 1 + 0.045 * (stationLevel(i) - 1) : 0.8;
+  const top = (stallDims(p.def.k).h || 3.3) * sc;
+  p.label.position.y = top + 0.52;
+  p.badge.position.y = top + 1.47;
   const sub = owned
     ? 'Sv ' + stationLevel(i) + ' · ' + fmt(serveValueAt(i)) + ' 💰'
     : Math.round(p.def.p * Math.pow(0.92, state.rebirths)) + ' 💰';
@@ -3575,6 +3603,9 @@ function startGame(){
     applySkillEffects();
   }
 
+  /* etiketleri tezgah yüksekliklerine göre yerleştir (ilk açılışta da) */
+  for (let i = 0; i < pads.length; i++) refreshPadLabel(i);
+
   updateHud();
 }
 
@@ -3637,6 +3668,28 @@ $('lbBtn').onclick = () => { renderLeaderboard(); $('lbSheet').classList.add('on
 $('skillBtn').onclick = () => { renderSkills(); $('skillSheet').classList.add('on'); sfxClick(); };
 $('achBtn').onclick = () => { checkAchievements(); renderAchievements(); $('achSheet').classList.add('on'); sfxClick(); };
 $('eggBtn').onclick = () => { renderPets(); $('eggSheet').classList.add('on'); sfxClick(); };
+
+/* --- ayarlar --- */
+const SET_KEY = 'tatli_settings';
+function readSettings(){
+  try { return JSON.parse(localStorage.getItem(SET_KEY) || '{}'); } catch(e){ return {}; }
+}
+const settings = Object.assign({ music:true, sfx:true, glow:true, shadow:true }, readSettings());
+function applySettings(){
+  localStorage.setItem(SET_KEY, JSON.stringify(settings));
+  if (settings.music) startMusic(); else stopMusic();
+  renderer.shadowMap.enabled = settings.shadow;
+  scene.traverse(o => { if (o.isMesh && o.material) o.material.needsUpdate = true; });
+  const map = { togMusic:'music', togSfx:'sfx', togGlow:'glow', togShadow:'shadow' };
+  for (const [id, key] of Object.entries(map)){
+    const el = $(id);
+    if (el){ el.classList.toggle('on', settings[key]); el.textContent = settings[key] ? 'Açık' : 'Kapalı'; }
+  }
+}
+$('setBtn').onclick = () => { applySettings(); $('setSheet').classList.add('on'); sfxClick(); };
+for (const [id, key] of [['togMusic','music'],['togSfx','sfx'],['togGlow','glow'],['togShadow','shadow']]){
+  $(id).onclick = () => { settings[key] = !settings[key]; applySettings(); if (settings.sfx) sfxClick(); };
+}
 $('rebBtn').onclick = () => {
   $('rebMult').textContent = 'x' + rebirthMult().toFixed(1);
   $('rebNext').textContent = 'Sonraki: x' + (rebirthMult() + 0.4).toFixed(1);
@@ -4050,8 +4103,10 @@ function tick(){
     const near = Math.hypot(playerPos.x - s.x, playerPos.z - s.z) < 3.4;
     arrowGroup.visible = !near;
     if (!near){
-      arrowGroup.position.set(s.x, 2.0 + Math.sin(elapsed * 3.2) * 0.2, s.z + 1.7);
-      arrowGroup.scale.setScalar(0.55);
+      /* ok, tezgahın etiketinin/badgesinin üstünde kalsın */
+      const topY = pads[nextIdx] ? pads[nextIdx].label.position.y : 4.0;
+      arrowGroup.position.set(s.x, topY + 0.7 + Math.sin(elapsed * 3.2) * 0.18, s.z + 1.0);
+      arrowGroup.scale.setScalar(0.38);
       arrowGroup.rotation.y = Math.sin(elapsed * 1.6) * 0.3;
     }
   } else arrowGroup.visible = false;
