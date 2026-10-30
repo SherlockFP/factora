@@ -7,8 +7,9 @@ const KINDS = ['stand', 'oven', 'icecream', 'juice', 'cake', 'donut', 'choco', '
 
 const clamp01 = (v) => (v < 0 ? 0 : v > 1 ? 1 : Number(v) || 0);
 const isObj = (v) => v !== null && typeof v === 'object';
-const labelOf = (s) => (s >= 0.95 ? 'PERFECT' : s >= 0.7 ? 'İYİ' : s >= 0.4 ? 'OLSUN' : 'KAÇTI');
-const miss = () => ({ done: true, score: 0, label: 'MISS' });
+const gradeOf = (s) => (s >= 0.95 ? 'PERFECT' : s >= 0.7 ? 'GOOD' : s >= 0.4 ? 'OK' : 'MISS');
+const labelOf = (s) => (s >= 0.95 ? 'MÜKEMMEL' : s >= 0.7 ? 'İYİ' : s >= 0.4 ? 'OLSUN' : 'KAÇTI');
+const miss = () => ({ done: true, score: 0, label: 'MISS', grade: 'MISS', failed: true });
 const sweep = (t, speed) => 1 - Math.abs(((t * speed) % 2) - 1);
 const yOf = (ch, s) => 1 - (ch.t - s.at) / s.dur;
 
@@ -46,7 +47,7 @@ const BUILD = {
     ch.hits = 0; ch.misses = 0;
   },
   donut(ch, rng) { ch.pattern = Array.from({ length: 4 }, () => Math.floor(rng() * 4)); ch.progress = 0; ch.wrongs = 0; ch.show = 1.2; },
-  choco(ch) { ch.heat = 0; ch.holding = false; ch.started = false; ch.released = false; ch.rel = 0; ch.band = [0.6, 0.8]; },
+  choco(ch) { ch.heat = 0; ch.holding = false; ch.released = false; ch.rel = 0; ch.band = [0.6, 0.8]; },
   candy(ch, rng) {
     const v = [0, 0, 1, 1, 2, 2];
     for (let i = v.length - 1; i > 0; i--) { const j = Math.floor(rng() * (i + 1)); [v[i], v[j]] = [v[j], v[i]]; }
@@ -63,7 +64,7 @@ const SCORE = {
   stand: (ch) => ch.hitScore,
   oven: (ch) => ch.taps / 3,
   icecream: (ch) => ch.scoops.filter((s) => s.caught).length / 3,
-  juice: (ch) => clamp01(ch.alts / 8 - ch.wrong * 0.05),
+  juice: (ch) => clamp01(ch.alts / 6 - ch.wrong * 0.05),
   cake: (ch) => clamp01(ch.hits / 5 - ch.misses * 0.03),
   donut: (ch) => clamp01((ch.progress / 4) * (1 - Math.min(0.4, ch.wrongs * 0.1))),
   choco: (ch) => (ch.released ? ch.rel : 0),
@@ -126,7 +127,7 @@ const PRESS = {
   },
   choco(ch, input) {
     if (!isObj(input) || typeof input.down !== 'boolean') return miss();
-    if (input.down) { ch.holding = true; ch.started = true; return live(ch); }
+    if (input.down) { ch.holding = true; return live(ch); }
     if (!ch.holding) return live(ch);
     ch.holding = false; ch.released = true;
     const d = ch.heat < ch.band[0] ? ch.band[0] - ch.heat : ch.heat > ch.band[1] ? ch.heat - ch.band[1] : 0;
@@ -169,11 +170,11 @@ const PRESS = {
 const TAP_KINDS = { stand: 1, oven: 1, icecream: 1, cake: 1, castle: 1 };
 
 function live(ch) {
-  return { done: false, score: SCORE[ch.kind](ch), label: '' };
+  return { done: false, score: SCORE[ch.kind](ch), label: '', grade: '', failed: false };
 }
 
 function resultOf(ch) {
-  return { done: true, score: ch.score, label: ch.label, failed: ch.failed };
+  return { done: true, score: ch.score, label: ch.label, grade: gradeOf(ch.score), perfect: ch.score >= 0.95, failed: ch.failed };
 }
 
 function finish(ch, score, failed) {
@@ -181,6 +182,8 @@ function finish(ch, score, failed) {
   ch.state = 'done';
   ch.score = clamp01(score);
   ch.label = labelOf(ch.score);
+  ch.grade = gradeOf(ch.score);
+  ch.perfect = ch.score >= 0.95;
   ch.failed = failed === undefined ? ch.score < 0.5 : !!failed;
   return resultOf(ch);
 }
@@ -229,6 +232,8 @@ export function createMinigames(opts) {
       ch.state = 'cancelled';
       ch.score = clamp01(SCORE[ch.kind](ch));
       ch.label = labelOf(ch.score);
+      ch.grade = gradeOf(ch.score);
+      ch.perfect = ch.score >= 0.95;
       ch.failed = ch.score < 0.5;
       return resultOf(ch);
     }
@@ -302,7 +307,7 @@ if (isMain) {
     ideal[kind](ch);
     ok(ch.done, kind + ' ideal terminates');
     ok(ch.score >= 0.9, kind + ' ideal score ' + ch.score.toFixed(3));
-    ok(ch.label === 'PERFECT', kind + ' perfect label ' + ch.label);
+    ok(ch.grade === 'PERFECT' && ch.label === 'MÜKEMMEL', kind + ' perfect label ' + ch.label);
 
     const idle = m.start(kind);
     let guard = 0;

@@ -54,7 +54,7 @@ export function buildDecor(THREE, helpers){
   /* ---------- interaction runtime (all driven by updateInteractives) ---------- */
   const rt = { t: 0, fountain: null };
   const flags = [], balloons = [], swings = [];
-  let balloonCart = null, signG = null, signMat = null, wellG = null;
+  let signG = null, signMat = null;
 
   /* ---------- central fountain (0,0) ---------- */
   {
@@ -80,7 +80,27 @@ export function buildDecor(THREE, helpers){
     g.position.set(0, 0, 0);
     root.add(g);
     root.userData.animated = [w1, w2];
-    Object.assign(rt, { fountain: { g, w1, w2, ring, k: 1 } });
+    const f = { g, w1, w2, ring, boost: 0, base: [w1.scale.clone(), w2.scale.clone()] };
+    rt.fountain = f;
+    reg({
+      id: 'fountain', object3D: g, radius: 3.2, label: 'Fıskiye',
+      onInteract(state){ f.boost = 3; state.fountainBoost = 3; },
+      onNear(state, dt){
+        if (f.boost > 0) f.boost = Math.max(0, f.boost - dt);
+        if ('fountainBoost' in state) state.fountainBoost = f.boost;   // caller reads, we own the countdown
+        const on = f.boost > 0;
+        f.ring.visible = on;
+        f.w1.rotation.y += dt * (on ? 2.6 : 0);         // caller still adds its own idle spin
+        f.w2.rotation.y -= dt * (on ? 3.4 : 0);
+        const s = on ? 1 + 0.07 * Math.min(1, f.boost) : 1;
+        f.w1.scale.set(f.base[0].x * s, f.base[0].y * s, f.base[0].z * s);
+        f.w2.scale.set(f.base[1].x * s, f.base[1].y * (on ? 1.8 : 1), f.base[1].z * s);
+        if (on){
+          f.ring.rotation.y += dt * 4;
+          f.ring.position.y = Math.sin(rt.t * 6) * .25;
+        }
+      },
+    });
   }
 
   /* ---------- taş döşeli yürüyüş yolu (spawn → çeşme → tezgah sıraları) ----------
@@ -205,7 +225,25 @@ export function buildDecor(THREE, helpers){
       }));
     g.position.set(-9, 0, 1.5);
     root.add(g);
-    balloonCart = g;
+    reg({
+      id: 'balloons', object3D: g, radius: 2.4, label: 'Balon Arabası',
+      onInteract(){
+        let n = 0;
+        for (const b of balloons){
+          if (b.t <= 0 && n++ < 3) b.t = 2;          // 3 balon: patla, 2 sn sonra geri gel
+        }
+      },
+      onNear(state, dt){
+        for (const b of balloons){
+          if (b.t > 0){
+            b.t = Math.max(0, b.t - dt);
+            b.m.scale.setScalar(b.t > 0 ? 0 : b.s);   // patladı → 2 sn yok → geri gel
+          } else if (b.m.scale.x !== b.s){
+            b.m.scale.setScalar(b.s);
+          }
+        }
+      },
+    });
   }
   /* flower stand */
   {
@@ -268,6 +306,19 @@ export function buildDecor(THREE, helpers){
     root.userData.signBoard = board;
     signMat = board.material;
     signG = g;
+    let bounce = 0;
+    reg({
+      id: 'sign', object3D: g, radius: 4, label: 'Giriş Tabelası',
+      onInteract(){ bounce = .6; },
+      onNear(state, dt){
+        const target = state.near === true ? .55 + Math.sin(rt.t * 3) * .25 : 0;
+        signMat.emissiveIntensity += (target - signMat.emissiveIntensity) * Math.min(1, dt * 8);
+        if (bounce > 0){
+          bounce = Math.max(0, bounce - dt);
+          signG.position.y = Math.sin((1 - bounce / .6) * Math.PI) * .45;
+        } else if (signG.position.y !== 0) signG.position.y = 0;
+      },
+    });
   }
 
   /* ---------- 3 flagpoles ---------- */
@@ -318,7 +369,6 @@ export function buildDecor(THREE, helpers){
     coin.visible = false;
     g.position.set(3.6, 0, 10.6);
     root.add(g);
-    wellG = g;
     let cd = 0, coinT = 0;
     reg({
       id: 'well', object3D: g, radius: 2.2, label: 'Dilek Kuyusu',
@@ -355,7 +405,7 @@ export function buildDecor(THREE, helpers){
       g.add(p);
       swings.push({ p, ph: i * 2.1, wild: 0 });
     });
-    g.position.set(-12, 0, 8);
+    g.position.set(-12.6, 0, 11.5);
     g.rotation.y = .3;
     root.add(g);
     reg({
@@ -380,6 +430,19 @@ export function buildDecor(THREE, helpers){
     put(root, 'cyl', woodD, x, .45, z, .62, .9, .62);
     put(root, 'cyl', metal, x, .45, z, .66, .12, .66);
   }
+
+  /* ---------- interaction driver ---------- */
+  const inter = root.userData.interactives;
+  root.userData.updateInteractives = (dt, playerPos, state) => {
+    rt.t += dt;
+    for (const o of inter){
+      const p = o.object3D.position;
+      const dx = playerPos.x - p.x, dz = playerPos.z - p.z;
+      o.near = dx * dx + dz * dz <= o.radius * o.radius;
+      state.near = o.near;
+      o.onNear(state, dt);
+    }
+  };
 
   if (scene && scene.add) scene.add(root);
   return root;

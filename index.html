@@ -28,14 +28,14 @@
   #xp i.on{background:var(--sun)}
   #xpTxt{font-size:11px;font-weight:900;color:#fff;text-shadow:0 1px 0 #0006;margin-left:6px;white-space:nowrap}
 
-  #goal{display:none;max-width:100%;opacity:0;transition:opacity .3s,transform .3s;pointer-events:none}
-  #goal .goalIn{display:flex;align-items:center;gap:7px;padding:7px 12px;border-radius:var(--r);background:var(--paper);box-shadow:0 3px 0 #0002;font-weight:900;font-size:13px;color:var(--ink)}
+  #goal{flex-basis:100%;text-align:center;margin-top:2px;display:none;opacity:0;transition:opacity .3s,transform .3s;pointer-events:none}
+  #goal .goalIn{display:inline-flex;align-items:center;gap:7px;padding:7px 13px;border-radius:var(--r);background:var(--paper);box-shadow:var(--sh);font-weight:900;font-size:13px;color:var(--ink);max-width:92vw}
   #goalIcon{font-size:16px}
   /* ipucu: hedefin altında küçük ikincil satır */
-  #hint{display:none;font-size:11px;font-weight:800;color:#fff;text-shadow:0 1px 0 #0007;padding-left:2px;transition:opacity .5s}
+  #hint{display:none;width:100%;text-align:center;font-size:11px;font-weight:800;color:#fff;text-shadow:0 1px 0 #0007;transition:opacity .5s}
   #hint.on{display:block}
 
-  #topRight{position:fixed;top:calc(10px + env(safe-area-inset-top));right:10px;z-index:10;display:none;align-items:flex-start;gap:6px;flex-wrap:wrap;justify-content:flex-end;pointer-events:auto}
+  #topRight{display:none;margin-left:auto;align-items:center;gap:6px;flex-wrap:wrap;justify-content:flex-end;row-gap:4px;pointer-events:auto}
   #topRight.on{display:flex}
   .grp{display:flex;gap:5px}
   .grp + .grp{position:relative;padding-left:8px}
@@ -46,14 +46,14 @@
   .setRow:last-of-type{border-bottom:0}
   .tog{border:0;border-radius:11px;padding:7px 15px;font-weight:900;font-size:13px;cursor:pointer;background:#d8d0c2;color:#8b8272;transition:.15s}
   .tog.on{background:#5ddc6b;color:#fff;box-shadow:0 3px 0 #34a844}
-  #topRight{gap:5px}
-  @media (max-width:430px){
-    .icobtn{width:29px;height:29px;border-radius:10px;font-size:13.5px}
-    #topRight{gap:3px;flex-wrap:wrap;max-width:calc(100vw - 196px);justify-content:flex-end;row-gap:3px}
-    .pill{font-size:16px;padding:6px 10px;border-radius:14px}
-    .pill small{font-size:10px}
-    #multPill small{display:none}
-  }
+  #mgStage{position:relative;height:190px;margin:6px 0 10px;border-radius:18px;background:#2b2440;overflow:hidden;display:grid;place-items:center}
+  #mgBar{height:10px;border-radius:6px;background:#00000018;overflow:hidden;margin-bottom:6px}
+  #mgFill{height:100%;width:100%;background:linear-gradient(90deg,#ffd400,#ff8a3d)}
+  .mgTarget{position:absolute;border-radius:50%;background:#ff8ad0;box-shadow:0 0 16px #ff8ad0;animation:mgPop .2s}
+  .mgHit{background:#6fdc4f!important;box-shadow:0 0 20px #6fdc4f!important}
+  @keyframes mgPop{from{transform:scale(.2);opacity:0}to{transform:scale(1);opacity:1}}
+  #mgNeedle{position:absolute;top:0;bottom:0;width:5px;background:#fff;box-shadow:0 0 12px #fff}
+  #mgTier{position:absolute;top:0;bottom:0;background:#6fdc4f88;border-left:2px solid #6fdc4f;border-right:2px solid #6fdc4f}
   #roomTag{display:none;align-items:center;gap:6px}
   #roomTag.on{display:flex}
   #roomTag b{padding:8px 12px;border-radius:12px;background:#fff;box-shadow:0 3px 0 #0002;font-size:14px;color:#666;letter-spacing:2px}
@@ -69,10 +69,11 @@
   @keyframes floatUp{0%{transform:translate(-50%,0) scale(.6);opacity:0}18%{transform:translate(-50%,-14px) scale(1.15);opacity:1}100%{transform:translate(-50%,-90px) scale(1);opacity:0}}
 
   /* ---------- paneller ---------- */
-  .sheet{position:fixed;inset:0;display:none;place-items:center;background:#1a0f2eaa;z-index:20;padding:16px}
+  .sheet{position:fixed;inset:0;display:none;place-items:center;background:#1a0f2eaa;backdrop-filter:blur(3px);z-index:20;padding:16px}
   .sheet.on{display:grid}
-  .card{width:min(400px,94vw);max-height:88vh;overflow:auto;padding:22px;border-radius:26px;background:#fffdf7;box-shadow:0 12px 0 #0003,0 26px 60px #0007;animation:pop .34s cubic-bezier(.2,1.6,.4,1)}
-  @keyframes pop{from{transform:scale(.85) translateY(24px);opacity:0}to{transform:none;opacity:1}}
+  .sheet .card{transform:translateY(12px) scale(.98);opacity:0;transition:transform .22s cubic-bezier(.2,1.4,.4,1),opacity .18s}
+  .sheet.on .card{transform:none;opacity:1}
+  .card{width:min(400px,94vw);max-height:88vh;overflow:auto;padding:22px;border-radius:var(--r);background:var(--paper);box-shadow:0 12px 0 #0003,0 26px 60px #0007}
   .card h2{font-size:23px;font-weight:900;color:#ff5b5b;text-align:center;margin-bottom:4px}
   .card p.s{font-size:13px;font-weight:700;color:#9a8f7d;text-align:center;margin-bottom:14px}
   .btn{display:block;width:100%;padding:14px;border:0;border-radius:17px;font-size:17px;font-weight:900;color:#fff;cursor:pointer;transition:transform .07s;background:linear-gradient(#6fdc4f,#4cb42f);box-shadow:0 5px 0 #2e7a1c;margin-top:9px}
@@ -129,20 +130,25 @@
   @keyframes pillPop{0%{transform:scale(1)}40%{transform:scale(1.14)}100%{transform:scale(1)}}
 
   /* ---------- servis döngüsü ---------- */
-  #stationPanel{position:fixed;right:calc(16px + env(safe-area-inset-right));bottom:calc(144px + env(safe-area-inset-bottom));width:min(320px,72vw);display:none;z-index:13;background:#fffdf7;border-radius:20px;box-shadow:0 7px 0 #0002,0 18px 40px #0005;padding:11px 13px;opacity:0;transform:translateY(10px);transition:opacity .18s,transform .18s}
+  #stationPanel{position:fixed;right:calc(16px + env(safe-area-inset-right));bottom:calc(144px + env(safe-area-inset-bottom));width:min(320px,72vw);display:none;z-index:13;background:var(--paper);border-radius:var(--r);box-shadow:0 7px 0 #0002,0 18px 40px #0005;padding:11px 13px;opacity:0;transform:translateY(10px);transition:opacity .18s,transform .18s}
   #stationPanel.on{display:block;opacity:1;transform:translateY(0)}
   @media (max-width:430px){
-    #stationPanel{width:min(260px,68vw);padding:9px 10px;border-radius:17px;bottom:calc(212px + env(safe-area-inset-bottom))}
+    #stationPanel{width:min(270px,74vw);padding:9px 10px;border-radius:var(--r);bottom:calc(212px + env(safe-area-inset-bottom))}
     #stationPanel .spHead{font-size:13.5px}
-    #stationPanel .spInfo{font-size:11px}
+    #stationPanel .spStats b{font-size:12.5px}
+    #stationPanel .spNext{font-size:10px}
     #stationPanel .spBtns .btn{padding:9px 6px;font-size:12.5px}
   }
-  #stationPanel .spHead{display:flex;align-items:center;gap:8px;font-weight:900;font-size:15px;color:#4a4238}
+  #stationPanel .spHead{display:flex;align-items:center;gap:8px;font-weight:900;font-size:15px;color:var(--ink)}
+  #stationPanel .spIco{font-size:19px;line-height:1}
   #stationPanel .spHead b{flex:1;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
-  #stationPanel .spLv{background:#ffe9a8;color:#a86f00;border-radius:10px;padding:3px 9px;font-size:12px;white-space:nowrap}
-  #stationPanel .spInfo{font-size:12px;font-weight:800;color:#9a8f7d;margin:3px 0 9px}
+  #stationPanel .spLv{background:#ffe9a8;color:#a86f00;border-radius:8px;padding:3px 9px;font-size:12px;white-space:nowrap}
+  #stationPanel .spStats{display:grid;grid-template-columns:1fr 1fr;gap:6px;margin:8px 0 6px}
+  #stationPanel .spStats div{background:#f6f1e6;border-radius:9px;padding:5px 8px;font-size:10px;font-weight:800;color:var(--muted)}
+  #stationPanel .spStats b{display:block;font-size:14px;color:var(--ink);margin-top:1px}
+  #stationPanel .spNext{font-size:10.5px;font-weight:800;color:#e08b00;margin:0 0 8px}
   #stationPanel .spBtns{display:flex;gap:7px}
-  #stationPanel .spBtns .btn{margin:0;padding:11px 8px;font-size:14px;border-radius:14px;flex:1;line-height:1.15}
+  #stationPanel .spBtns .btn{margin:0;padding:11px 8px;font-size:14px;border-radius:11px;flex:1;line-height:1.15}
   #stationPanel .spBtns .btn small{display:block;font-size:10.5px;font-weight:800;opacity:.88;margin-top:2px}
 
   #serveBtn{position:fixed;right:calc(16px + env(safe-area-inset-right));bottom:calc(24px + env(safe-area-inset-bottom));width:108px;height:108px;border-radius:50%;border:0;background:linear-gradient(#ffd95c,#ff9f1a);box-shadow:0 8px 0 #b86400,0 14px 28px #0004;color:#fff;font:900 16px/1.1 system-ui,sans-serif;text-shadow:0 2px 0 #0004;display:none;z-index:14;cursor:pointer;transition:transform .07s;letter-spacing:.3px}
@@ -316,6 +322,14 @@
   <button class="btn" id="rwBtn">Topla!</button>
 </div></div>
 
+<div class="sheet" id="mgSheet"><div class="card" id="mgCard">
+  <h2 id="mgTitle">🍋 Limonata</h2>
+  <p class="s" id="mgHint">İbreyi yeşil alanda durdur</p>
+  <div id="mgStage"></div>
+  <div id="mgBar"><div id="mgFill"></div></div>
+  <button class="btn" id="mgGo">TAMAM</button>
+</div></div>
+
 <div class="sheet" id="setSheet"><div class="card">
   <h2>⚙️ Ayarlar</h2>
   <div class="setRow"><span>🎵 Müzik</span><button class="tog on" id="togMusic">Açık</button></div>
@@ -349,6 +363,7 @@ import { createQuestSystem } from './src/quests.js?v=7';
 import { TUNING, MAX_LEVEL, levelServeValue, levelQueue, levelSpawnGap, upgradeCost, staffCost, servePayout, speedFactor, createCombo, createRush } from './src/service.js?v=7';
 import { createAudioJuice } from './src/audio_juice.js?v=1';
 import { createProgression } from './src/progression.js?v=1';
+import { createMinigames } from './src/minigames.js?v=1';
 
 /* ==================================================================
    RENDERER + SAHNE
@@ -2138,6 +2153,8 @@ function fmt(n){
 
 /* --- rebirth çarpanı --- */
 const prog = createProgression({});
+const MG = createMinigames({ seed: Date.now() });
+let mgChallenge = null, mgOnDone = null, mgRaf = 0;
 function rebirthMult(){
   const b = prog.rebirthBonus(state.rebirths);
   const empire = prog.permanentPerks(state.rebirths).find(p => p.id === 'imparatorluk');
@@ -2225,8 +2242,6 @@ const combo = createCombo();
 const rush = createRush();
 const staffTimers = new Array(STATIONS.length).fill(0);
 let nearStation = -1;
-let rhythmPos = 0.5;
-const RHYTHM_PERFECT = 0.085;
 const RHYTHM_GOOD = 0.17;
 
 function isMine(i){
@@ -2257,22 +2272,149 @@ function serveAt(i){
   if (Math.hypot(playerPos.x - STATIONS[i].x, playerPos.z - STATIONS[i].z) > serveReach() + 0.6) return false;
   const info = npcSystem.queueInfo(i);
   if (!info) return false;
+  if (!openMinigame(i)) return false;
+  return true;
+}
+
+/* ==================================================================
+   MİNİ OYUN — her tezgahın kendi etkileşimi (src/minigames.js)
+   ================================================================== */
+function openMinigame(i){
+  const kind = STATIONS[i].k;
+  if (!MG.get(kind)) return false;
+  mgChallenge = MG.start(kind, { seed: (Date.now() ^ (i * 2654435761)) >>> 0 });
+  if (!mgChallenge) return false;
+
+  const d = MG.get(kind);
+  $('mgTitle').textContent = STATIONS[i].e + ' ' + d.name;
+  $('mgHint').textContent = d.hint;
+  $('mgGo').textContent = 'TAMAM';
+  const stage = $('mgStage');
+  stage.innerHTML = '';
+  buildMgVisual(mgChallenge, stage);
+  $('mgSheet').classList.add('on');
+
+  mgOnDone = (res) => {
+    $('mgSheet').classList.remove('on');
+    if (mgRaf) cancelAnimationFrame(mgRaf);
+    mgRaf = 0;
+    const ch = mgChallenge;
+    mgChallenge = null;
+    finishServe(i, ch ? ch.score : 0, ch ? ch.label : 'KAÇTI');
+  };
+
+  let last = performance.now();
+  const loop = (now) => {
+    if (!mgChallenge) return;
+    const dt = Math.min(0.05, (now - last) / 1000);
+    last = now;
+    const r = MG.update(mgChallenge, dt);
+    paintMg(mgChallenge, stage);
+    $('mgFill').style.width = Math.max(0, 100 - (mgChallenge.t / mgChallenge.duration) * 100) + '%';
+    if (r.done){ mgOnDone(r); return; }
+    mgRaf = requestAnimationFrame(loop);
+  };
+  mgRaf = requestAnimationFrame(loop);
+
+  /* panel tıklaması / tuş basımı */
+  stage.onpointerdown = (e) => {
+    if (!mgChallenge) return;
+    const b = stage.getBoundingClientRect();
+    const r = MG.press(mgChallenge, { x: (e.clientX - b.left) / b.width, y: (e.clientY - b.top) / b.height, index: Number(e.target.dataset.idx ?? -1) });
+    paintMg(mgChallenge, stage);
+    if (r.done) mgOnDone(r);
+  };
+  return true;
+}
+
+function paintMg(ch, stage){
+  if (!ch) return;
+  /* zamanlama ibresi */
+  const nd = stage.querySelector('#mgNeedle');
+  if (nd && ch.kind === 'stand') nd.style.left = (ch.pos * 100) + '%';
+  /* kurabiye / top / hedef işaretleri */
+  for (const el of stage.querySelectorAll('[data-k]')){
+    const k = el.dataset.k;
+    if (k === 'cookie'){
+      const c = ch.cookies?.[Number(el.dataset.i)];
+      el.style.opacity = c?.tapped ? 0.25 : 1;
+    }
+    if (k === 'scoop'){
+      const s = ch.scoops?.[Number(el.dataset.i)];
+      el.style.opacity = s?.caught ? 0.25 : 1;
+    }
+    if (k === 'target'){
+      const t2 = ch.targets?.[Number(el.dataset.i)];
+      el.classList.toggle('mgHit', !!t2?.hit);
+    }
+    if (k === 'card'){
+      const i = Number(el.dataset.i);
+      const open = ch.matched?.[i] || ch.first === i;
+      el.textContent = open ? ch.cards?.[i] : '?';
+    }
+  }
+  /* sıcaklık */
+  if (ch.kind === 'choco'){
+    const f = stage.querySelector('#mgFill2');
+    if (f) f.style.height = Math.min(100, ch.heat * 100) + '%';
+  }
+}
+
+function buildMgVisual(ch, stage){
+  const add = (html) => { stage.insertAdjacentHTML('beforeend', html); };
+  switch (ch.kind){
+    case 'stand':
+      add('<div id="mgTier" style="left:40%;width:20%"></div><div id="mgNeedle" style="left:0"></div>');
+      break;
+    case 'oven':
+      ch.cookies.forEach((c, i) => add(`<div data-k="cookie" data-i="${i}" style="position:absolute;left:${15+i*28}%;top:38%;font-size:44px">🍪</div>`));
+      break;
+    case 'icecream':
+      ch.scoops.forEach((s, i) => add(`<div data-k="scoop" data-i="${i}" style="position:absolute;left:${15+i*28}%;top:20%;font-size:44px">🍦</div>`));
+      break;
+    case 'juice':
+      add('<div style="font-size:44px">🧃</div><div id="mgAlt" style="position:absolute;bottom:16%;font-weight:900;color:#fff;font-size:20px">A ↔ D</div>');
+      break;
+    case 'cake':
+      ch.targets.forEach((t2, i) => add(`<div class="mgTarget" data-k="target" data-i="${i}" style="left:${t2.x*100}%;top:${t2.y*100}%;width:44px;height:44px;margin:-22px 0 0 -22px"></div>`));
+      break;
+    case 'donut': {
+      const shown = ch.pattern.map(n => '🍩🍬🧁🍰'[n]).join(' ');
+      add(`<div style="color:#fff;font-weight:900;font-size:22px;text-align:center">${shown}</div>`);
+      for (let i=0;i<4;i++) add(`<button data-idx="${i}" style="position:absolute;left:${10+i*22}%;bottom:12%;width:52px;height:52px;border-radius:14px;border:0;font-size:22px;font-weight:900">${i+1}</button>`);
+      break;
+    }
+    case 'choco':
+      add('<div style="position:absolute;left:44%;top:10%;bottom:10%;width:40px;border-radius:10px;background:#00000055;overflow:hidden"><div id="mgFill2" style="position:absolute;bottom:0;width:100%;height:0;background:linear-gradient(#ff8a3d,#ffd400)"></div></div><div style="position:absolute;left:60%;top:30%;bottom:30%;width:40px;border:3px solid #6fdc4f;border-radius:8px"></div>');
+      break;
+    case 'candy':
+      ch.cards.forEach((_, i) => add(`<button class="mgCard" data-k="card" data-i="${i}" data-idx="${i}" style="position:absolute;left:${12+(i%3)*28}%;top:${(i<3?22:56)}%;width:60px;height:60px;border-radius:12px;border:0;background:#fff;font-size:26px;font-weight:900">?</button>`));
+      break;
+    case 'rainbow':
+      add(`<div style="color:#fff;font-weight:900;font-size:22px">${ch.sequence.map(n=>'🔴🟡🔵🟢'[n]).join('')}</div>`);
+      for (let i=0;i<4;i++) add(`<button data-idx="${i}" style="position:absolute;left:${10+i*22}%;bottom:12%;width:52px;height:52px;border-radius:50%;border:0;background:${['#ff5b5b','#ffd400','#3aa0ff','#4fbf5f'][i]}"></button>`);
+      break;
+    case 'castle':
+      add('<div id="mgTier" style="left:40%;width:20%"></div><div id="mgNeedle" style="left:0"></div>');
+      break;
+  }
+}
+
+/* Mini oyun bitti: gerçek servisi uygula. score 0..1 ödemeyi çarpar. */
+function finishServe(i, score, label){
+  const info = npcSystem.queueInfo(i);
+  if (!info) return false;
   const npc = npcSystem.serve(i);
   if (!npc) return false;
-
   const def = STATIONS[i];
   const speed = speedFactor(info.wait, info.patience);
   const vip = !!npc.vip;
-  /* ritim zamanlaması: ibre merkeze ne kadar yakınsa o kadar çok bahşiş */
-  const timing = Math.abs(rhythmPos - 0.5);
-  const timed = timing < RHYTHM_PERFECT ? 1.8 : timing < RHYTHM_GOOD ? 1.25 : 1;
-  rhythmEl.classList.remove('hit');
-  void rhythmEl.offsetWidth;
-  rhythmEl.classList.add('hit');
+  /* mini oyun skoru: 0.5x (kaçtı) .. 2x (mükemmel) */
+  const skill = 0.5 + Math.max(0, Math.min(1, Number(score) || 0)) * 1.5;
   combo.hit();
   const gain = Math.floor(
     servePayout(def.i, stationLevel(i), { combo: combo.mult, speed, rush: rush.active })
-    * rebirthMult() * petMult() * (vip ? 3 : 1) * (1 + 0.06 * skillLevel('tip')) * timed
+    * rebirthMult() * petMult() * (vip ? 3 : 1) * (1 + 0.06 * skillLevel('tip')) * skill
   );
   state.coins += gain;
   state.totalEarned += gain;
@@ -2493,8 +2635,6 @@ function renderSkills(){
 const spEl = $('stationPanel'), spNameEl = $('spName'), spLvEl = $('spLv'), spInfoEl = $('spInfo');
 const spUpEl = $('spUp'), spStaffEl = $('spStaff');
 const serveBtnEl = $('serveBtn');
-const rhythmEl = $('rhythm');
-const rhythmNeedle = rhythmEl ? rhythmEl.querySelector('.rNeedle') : null;
 const rushEl = $('rushBanner');
 const comboGlowEl = $('comboGlow'), flashEl = $('flash'), coinsPillEl = coinsEl.closest('.pill');
 
@@ -2593,12 +2733,6 @@ function updateServiceUI(){
 
   const canServe = owned && q > 0 && state.mode === 'game';
   serveBtnEl.classList.toggle('on', canServe);
-  /* servis ritmi: ibre yeşil bölgedeyken servis et → mükemmel bahşiş */
-  rhythmEl.classList.toggle('on', canServe);
-  if (canServe){
-    rhythmPos = 0.5 + 0.5 * Math.sin(elapsed * 4.4);
-    rhythmNeedle.style.left = (3 + rhythmPos * 94).toFixed(2) + '%';
-  }
   if (canServe){
     const info = npcSystem ? npcSystem.queueInfo(i) : null;
     const sSig = i + '|' + q + '|' + (info && info.vip ? 1 : 0);
@@ -3488,6 +3622,8 @@ addEventListener('keydown', e => {
     e.preventDefault();
     if (!e.repeat){
       if (nearStation >= 0) serveAt(nearStation);
+      else if (plazaDecor && plazaDecor.userData.interactives)
+        for (const o of plazaDecor.userData.interactives) if (o.near && o.onInteract) o.onInteract(state);
     }
   } else if (e.code === 'KeyU' && !e.repeat){
     if (nearStation >= 0) upgradeAt(nearStation);
@@ -3779,6 +3915,27 @@ $('rebBtn').onclick = () => {
 };
 $('leaveBtn').onclick = () => { if (confirm('Ana menüye dön? İlerlemen kaydedilir.')) backToMenu(); };
 serveBtnEl.onclick = (e) => { e.stopPropagation(); if (nearStation >= 0) serveAt(nearStation); };
+
+/* mini oyun: panel butonu bitirir, klavye de çalışır */
+$('mgGo').onclick = () => {
+  if (!mgChallenge) return;
+  const r = MG.cancel(mgChallenge);
+  if (mgOnDone) mgOnDone(r);
+};
+addEventListener('keydown', e => {
+  if (!mgChallenge || e.repeat) return;
+  if (e.code === 'Escape'){ e.preventDefault(); $('mgGo').click(); return; }
+  const map = { Space:'SPACE', KeyA:'a', KeyD:'d', Digit1:'1', Digit2:'2', Digit3:'3', Digit4:'4' };
+  const k = map[e.code];
+  if (!k) return;
+  e.preventDefault();
+  const r = MG.press(mgChallenge, e.code === 'Space' ? { down:true } : { key:k, index: Number(k) - 1 });
+  if (r.done && mgOnDone) mgOnDone(r);
+});
+addEventListener('keyup', e => {
+  if (!mgChallenge) return;
+  if (e.code === 'Space') MG.press(mgChallenge, { down:false });
+});
 spUpEl.onclick = (e) => { e.stopPropagation(); if (nearStation >= 0) upgradeAt(nearStation); };
 spStaffEl.onclick = (e) => { e.stopPropagation(); if (nearStation >= 0) hireAt(nearStation); };
 [serveBtnEl, spUpEl, spStaffEl].forEach(b => b.addEventListener('pointerdown', e => e.stopPropagation()));
@@ -4134,6 +4291,8 @@ function tick(){
 
   /* su animasyonu */
   for (const w of decorAnimated){ if (w) w.rotation.y += dt * 0.35; }
+  if (plazaDecor && plazaDecor.userData.updateInteractives)
+    plazaDecor.userData.updateInteractives(dt, playerPos, state);
 
   /* tezgah süsleri: balon sallanması, kraliyet halkası */
   clockT += dt;
@@ -4276,7 +4435,6 @@ setTimeout(() => {
       npcs: () => (npcSystem ? npcSystem.npcs : null),
       queue: (i) => (npcSystem ? npcSystem.queueInfo(i) : null),
       serve: serveAt, upgrade: upgradeAt, hire: hireAt, buy: tryBuy,
-      rhythm: () => rhythmPos,
       setTod: (t) => { dayNight.t = t; updateDayNight(0); },
     };
   }
