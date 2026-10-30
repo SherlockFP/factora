@@ -205,7 +205,7 @@ export function createNpcSystem(THREE, opts = {}) {
     const bubble = new THREE.Sprite(new THREE.SpriteMaterial({
       map: bubbleTexture('🍰'), transparent: true, depthWrite: false, depthTest: false,
     }));
-    bubble.scale.set(0.85, 0.85, 1);
+    bubble.scale.set(0.72, 0.72, 1);
     bubble.position.y = 2.45;
     bubble.visible = false;
     g.add(bubble);
@@ -245,10 +245,20 @@ export function createNpcSystem(THREE, opts = {}) {
     return !!(o && o[i] !== null && o[i] !== undefined);
   };
 
+  /* Kuyruk tezgahın TAM ÖNÜNÜ kapatmasın: müşteriler kendi tarafına doğru
+     çapraz bir hat kurar, oyuncu tezgahın karşısında rahat durur.
+     Yön tezgah indeksine göre dışa bakar, komşu kuyruklarla çakışmaz. */
+  function queueDir(i) {
+    const s = stations[i];
+    return (s && s.x > 0.5) ? 1 : -1;   /* sağdaki sağa, soldaki sola */
+  }
   function slotPos(i, k) {
     const s = stations[i] || { x: 0, z: 0 };
-    const side = k % 2 === 0 ? -0.45 : 0.45;
-    return { x: s.x + side, z: s.z + 2.35 + k * 1.08 };
+    const dir = queueDir(i);
+    return {
+      x: s.x + dir * (1.85 + k * 0.68),
+      z: s.z + 1.55 + k * 0.34,
+    };
   }
 
   function edgePoint() {
@@ -259,14 +269,18 @@ export function createNpcSystem(THREE, opts = {}) {
   /* Müşteri tezgahın 7-10 birim uzağından gelir: hem hızlı ulaşır hem de
      plazanın öbür ucundan yürümek zorunda kalmaz. Oyuncunun bulunduğu yön
      ters çevrilir ki doğrudan kameranın içine yürümesinler. */
-  function approachPoint(s) {
-    let a = Math.random() * Math.PI * 2;
+  function approachPoint(s, i) {
+    /* kuyruk yönünden gelsinler ki tezgahın önünden geçmesinler */
+    const dir = i === undefined ? 1 : queueDir(i);
+    let a = (dir > 0 ? 0 : Math.PI) + (Math.random() - 0.5) * 1.5;
     const p = getPlayer ? getPlayer() : null;
     if (p) {
       const toPlayer = Math.atan2(p.z - s.z, p.x - s.x);
-      a = toPlayer + Math.PI + (Math.random() - 0.5) * 2.2;
+      const away = toPlayer + Math.PI;
+      /* oyuncunun arkasından gelmek ile kuyruk yönü çelişmesin */
+      if (Math.cos(away - a) < 0) a = away + (Math.random() - 0.5) * 1.2;
     }
-    const r = 7 + Math.random() * 3;
+    const r = 6.5 + Math.random() * 3;
     return {
       x: Math.max(-EDGE + 1, Math.min(EDGE - 1, s.x + Math.cos(a) * r)),
       z: Math.max(-EDGE + 1, Math.min(EDGE - 1, s.z + Math.sin(a) * r)),
@@ -307,7 +321,7 @@ export function createNpcSystem(THREE, opts = {}) {
     const free = npcs.find((n) => n.state === 'idle');
     if (!free) return null;
     const s = stations[i] || { x: 0, z: 0 };
-    const p = approachPoint(s);
+    const p = approachPoint(s, i);
     const q = queues[i];
     if (q.length >= queueCap(i)) return null;
     free.station = i;

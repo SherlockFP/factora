@@ -149,6 +149,39 @@ tatlı saati bandı, rebirth (hata yok + kayıt), kayıt/yükleme, 390px yerleş
 - **Etiket yüksekliği:** tezgah isimleri 4.35, kuyruk rozetleri 5.2 — yeni modellerin üstünde kalır.
 - **Kamera konforu:** yüzüne giren müşteri gizlenir, yürüyen müşteriler 2.8 birim kişisel alana girmez.
 
+## 6.2 v3.2 — seviye görselliği ve müşteri çeşitliliği
+
+- **Tezgah seviye süsleri** (`buildStallTier`, `index.html`): seviye artık sadece sayı değil.
+  | Sv | Süs |
+  |---|---|
+  | 2 | tentenin önüne asılı flamalar |
+  | 4 | tabela üstünde ampul dizisi (ışıktan bağımsız parlar) |
+  | 5 | tezgah önüne altın kenar |
+  | 6 | yanda ürün kasası |
+  | 7 | sallanan balonlar |
+  | 9 | tabelada taç |
+  | 10 | zeminde nefes alan kraliyet halkası |
+
+  Süsler modelin ölçülen kutusundan (genişlik/yükseklik/derinlik) hesaplanır, tezgahla birlikte büyür,
+  yükseltmede yeniden kurulur (eski geometri dispose edilir). Panelde `Sv 6: kasa doldu` gibi sıradaki kademe yazar.
+- **Müşteri çeşitliliği** (`src/npcs.js`): yetişkin / çocuk / uzun gövde tipleri, gözlük · sırt çantası · saç bağı
+  aksesuarları, yumuşak zemin gölgesi (zıplarken yerde kalır), sabrın son çeyreğinde `⏳` balonu.
+- **Etiket yerleşimi:** tezgah etiketi ve kuyruk rozeti tezgahın gerçek yüksekliğine göre konumlanır;
+  yükselen tezgah etiketin içine girmiyor.
+- **Aydınlatma:** dolgu ortam ışığı eklendi (tente altları ve tezgah önleri kapkara kalmıyor), gece hemi 0.6.
+- **Kamera konforu:** birinci şahıs tepsisi küçültülüp köşeye çekildi, hedef oku tezgahın üstüne alındı,
+  pad etiketleri %15 küçültüldü.
+
+## 6.3 v3.3 — kuyruk düzeni ve gece ışığı
+
+- **Kuyruk artık tezgahın önünü kapatmıyor** (`src/npcs.js` → `slotPos`, `queueDir`): müşteriler tezgahın
+  yanına doğru çapraz bir hat kuruyor (sağdaki tezgah sağa, soldaki sola). Oyuncu tezgahın tam karşısında
+  duruyor, servis için kuyruğun içine girmek zorunda kalmıyor. Yön tezgahın x işaretinden geldiği için
+  komşu kuyruklar çakışmıyor. Müşteriler de kuyruk yönünden yaklaşıyor (tezgahın önünden geçmiyorlar).
+- **Gece tezgah ışığı:** 4. seviyeden itibaren her tezgahın sıcak bir halesi var (additive sprite, gece
+  0.28 opaklığa kadar açılıyor) ve oyuncunun en yakınındaki seviyeli tezgah tek bir `PointLight` ile
+  aydınlanıyor (10 tezgah = 10 ışık yerine 1 ışık, mobilde bedava). Karanlıkta tezgah önü artık okunuyor.
+
 ## 7. Sonraki adımlar (fikir)
 
 - Tezgah başına 2. personel / kasiyer yükseltmesi

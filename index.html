@@ -1088,6 +1088,27 @@ function buildStallTier(kind, lv){
   return g;
 }
 
+/* seviyeli tezgahın gece halesi: ışıklar yandıysa tezgah karanlıkta kaybolmaz */
+function refreshStallGlow(i){
+  const p = pads[i];
+  const lv = stationLevel(i);
+  const want = state.owned[i] !== null && state.owned[i] !== undefined && lv >= 4;
+  if (!want){
+    if (p.glow){ scene.remove(p.glow); p.glow = null; }
+    return;
+  }
+  if (!p.glow){
+    p.glow = new THREE.Sprite(new THREE.SpriteMaterial({
+      map: sunGlowTex, color: 0xffc87a, transparent: true, opacity: 0,
+      depthWrite: false, blending: THREE.AdditiveBlending, fog: false,
+    }));
+    scene.add(p.glow);
+  }
+  const d = stallDims(p.def.k), sc = 1 + 0.045 * (lv - 1);
+  p.glow.scale.set(d.w * sc * 1.35, d.h * sc * 0.85, 1);
+  p.glow.position.set(p.def.x, d.h * sc * 0.5, p.def.z + 1.1);
+}
+
 /* tezgahın süs grubunu seviyeye göre yeniden kur */
 function refreshStallTier(i){
   const p = pads[i];
@@ -1418,6 +1439,7 @@ function resetPad(i){
   if (p.holder){ scene.remove(p.holder); p.holder = null; }
   if (p.staffObj){ scene.remove(p.staffObj); p.staffObj = null; }
   if (p.ownRing){ scene.remove(p.ownRing); p.ownRing = null; }
+  if (p.glow){ scene.remove(p.glow); p.glow = null; }
   p.built = false;
   p.denied = false;
   p.pop = 0;
@@ -1459,6 +1481,11 @@ async function loadStallModels(){
   console.log('Blender tezgah modelleri: ' + n + '/' + kinds.length);
 }
 loadStallModels();
+
+/* gece tezgah ışığı: oyuncunun yanındaki seviyeli tezgahı aydınlatır */
+const stallLight = new THREE.PointLight(0xffd7a4, 0, 9, 2);
+stallLight.position.set(0, 2.5, 0);
+scene.add(stallLight);
 
 /* ==================================================================
    PLAZA DOLGUSU (fıskiye, bank, çiçek, bayrak, tezgah süsleri)
@@ -2131,6 +2158,7 @@ function questStats(){
     pets: state.pets.length,
     online: state.netMode !== 'solo',
     coins: state.coins,
+    soloFor: state.playTime || 0,
   };
 }
 
@@ -2345,6 +2373,7 @@ function applyStationLevel(i){
   const scale = 1 + 0.045 * (stationLevel(i) - 1);
   if (p.holder) p.holder.scale.setScalar(scale);
   refreshStallTier(i);
+  refreshStallGlow(i);
   refreshPadLabel(i);
 }
 
@@ -2614,6 +2643,7 @@ function buildPad(i){
   p.holder = holder;
   p.obj = obj;
   refreshStallTier(i);
+  refreshStallGlow(i);
 
   /* sahiplik halkası */
   const ownerId = state.owned[i];
@@ -3164,12 +3194,14 @@ const ACHIEVEMENTS = [
   {id:'vip',     icon:'⭐', name:'VİP Ağırlama',     desc:'Bir VİP müşteriyi servis et',        test:() => state.served >= 1 && state.vipServed >= 1},
 ];
 
-const unlockedAch = new Set();
+const unlockedAch = new Set(JSON.parse(localStorage.getItem('tatli_ach') || '[]'));
+function saveAch(){ try { localStorage.setItem('tatli_ach', JSON.stringify([...unlockedAch])); } catch(e){} }
 function checkAchievements(){
   for (const a of ACHIEVEMENTS){
     if (unlockedAch.has(a.id)) continue;
     if (a.test()){
       unlockedAch.add(a.id);
+      saveAch();
       setTimeout(() => {
         toast('⭐ ' + a.name + '\n' + a.desc);
         sfxBig();
@@ -4058,12 +4090,30 @@ function tick(){
 
   /* tezgah süsleri: balon sallanması, kraliyet halkası */
   clockT += dt;
+  const nightAmt = dayNight.night;
   for (const p of pads){
+    if (p.glow) p.glow.material.opacity = nightAmt * 0.28 * (0.8 + 0.2 * Math.sin(clockT * 1.6 + p.i));
     if (!p.tier || !p.tier.userData.anim) continue;
     for (const a of p.tier.userData.anim){
       if (a.type === 'bob') a.obj.position.y = a.y0 + Math.sin(clockT * 1.5 + a.ph) * 0.07;
       else if (a.type === 'breathe') a.obj.scale.setScalar(1 + Math.sin(clockT * 1.9 + a.ph) * 0.035);
       else if (a.type === 'pulse') a.obj.material.opacity = 0.42 + 0.22 * Math.sin(clockT * 2.4 + a.ph);
+    }
+  }
+
+  /* gece: en yakın seviyeli tezgahın sıcak ışığı */
+  {
+    let best = -1, bd = 999;
+    for (let i = 0; i < pads.length; i++){
+      if (state.owned[i] === null || stationLevel(i) < 4) continue;
+      const d = Math.hypot(playerPos.x - STATIONS[i].x, playerPos.z - STATIONS[i].z);
+      if (d < bd){ bd = d; best = i; }
+    }
+    if (best >= 0 && nightAmt > 0.12){
+      stallLight.position.set(STATIONS[best].x, 2.5, STATIONS[best].z + 1.1);
+      stallLight.intensity = (0.2 + 0.8 * nightAmt) * 1.9;
+    } else {
+      stallLight.intensity = 0;
     }
   }
 

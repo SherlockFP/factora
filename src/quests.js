@@ -38,9 +38,14 @@ export function createQuestSystem(opts = {}) {
     : defaults;
 
   const keys = { stations: 'owned', rate: 'rate', pets: 'pets', coins: 'coins' };
-  const met = (q, s) => q.type === 'multi'
-    ? !!s.online
-    : Number(s[keys[q.type]] || 0) >= q.goal;
+  /* shortcut: çok oyunculu görev, arkadaşı olmayan çocuk için kalıcı duvar olmasın —
+     çevrimiçi değilse 3 dakika sonra otomatik geçilir. */
+  const SOLO_SKIP = 180;
+  const met = (q, s) => {
+    if (q.type !== 'multi') return Number(s[keys[q.type]] || 0) >= q.goal;
+    if (s.online) return true;
+    return Number(s.soloFor || 0) >= SOLO_SKIP;
+  };
 
   let index = 0;
   let justCompleted = [];
