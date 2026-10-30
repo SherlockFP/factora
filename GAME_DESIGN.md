@@ -1,6 +1,10 @@
 # Tatlı Tycoon — Oyun Tasarım Dokümanı
 
 > Sürüm 2.0 · Tek dosya HTML · Three.js · PeerJS (P2P) · Çocuk (7–12) hedef kitlesi
+>
+> **v3 notu:** Gelir modeli pasif beklemeden **aktif servis döngüsüne** geçti
+> (müşteri kuyruğu, kombo, tezgah seviyeleri, personel). Güncel tasarım ve
+> denge tabloları için `PLAN_V3.md` dosyasına bak.
 
 ---
 

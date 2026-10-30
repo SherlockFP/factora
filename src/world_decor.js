@@ -44,7 +44,7 @@ export function buildDecor(THREE, helpers){
         leaf2  = M(0x7fe08a), terra  = M(0xe07a4f), gold = M(0xffcf3d, {emissive:0x8a5e00, emissiveIntensity:.3}),
         glow   = M(0xfff0a8, {emissive:0xffdd55, emissiveIntensity:.85}),
         water  = M(0x57d7ff, {transparent:true, opacity:.85, emissive:0x1b6d8a, emissiveIntensity:.25}),
-        pathM  = M(0xffdf9e), rope = M(0x8a5a30);
+        rope = M(0x8a5a30);
   const POP = [M(0xff5b5b), M(0xffd400), M(0x3aa0ff), M(0x4fbf5f), M(0xb06bff), M(0xff8ad0)];
 
   /* ---------- central fountain (0,0) ---------- */
@@ -65,12 +65,44 @@ export function buildDecor(THREE, helpers){
     root.userData.animated = [w1, w2];
   }
 
-  /* ---------- colored walkway: spawn → fountain → station rows, plus E–W axis ----------
-     Ground-height only (0.08 tall); segments stop outside every pad's 2.5 radius. */
-  put(root, 'box', pathM, 0, .04, 12.55, 3, .08, 8.1);   // spawn corridor, z 8.5..16.6
-  put(root, 'box', pathM, 0, .04, 2.9, 3, .08, 1.2);     // fountain → north pad gap
-  put(root, 'box', pathM, 0, .04, -2.9, 3, .08, 1.2);    // fountain → south pad gap
-  put(root, 'box', pathM, 0, .04, 0, 33, .08, 2.4);      // east–west plaza axis
+  /* ---------- taş döşeli yürüyüş yolu (spawn → çeşme → tezgah sıraları) ----------
+     Dokulu düzlemler: tek karelik dokuyu tekrarlayarak kesintisiz taş görünümü verir. */
+  const pathTexture = (repX, repY) => {
+    const c = document.createElement('canvas');
+    c.width = c.height = 128;
+    const q = c.getContext('2d');
+    q.fillStyle = '#efd7ab';
+    q.fillRect(0, 0, 128, 128);
+    for (let i = 0; i < 4; i++) for (let j = 0; j < 4; j++){
+      q.fillStyle = (i + j) % 2 ? '#f7e5c1' : '#e9cf9f';
+      q.fillRect(i * 32 + 2, j * 32 + 2, 28, 28);
+      q.fillStyle = 'rgba(255,255,255,.4)';
+      q.fillRect(i * 32 + 2, j * 32 + 2, 28, 3);
+      q.fillStyle = 'rgba(150,120,70,.12)';
+      q.fillRect(i * 32 + 2, j * 32 + 28, 28, 2);
+    }
+    const t = new THREE.CanvasTexture(c);
+    t.wrapS = t.wrapT = THREE.RepeatWrapping;
+    t.repeat.set(repX, repY);
+    t.colorSpace = THREE.SRGBColorSpace;
+    t.anisotropy = 4;
+    return new THREE.MeshLambertMaterial({ map: t });
+  };
+  const pavePlane = (mat, cx, cz, w, d) => {
+    const p = new THREE.Mesh(new THREE.PlaneGeometry(w, d), mat);
+    p.rotation.x = -Math.PI / 2;
+    p.position.set(cx, .065, cz);
+    p.receiveShadow = true;
+    root.add(p);
+    return p;
+  };
+  pavePlane(pathTexture(2, 5), 0, 12.55, 3, 8.1);      // spawn koridoru, z 8.5..16.6
+  pavePlane(pathTexture(20, 2), 0, 0, 33, 2.4);        // doğu-batı ekseni
+  pavePlane(pathTexture(2, 1), 0, 2.9, 3, 1.2);        // çeşme → kuzey boşluğu
+  pavePlane(pathTexture(2, 1), 0, -2.9, 3, 1.2);       // çeşme → güney boşluğu
+  /* bordür */
+  for (const x of [-1.6, 1.6]) put(root, 'box', stoneD, x, .05, 12.55, .22, .1, 8.1);
+  for (const z of [-1.3, 1.3]) put(root, 'box', stoneD, 0, .05, z, 33, .1, .22);
 
   /* ---------- benches (wood + metal) ---------- */
   const bench = (x, z, ry) => {

@@ -24,10 +24,11 @@
   .icobtn:active{transform:translateY(3px);box-shadow:0 1px 0 #0002}
   #topRight{gap:5px}
   @media (max-width:430px){
-    .icobtn{width:37px;height:37px;border-radius:12px;font-size:17px}
-    #topRight{gap:4px}
-    .pill{font-size:17px;padding:7px 12px}
-    .pill small{font-size:11px}
+    .icobtn{width:29px;height:29px;border-radius:10px;font-size:13.5px}
+    #topRight{gap:3px;flex-wrap:wrap;max-width:calc(100vw - 196px);justify-content:flex-end;row-gap:3px}
+    .pill{font-size:16px;padding:6px 10px;border-radius:14px}
+    .pill small{font-size:10px}
+    #multPill small{display:none}
   }
   #roomTag{display:none;align-items:center;gap:6px}
   #roomTag.on{display:flex}
@@ -36,7 +37,7 @@
   #hint{position:fixed;bottom:calc(16px + env(safe-area-inset-bottom));left:50%;transform:translateX(-50%);padding:9px 18px;border-radius:15px;background:#0009;color:#fff;font-weight:800;font-size:14px;pointer-events:none;white-space:nowrap;display:none;z-index:10;transition:opacity .5s;max-width:92vw;text-align:center}
   #hint.on{display:block}
 
-  #toast{position:fixed;top:26%;left:50%;transform:translate(-50%,-50%) scale(.4);font-size:clamp(24px,7vw,38px);font-weight:900;color:#ffd400;text-shadow:0 4px 0 #a86f00,0 0 26px #fff,0 0 6px #fff;opacity:0;transition:.26s cubic-bezier(.2,1.7,.4,1);pointer-events:none;text-align:center;white-space:pre-line;z-index:12}
+  #toast{position:fixed;top:26%;left:50%;transform:translate(-50%,-50%) scale(.4);font-size:clamp(24px,7vw,38px);font-weight:900;color:#ffd400;text-shadow:0 4px 0 #a86f00,0 0 26px #fff,0 0 6px #fff;opacity:0;transition:.26s cubic-bezier(.2,1.7,.4,1);pointer-events:none;text-align:center;white-space:pre-line;z-index:12;width:max-content;max-width:88vw;line-height:1.12}
   #toast.on{opacity:1;transform:translate(-50%,-50%) scale(1)}
 
   #floaters{position:fixed;inset:0;pointer-events:none;z-index:11;overflow:hidden}
@@ -96,9 +97,99 @@
   #loading{position:fixed;inset:0;display:grid;place-items:center;background:#8fdcff;z-index:40;font-weight:900;font-size:19px;color:#fff;text-shadow:0 3px 0 #0003}
   #loading .sp{width:34px;height:34px;border:5px solid #fff5;border-top-color:#fff;border-radius:50%;animation:spin .8s linear infinite;margin:0 auto 14px}
   @keyframes spin{to{transform:rotate(360deg)}}
+
+  /* ---------- servis hissi ---------- */
+  #comboGlow{position:fixed;inset:0;pointer-events:none;z-index:8;opacity:0;transition:opacity .3s;box-shadow:inset 0 0 130px rgba(255,150,0,.55),inset 0 0 42px rgba(255,90,90,.35)}
+  #flash{position:fixed;inset:0;pointer-events:none;z-index:9;background:#fff;opacity:0;transition:opacity .4s}
+  .pill.pop{animation:pillPop .2s ease-out}
+  @keyframes pillPop{0%{transform:scale(1)}40%{transform:scale(1.14)}100%{transform:scale(1)}}
+
+  /* ---------- servis döngüsü ---------- */
+  #stationPanel{position:fixed;right:calc(16px + env(safe-area-inset-right));bottom:calc(144px + env(safe-area-inset-bottom));width:min(320px,72vw);display:none;z-index:13;background:#fffdf7;border-radius:20px;box-shadow:0 7px 0 #0002,0 18px 40px #0005;padding:11px 13px;opacity:0;transform:translateY(10px);transition:opacity .18s,transform .18s}
+  #stationPanel.on{display:block;opacity:1;transform:translateY(0)}
+  @media (max-width:430px){
+    #stationPanel{width:min(260px,68vw);padding:9px 10px;border-radius:17px;bottom:calc(212px + env(safe-area-inset-bottom))}
+    #stationPanel .spHead{font-size:13.5px}
+    #stationPanel .spInfo{font-size:11px}
+    #stationPanel .spBtns .btn{padding:9px 6px;font-size:12.5px}
+  }
+  #stationPanel .spHead{display:flex;align-items:center;gap:8px;font-weight:900;font-size:15px;color:#4a4238}
+  #stationPanel .spHead b{flex:1;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+  #stationPanel .spLv{background:#ffe9a8;color:#a86f00;border-radius:10px;padding:3px 9px;font-size:12px;white-space:nowrap}
+  #stationPanel .spInfo{font-size:12px;font-weight:800;color:#9a8f7d;margin:3px 0 9px}
+  #stationPanel .spBtns{display:flex;gap:7px}
+  #stationPanel .spBtns .btn{margin:0;padding:11px 8px;font-size:14px;border-radius:14px;flex:1;line-height:1.15}
+  #stationPanel .spBtns .btn small{display:block;font-size:10.5px;font-weight:800;opacity:.88;margin-top:2px}
+
+  #serveBtn{position:fixed;right:calc(16px + env(safe-area-inset-right));bottom:calc(24px + env(safe-area-inset-bottom));width:108px;height:108px;border-radius:50%;border:0;background:linear-gradient(#ffd95c,#ff9f1a);box-shadow:0 8px 0 #b86400,0 14px 28px #0004;color:#fff;font:900 16px/1.1 system-ui,sans-serif;text-shadow:0 2px 0 #0004;display:none;z-index:14;cursor:pointer;transition:transform .07s;letter-spacing:.3px}
+  #serveBtn.on{display:block}
+  #serveBtn:active{transform:translateY(6px);box-shadow:0 2px 0 #b86400}
+  #serveBtn small{display:block;font-size:11px;opacity:.92;margin-top:3px}
+  #serveBtn[data-n]:not([data-n="0"])::after{content:attr(data-n);position:absolute;top:-4px;right:-4px;min-width:26px;height:26px;border-radius:13px;background:#ff5b5b;color:#fff;font-size:13px;display:grid;place-items:center;box-shadow:0 2px 0 #b32d2d}
+
+  /* ---------- servis ritmi ---------- */
+  #rhythm{position:fixed;right:calc(138px + env(safe-area-inset-right));bottom:calc(44px + env(safe-area-inset-bottom));width:128px;height:15px;border-radius:9px;background:#20180fdd;box-shadow:0 3px 0 #0004,inset 0 0 0 2px #ffffff22;opacity:0;transform:translateY(6px);transition:opacity .16s,transform .16s;z-index:14;pointer-events:none}
+  #rhythm.on{opacity:1;transform:translateY(0)}
+  #rhythm .rZone{position:absolute;left:42%;width:16%;top:1px;bottom:1px;background:linear-gradient(#9bff88,#2fbf24);border-radius:7px;box-shadow:0 0 10px #7bff5f}
+  #rhythm .rNeedle{position:absolute;top:-4px;bottom:-4px;width:4px;margin-left:-2px;border-radius:2px;background:#fff;box-shadow:0 0 9px #fff,0 0 3px #fff}
+  #rhythm.hit{animation:rHit .22s ease-out}
+  @keyframes rHit{0%{transform:scale(1.18)}100%{transform:scale(1)}}
+  @media (max-width:430px){ #rhythm{right:calc(130px + env(safe-area-inset-right));bottom:calc(40px + env(safe-area-inset-bottom));width:96px} }
+
+  #rushBanner{position:fixed;top:calc(118px + env(safe-area-inset-top));left:50%;transform:translate(-50%,-16px) scale(.9);z-index:12;pointer-events:none;text-align:center;opacity:0;transition:.3s cubic-bezier(.2,1.6,.4,1)}
+  #rushBanner.on{opacity:1;transform:translate(-50%,0) scale(1)}
+  #rushBanner b{display:block;font-size:clamp(20px,4.5vw,30px);font-weight:900;color:#fff;text-shadow:0 3px 0 #d94a8c,0 0 18px #ff6b9d}
+  #rushBanner small{display:block;font-size:12px;font-weight:900;color:#fff;text-shadow:0 2px 0 #0006;margin-top:2px}
+
+  /* ---------- ana menü ---------- */
+  #menu{position:fixed;inset:0;z-index:15;display:flex;align-items:center;justify-content:flex-start;padding:calc(20px + env(safe-area-inset-top)) 5vw calc(20px + env(safe-area-inset-bottom));pointer-events:none}
+  #menu.off{display:none}
+  .menu-wrap{pointer-events:auto;width:min(380px,88vw);max-height:100%;overflow:auto;display:flex;flex-direction:column;gap:9px;animation:menuIn .45s ease-out;scrollbar-width:none}
+  .menu-wrap::-webkit-scrollbar{display:none}
+  @keyframes menuIn{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:none}}
+  .logo{font-size:clamp(44px,6vw,72px);font-weight:900;line-height:.84;letter-spacing:-2px;text-align:center;color:#ff5b5b;text-shadow:0 5px 0 #c93b3b,0 9px 18px #0003;transform:rotate(-2deg);margin-bottom:2px}
+  .logo span{display:block;color:#ffc21a;text-shadow:0 5px 0 #b87900,0 9px 18px #0003;font-size:1.06em}
+  .tagline{text-align:center;color:#fff;font-weight:900;font-size:clamp(10px,1.2vw,13px);text-shadow:0 2px 0 #0004;letter-spacing:.5px;margin-bottom:4px}
+  .name-row{display:flex;align-items:center;gap:9px;background:#fffdf7;border-radius:16px;padding:9px 13px;box-shadow:0 5px 0 #0002}
+  .name-row span{font-size:10px;font-weight:900;color:#b3a894;letter-spacing:1.2px}
+  .name-row input{flex:1;min-width:0;border:0;outline:0;background:transparent;font:900 17px system-ui,sans-serif;color:#4a4238;text-align:left;height:26px;line-height:26px;padding:0}
+  .name-row input::placeholder{color:#c9bfae}
+  .menu-btn{border:0;border-radius:18px;padding:13px 16px;font:900 clamp(17px,2vw,21px) system-ui,sans-serif;color:#fff;cursor:pointer;text-shadow:0 2px 0 #0003;box-shadow:0 5px 0 var(--shade),0 9px 20px #0002;transition:transform .07s,box-shadow .07s;letter-spacing:.3px}
+  .menu-btn:active{transform:translateY(4px);box-shadow:0 1px 0 var(--shade)}
+  .menu-btn.green{background:linear-gradient(#7fe85f,#4cb42f);--shade:#2e7a1c}
+  .menu-btn.orange{background:linear-gradient(#ffc45c,#f08c00);--shade:#a65e00}
+  .menu-btn.blue{background:linear-gradient(#6cc6ff,#2b8fe0);--shade:#1c5f96}
+  .menu-btn.purple{background:linear-gradient(#b9a6ff,#8a6ff0);--shade:#5b45ad}
+  .menu-best{text-align:center;color:#fff;font-weight:800;font-size:12px;text-shadow:0 2px 0 #0004;margin-top:3px}
+  .menu-best b{color:#ffe14d}
+  @media (orientation:portrait){
+    #menu{justify-content:center;padding-left:16px;padding-right:16px}
+    .menu-wrap{width:min(360px,92vw)}
+    .logo{font-size:clamp(46px,15vw,68px)}
+    .tagline{font-size:11px}
+  }
+  @media (max-height:620px){
+    .menu-wrap{gap:6px}
+    .logo{font-size:38px}
+    .menu-btn{padding:10px 14px;font-size:16px}
+    .name-row{padding:7px 11px}
+  }
 </style>
 </head>
 <body>
+
+<div id="menu">
+  <div class="menu-wrap">
+    <div class="logo">TATLI<span>TYCOON</span></div>
+    <p class="tagline">KENDİ TATLI İMPARATORLUĞUNU KUR</p>
+    <label class="name-row"><span>ADIN</span><input id="nameInput" maxlength="12" placeholder="Oyuncu" autocomplete="off" spellcheck="false"></label>
+    <button class="menu-btn green" id="btnSolo">▶ TEK OYNA</button>
+    <button class="menu-btn orange" id="btnHost">🏠 ODA KUR</button>
+    <button class="menu-btn blue" id="btnJoin">🔑 ODAYA KATIL</button>
+    <button class="menu-btn purple" id="btnCos">🎨 GÖRÜNÜM</button>
+    <div class="menu-best">🏆 En iyi: <b id="bestScore">0</b>/sn</div>
+  </div>
+</div>
 
 <div id="loading"><div style="text-align:center"><div class="sp"></div>Tatlı Tycoon yükleniyor…</div></div>
 
@@ -117,6 +208,7 @@
 <div id="topRight">
   <div id="roomTag"><b id="roomCode"></b></div>
   <button class="icobtn" id="emojiBtn" title="Emoji">😀</button>
+  <button class="icobtn" id="skillBtn" title="Yetenekler">⚡</button>
   <button class="icobtn" id="achBtn" title="Başarımlar">⭐</button>
   <button class="icobtn" id="lbBtn" title="Sıralama">🏆</button>
   <button class="icobtn" id="eggBtn" title="Pet">🥚</button>
@@ -129,6 +221,22 @@
 <div id="hint">Halıya yürü, satın al!</div>
 <div id="toast"></div>
 <div id="floaters"></div>
+<div id="comboGlow"></div>
+<div id="flash"></div>
+
+<div id="rhythm" aria-hidden="true"><div class="rZone"></div><div class="rNeedle"></div></div>
+<button id="serveBtn">🍰 SERVİS<small>dokun / E</small></button>
+
+<div id="stationPanel">
+  <div class="spHead"><b id="spName">Tezgah</b><span class="spLv" id="spLv">Sv 1</span></div>
+  <div class="spInfo" id="spInfo"></div>
+  <div class="spBtns">
+    <button class="btn orange" id="spUp">Yükselt</button>
+    <button class="btn blue" id="spStaff">Personel</button>
+  </div>
+</div>
+
+<div id="rushBanner"><b>🍭 TATLI SAATİ! 🍭</b><small>Müşteriler akın ediyor · ödeme x1.6</small></div>
 
 <div class="sheet" id="cosSheet"><div class="card">
   <h2>🎨 Görünümün</h2>
@@ -142,6 +250,13 @@
   <h2>⭐ Başarımlar</h2>
   <p class="s" id="achSub">Tamamladıkların burada</p>
   <div id="achList"></div>
+  <button class="btn ghost" data-close>Kapat</button>
+</div></div>
+
+<div class="sheet" id="skillSheet"><div class="card">
+  <h2>⚡ Yetenekler</h2>
+  <p class="s" id="skillSub">Kalıcı yükseltmeler</p>
+  <div id="skillList"></div>
   <button class="btn ghost" data-close>Kapat</button>
 </div></div>
 
@@ -188,12 +303,16 @@
 
 <script src="https://unpkg.com/peerjs@1.5.4/dist/peerjs.min.js"></script>
 <script type="importmap">
-{"imports":{"three":"https://unpkg.com/three@0.169.0/build/three.module.js"}}
+{"imports":{"three":"https://unpkg.com/three@0.169.0/build/three.module.js","three/addons/":"https://unpkg.com/three@0.169.0/examples/jsm/"}}
 </script>
 <script type="module">
 import * as THREE from 'three';
-import { buildDecor } from './src/world_decor.js';
-import { createNpcSystem } from './src/npcs.js';
+import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
+import { buildDecor } from './src/world_decor.js?v=9';
+import { createNpcSystem } from './src/npcs.js?v=8';
+import { createQuestSystem } from './src/quests.js?v=7';
+import { TUNING, MAX_LEVEL, levelServeValue, levelQueue, levelSpawnGap, upgradeCost, staffCost, servePayout, speedFactor, createCombo, createRush } from './src/service.js?v=7';
+import { createAudioJuice } from './src/audio_juice.js?v=1';
 
 /* ==================================================================
    RENDERER + SAHNE
@@ -212,11 +331,111 @@ const scene = new THREE.Scene();
 scene.background = new THREE.Color(SKY);
 scene.fog = new THREE.Fog(SKY, 55, 130);
 
+/* gökyüzü kubbesi: düz renk yerine yumuşak gradyan */
+const skyTex = canvasTex(4, 256, (g, w, h) => {
+  const grd = g.createLinearGradient(0, 0, 0, h);
+  grd.addColorStop(0, '#4fb8f5');
+  grd.addColorStop(0.45, '#8fdcff');
+  grd.addColorStop(0.78, '#c9f1ff');
+  grd.addColorStop(1, '#e9faff');
+  g.fillStyle = grd;
+  g.fillRect(0, 0, w, h);
+});
+const skyDome = new THREE.Mesh(
+  new THREE.SphereGeometry(240, 24, 16),
+  new THREE.MeshBasicMaterial({ map: skyTex, side: THREE.BackSide, depthWrite: false, fog: false })
+);
+skyDome.renderOrder = -1;
+scene.add(skyDome);
+
+/* güneş parlaması */
+const sunGlowTex = canvasTex(128, 128, (g) => {
+  const grd = g.createRadialGradient(64, 64, 2, 64, 64, 64);
+  grd.addColorStop(0, 'rgba(255,252,230,1)');
+  grd.addColorStop(0.35, 'rgba(255,226,150,0.55)');
+  grd.addColorStop(1, 'rgba(255,210,120,0)');
+  g.fillStyle = grd;
+  g.fillRect(0, 0, 128, 128);
+});
+const sunGlow = new THREE.Sprite(new THREE.SpriteMaterial({
+  map: sunGlowTex, transparent: true, depthWrite: false, fog: false, blending: THREE.AdditiveBlending,
+}));
+sunGlow.scale.set(46, 46, 1);
+sunGlow.position.set(70, 62, 40);
+scene.add(sunGlow);
+
 const camera = new THREE.PerspectiveCamera(60, innerWidth/innerHeight, 0.05, 400);
 camera.rotation.order = 'YXZ';
 scene.add(camera);
 
-scene.add(new THREE.HemisphereLight(0xffffff, 0x86c46a, 1.25));
+/* ==================================================================
+   BİRİNCİ ŞAHIS TEPsi — oyuncunun elinde taşıdığı servis tepsisi
+   ================================================================== */
+const viewmodel = new THREE.Group();
+camera.add(viewmodel);
+const vmItem = { group: null, cake: null, cup: null, baseY: -0.335 };
+{
+  const wood = new THREE.MeshLambertMaterial({ color: 0xc4854a });
+  const woodD = new THREE.MeshLambertMaterial({ color: 0x8f5c2e });
+  const cream = new THREE.MeshLambertMaterial({ color: 0xfff6e6 });
+  const skin = new THREE.MeshLambertMaterial({ color: 0xffd9b0 });
+  const tray = new THREE.Mesh(new THREE.CylinderGeometry(0.155, 0.14, 0.022, 20), wood);
+  tray.rotation.x = -0.16;
+  viewmodel.add(tray);
+  const rim = new THREE.Mesh(new THREE.TorusGeometry(0.155, 0.012, 6, 22), woodD);
+  rim.rotation.x = Math.PI / 2 - 0.16;
+  viewmodel.add(rim);
+  /* tutan el */
+  const hand = new THREE.Mesh(new THREE.CapsuleGeometry(0.05, 0.13, 3, 8), skin);
+  hand.position.set(0.02, -0.09, 0.1);
+  hand.rotation.set(0.5, 0, 0.3);
+  viewmodel.add(hand);
+
+  const item = new THREE.Group();
+  const cake = new THREE.Mesh(new THREE.CylinderGeometry(0.055, 0.06, 0.05, 14), cream);
+  cake.position.y = 0.036;
+  item.add(cake);
+  const icing = new THREE.Mesh(new THREE.CylinderGeometry(0.052, 0.052, 0.014, 14), new THREE.MeshLambertMaterial({ color: 0xff8fb1 }));
+  icing.position.y = 0.066;
+  item.add(icing);
+  const cup = new THREE.Mesh(new THREE.CylinderGeometry(0.032, 0.026, 0.075, 12), cream);
+  cup.position.set(0.075, 0.048, -0.03);
+  item.add(cup);
+  item.position.set(-0.035, 0.012, 0);
+  viewmodel.add(item);
+  vmItem.group = item;
+  vmItem.cake = icing.material;
+  vmItem.cup = cup.material;
+
+  viewmodel.position.set(0.27, vmItem.baseY, -0.62);
+  viewmodel.rotation.set(0.12, -0.18, 0.06);
+  viewmodel.scale.setScalar(0.78);
+  viewmodel.traverse(o => { if (o.isMesh){ o.castShadow = false; o.receiveShadow = false; } });
+}
+let vmKick = 0;
+function updateViewmodel(dt, moving){
+  if (state.mode !== 'game'){ viewmodel.visible = false; return; }
+  viewmodel.visible = true;
+  vmKick *= Math.exp(-9 * dt);
+  const bobY = moving ? Math.sin(bob) * 0.012 : Math.sin(elapsed * 1.6) * 0.004;
+  viewmodel.position.set(
+    0.27 - vmKick * 0.05,
+    vmItem.baseY + bobY - vmKick * 0.06,
+    -0.62 - vmKick * 0.22
+  );
+  viewmodel.rotation.set(0.12 + vmKick * 0.55, -0.18 + vmKick * 0.12, 0.06);
+  const i = nearStation;
+  if (i >= 0 && isMine(i) && STATIONS[i]){
+    vmItem.cake.color.setHex(STATIONS[i].c);
+    vmItem.cup.color.setHex(0xfff6e6);
+  }
+}
+
+const hemi = new THREE.HemisphereLight(0xffffff, 0x86c46a, 1.25);
+scene.add(hemi);
+/* dolgu ışığı: tente altları, tezgah önleri ve kasalar kapkara kalmasın */
+const fillLight = new THREE.AmbientLight(0xfff4e2, 0.3);
+scene.add(fillLight);
 const sun = new THREE.DirectionalLight(0xfff6e0, 1.75);
 sun.position.set(22, 34, 16);
 sun.castShadow = true;
@@ -229,6 +448,115 @@ sun.shadow.camera.far = 90;
 sun.shadow.bias = -0.0009;
 sun.shadow.camera.updateProjectionMatrix();
 scene.add(sun);
+
+/* ==================================================================
+   GÜN / GECE DÖNGÜSÜ — gökyüzü tonu, güneş yayı, yıldızlar, fenerler
+   ================================================================== */
+const DAY_LENGTH = 240;                 /* tam döngü (saniye) */
+const dayNight = { t: 0.34, phase: 'day', elev: 1, night: 0, dusk: 0 };
+const lampGlows = [];
+
+const C_SKY_DAY = new THREE.Color(0x9fe4ff);
+const C_SKY_DUSK = new THREE.Color(0xffab7a);
+const C_SKY_NIGHT = new THREE.Color(0x1a2444);
+const C_SUN_DAY = new THREE.Color(0xfff6e0);
+const C_SUN_DUSK = new THREE.Color(0xff9a52);
+const C_SUN_NIGHT = new THREE.Color(0x9db6ff);
+const C_HEMI_DAY = new THREE.Color(0xffffff);
+const C_HEMI_NIGHT = new THREE.Color(0x44578f);
+const C_GROUND_DAY = new THREE.Color(0x86c46a);
+const C_GROUND_NIGHT = new THREE.Color(0x223052);
+const _dnA = new THREE.Color();
+const _dnB = new THREE.Color();
+
+/* yıldız alanı */
+const stars = (() => {
+  const N = 700;
+  const pos = new Float32Array(N * 3);
+  for (let i = 0; i < N; i++) {
+    const a = Math.random() * Math.PI * 2;
+    const y = 0.16 + Math.random() * 0.84;
+    const h = Math.sqrt(Math.max(0, 1 - y * y));
+    const r = 215;
+    pos[i * 3] = Math.cos(a) * h * r;
+    pos[i * 3 + 1] = y * r;
+    pos[i * 3 + 2] = Math.sin(a) * h * r;
+  }
+  const g = new THREE.BufferGeometry();
+  g.setAttribute('position', new THREE.BufferAttribute(pos, 3));
+  const p = new THREE.Points(g, new THREE.PointsMaterial({
+    color: 0xffffff, size: 1.9, transparent: true, opacity: 0, depthWrite: false, fog: false,
+  }));
+  p.frustumCulled = false;
+  scene.add(p);
+  return p;
+})();
+
+/* ay */
+const moon = new THREE.Sprite(new THREE.SpriteMaterial({
+  map: canvasTex(128, 128, (g) => {
+    const grd = g.createRadialGradient(64, 64, 4, 64, 64, 62);
+    grd.addColorStop(0, 'rgba(255,255,255,1)');
+    grd.addColorStop(0.42, 'rgba(228,238,255,0.85)');
+    grd.addColorStop(1, 'rgba(200,220,255,0)');
+    g.fillStyle = grd;
+    g.beginPath(); g.arc(64, 64, 62, 0, Math.PI * 2); g.fill();
+  }),
+  transparent: true, depthWrite: false, fog: false, opacity: 0, blending: THREE.AdditiveBlending,
+}));
+moon.scale.set(22, 22, 1);
+scene.add(moon);
+
+function updateDayNight(dt) {
+  if (dt > 0) dayNight.t = (dayNight.t + dt / DAY_LENGTH) % 1;
+  const angle = (dayNight.t - 0.25) * Math.PI * 2;
+  const elev = Math.sin(angle);
+  const night = Math.min(1, Math.max(0, -elev * 1.9));
+  const dusk = Math.max(0, 1 - Math.abs(elev) * 3.2);
+  const day = Math.min(1, Math.max(0, elev * 1.7));
+  dayNight.elev = elev;
+  dayNight.night = night;
+  dayNight.dusk = dusk;
+
+  _dnA.copy(C_SKY_DAY).lerp(C_SKY_DUSK, dusk * 0.92).lerp(C_SKY_NIGHT, night);
+  scene.background.copy(_dnA);
+  scene.fog.color.copy(_dnA);
+  skyDome.material.color.copy(_dnA);
+
+  _dnB.copy(C_SUN_DAY).lerp(C_SUN_DUSK, dusk).lerp(C_SUN_NIGHT, night);
+  sun.color.copy(_dnB);
+  sun.intensity = 0.2 + 1.6 * day;
+  hemi.intensity = 0.4 + 0.9 * day;
+  fillLight.intensity = 0.3 - 0.16 * night;
+  hemi.color.copy(C_HEMI_DAY).lerp(C_HEMI_NIGHT, night);
+  hemi.groundColor.copy(C_GROUND_DAY).lerp(C_GROUND_NIGHT, night);
+
+  const sx = Math.cos(angle) * 38;
+  const sy = Math.max(2.5, elev * 46 + 3);
+  sun.position.set(sx, sy, 20);
+  sunGlow.position.set(sx * 1.8, sy * 1.7, 46);
+  sunGlow.material.opacity = Math.min(0.95, Math.max(0, elev * 2.2));
+  sunGlow.material.color.copy(_dnB);
+  sunGlow.scale.setScalar(40 + dusk * 26);
+
+  stars.material.opacity = night * 0.95;
+  stars.rotation.y += 0.0006;
+  moon.material.opacity = night * 0.9;
+  moon.position.set(-sx * 1.7, 52 + Math.max(0, -elev) * 46, -110);
+
+  for (const g of lampGlows) g.material.opacity = Math.min(1, night * 0.9 + dusk * 0.3);
+
+  const phase = elev > 0.22 ? 'day' : elev > -0.12 ? 'dusk' : 'night';
+  if (phase !== dayNight.phase) {
+    const prev = dayNight.phase;
+    dayNight.phase = phase;
+    if (state.mode === 'game') {
+      if (phase === 'night') toast('🌙 Gece oldu\nFenerler yandı');
+      else if (phase === 'day' && prev === 'dusk') toast('☀️ Gün doğdu');
+      else if (phase === 'dusk') toast('🌇 Akşam oldu');
+    }
+  }
+}
 
 /* ==================================================================
    PROSEDÜREL DOKULAR
@@ -448,17 +776,33 @@ const LIMIT = AREA - 1.2;   // yürüme sınırı
 }
 
 /* fenerler */
+const lampSpots = [];
 {
   const dark = M(0x4a4238);
   const glass = M(0xfff0a8, {emissive:0xffe066, emissiveIntensity:0.55});
   for (const [x,z] of [[-AREA+2,-AREA+2],[AREA-2,-AREA+2],[-AREA+2,AREA-2],[AREA-2,AREA-2],[0,-AREA+2],[0,AREA-2]]){
-    add(scene, G.cyl, dark, x, 1.6, z, 0.16, 3.2, 0.16);
-    add(scene, G.sphLo, glass, x, 3.5, z, 0.42);
-    add(scene, G.cone, dark, x, 3.95, z, 0.5, 0.4, 0.5);
+    const g = new THREE.Group();
+    g.position.set(x, 0, z);
+    add(g, G.cyl, dark, 0, 1.6, 0, 0.16, 3.2, 0.16);
+    add(g, G.sphLo, glass, 0, 3.5, 0, 0.42);
+    add(g, G.cone, dark, 0, 3.95, 0, 0.5, 0.4, 0.5);
+    scene.add(g);
+    lampSpots.push(g);
+
+    /* gece yanan sıcak ışık halesi */
+    const glow = new THREE.Sprite(new THREE.SpriteMaterial({
+      map: sunGlowTex, color: 0xffcf7a, transparent: true, opacity: 0, depthWrite: false,
+      blending: THREE.AdditiveBlending, fog: false,
+    }));
+    glow.scale.set(6.2, 6.2, 1);
+    glow.position.set(x, 3.15, z);
+    scene.add(glow);
+    lampGlows.push(glow);
   }
 }
 
 /* ağaçlar */
+const treeSpots = [];
 function tree(x, z, s){
   const g = new THREE.Group();
   add(g, G.cyl, M(0x8a5a2b), 0, 0.65*s, 0, 0.34*s, 1.3*s, 0.34*s);
@@ -467,10 +811,11 @@ function tree(x, z, s){
   add(g, G.cone, M(0x62d473), 0, 3.75*s, 0, 1.1*s, 1.1*s, 1.1*s);
   g.position.set(x, 0, z);
   scene.add(g);
+  treeSpots.push({ x, z, s, group: g });
 }
 for (let i=0;i<26;i++){
   const a = (i/26)*Math.PI*2 + Math.random()*0.2;
-  const r = 24 + Math.random()*22;
+  const r = 27 + Math.random()*20;
   tree(Math.cos(a)*r, Math.sin(a)*r, 0.85 + Math.random()*0.75);
 }
 
@@ -514,23 +859,298 @@ for (let i=0;i<12;i++){
 }
 
 /* ==================================================================
+   BLENDER VARLIKLARI — ağaç, fener, bank, bulut, tabela
+   ================================================================== */
+const gltfLoader = new GLTFLoader();
+function loadProp(name){
+  return new Promise((resolve, reject) => {
+    gltfLoader.load('./assets/props/' + name + '.glb', g => resolve(g.scene), undefined, reject);
+  });
+}
+function prepProp(obj, scale){
+  obj.scale.setScalar(scale);
+  obj.traverse(o => {
+    if (o.isMesh){
+      o.castShadow = true;
+      o.receiveShadow = true;
+    }
+  });
+  return obj;
+}
+/* Blender'da üretilen tezgah modelleri (assets/build_stalls.py) */
+const STALL_MODELS = {};
+function makeStationVisual(kind, preview){
+  const holder = new THREE.Group();
+  const src = STALL_MODELS[kind];
+  if (src){
+    const c = src.clone(true);
+    c.traverse(o => {
+      if (o.isMesh){
+        o.castShadow = !preview;
+        o.receiveShadow = !preview;
+      }
+    });
+    holder.add(c);
+  } else {
+    holder.add(buildStation(kind));
+  }
+  if (preview) holder.traverse(o => { if (o.isMesh){ o.castShadow = false; o.receiveShadow = false; } });
+  return holder;
+}
+
+/* ==================================================================
+   TEZGAH SEVİYE SÜSLERİ
+   Seviye sadece sayı değil, gözle görülür bir zenginlik olmalı:
+   flama → ışık → altın kenar → kasa → balon → taç → kraliyet halkası.
+   ================================================================== */
+const STALL_DIMS = {};
+const FLAG_COLORS = [0xff5b5b, 0xffd400, 0x54b8ff, 0x6fdc4f, 0xff8ad0, 0xb06bff];
+
+/* yükseltme anında oyuncuya söylenen kademeler */
+const TIER_STEPS = [
+  { lv: 2,  text: 'flamalar takıldı' },
+  { lv: 4,  text: 'ışıklar yandı' },
+  { lv: 5,  text: 'altın kenar geldi' },
+  { lv: 6,  text: 'kasa doldu' },
+  { lv: 7,  text: 'balonlar çıktı' },
+  { lv: 9,  text: 'tacı takıldı' },
+  { lv: 10, text: 'kraliyet halkası açıldı' },
+];
+
+const tierMatCache = new Map();
+function tierM(hex, glow){
+  const key = hex + '|' + (glow === undefined ? '-' : glow);
+  let m = tierMatCache.get(key);
+  if (!m){
+    m = glow === undefined ? M(hex) : M(hex, { emissive: glow, emissiveIntensity: 0.95 });
+    tierMatCache.set(key, m);
+  }
+  return m;
+}
+const stallDims = (kind) => STALL_DIMS[kind] || { w: 2.9, h: 3.2, d: 2.4 };
+
+/* iki nokta arasında sarkan bir hat (flama/ampul dizisi) */
+function sagPoints(ax, ay, az, bx, by, bz, sag, n){
+  const pts = [];
+  for (let k = 0; k <= n; k++){
+    const t = k / n;
+    pts.push(new THREE.Vector3(
+      ax + (bx - ax) * t,
+      ay + (by - ay) * t - Math.sin(Math.PI * t) * sag,
+      az + (bz - az) * t,
+    ));
+  }
+  return pts;
+}
+
+function buildStallTier(kind, lv){
+  const g = new THREE.Group();
+  g.userData.anim = [];
+  if (lv < 2) return g;
+
+  const { w, h, d } = stallDims(kind);
+  const half = Math.min(1.55, w * 0.52);
+  const frontZ = Math.min(1.2, d * 0.48);
+  const poleX = half + 0.2, poleZ = frontZ + 0.22;
+  const poleTop = Math.min(3.0, h * 0.88);
+
+  /* --- 2: flama kemeri (iki direk + sarkan flamalar) --- */
+  if (lv >= 2){
+    const woodM = tierM(0xe0a94f);
+    for (const s of [-1, 1]) add(g, G.cyl, woodM, s * poleX, poleTop / 2, poleZ, 0.07, poleTop, 0.07);
+    const pts = sagPoints(-poleX, poleTop, poleZ, poleX, poleTop, poleZ, 0.28, 16);
+    const wire = new THREE.Mesh(
+      new THREE.TubeGeometry(new THREE.CatmullRomCurve3(pts), 18, 0.022, 4, false),
+      tierM(0xf2e6cf));
+    wire.castShadow = false;
+    wire.userData.own = true;
+    g.add(wire);
+    for (let k = 1; k < 15; k++){
+      const t = k / 15;
+      const y = poleTop - Math.sin(Math.PI * t) * 0.28;
+      const f = add(g, G.cone, tierM(FLAG_COLORS[k % FLAG_COLORS.length]),
+        -poleX + 2 * poleX * t, y - 0.17, poleZ, 0.34, 0.32, 0.05);
+      f.rotation.x = Math.PI;
+      f.castShadow = false;
+    }
+  }
+
+  /* --- 4: tente altı ampuller --- */
+  if (lv >= 4){
+    const bulb = tierM(0xfff4cf, 0xffcf5a);
+    const ax = -half, bx = half, ay = h * 0.60, by = ay;
+    const az = frontZ - 0.06;
+    const pts = sagPoints(ax, ay, az, bx, by, az, 0.16, 14);
+    const wire2 = new THREE.Mesh(
+      new THREE.TubeGeometry(new THREE.CatmullRomCurve3(pts), 16, 0.018, 4, false),
+      tierM(0x6b5a3f));
+    wire2.castShadow = false;
+    wire2.userData.own = true;
+    g.add(wire2);
+    for (let k = 0; k <= 12; k++){
+      const t = k / 12;
+      const y = ay - Math.sin(Math.PI * t) * 0.16;
+      const b = add(g, G.sph, bulb, -half + 2 * half * t, y - 0.07, az, 0.13);
+      b.castShadow = false;
+    }
+  }
+
+  /* --- 5: tezgah önüne altın kenar --- */
+  if (lv >= 5){
+    const gold = tierM(0xffcf3d, 0x805400);
+    const y = h * 0.335, z = frontZ * 0.78;
+    add(g, G.box, gold, 0, y, z, half * 1.7, 0.075, 0.09);
+    add(g, G.box, gold, 0, y - 0.16, z, half * 1.55, 0.045, 0.07);
+    for (let k = -2; k <= 2; k++){
+      add(g, G.sph, gold, k * half * 0.42, y, z + 0.05, 0.08);
+    }
+  }
+
+  /* --- 6: yan tarafta ürün kasası --- */
+  if (lv >= 6){
+    const crate = tierM(0xb07b45), crateD = tierM(0x8a5a30);
+    const cx = -(w * 0.5 + 0.52), cz = 0.25;
+    add(g, G.box, crate, cx, 0.22, cz, 0.62, 0.44, 0.62);
+    add(g, G.box, crateD, cx, 0.45, cz + 0.02, 0.66, 0.05, 0.66);
+    add(g, G.box, crate, cx, 0.66, cz, 0.5, 0.38, 0.5);
+    add(g, G.box, crateD, cx, 0.86, cz + 0.02, 0.54, 0.05, 0.54);
+    for (let k = 0; k < 5; k++){
+      const a = k * 1.9;
+      const s = add(g, G.sph, tierM(FLAG_COLORS[k % FLAG_COLORS.length]),
+        cx + Math.cos(a) * 0.15, 0.92, cz + Math.sin(a) * 0.15, 0.22);
+      s.castShadow = false;
+    }
+  }
+
+  /* --- 7: balonlar (yavaşça sallanır) --- */
+  if (lv >= 7){
+    const bx = w * 0.5 + 0.5, bz = 0.1;
+    for (let k = 0; k < 3; k++){
+      const by = 2.05 + k * 0.3;
+      const ball = add(g, G.sph, tierM(FLAG_COLORS[(k + 2) % FLAG_COLORS.length]),
+        bx + (k - 1) * 0.16, by, bz + (k - 1) * 0.1, 0.34, 0.4, 0.34);
+      ball.castShadow = false;
+      /* ip: balonun altından zemine */
+      add(g, G.box, tierM(0xfaf7ef),
+        bx + (k - 1) * 0.16, (by - 0.2) / 2, bz + (k - 1) * 0.1,
+        0.016, by - 0.2, 0.016);
+      g.userData.anim.push({ type: 'bob', obj: ball, y0: by, ph: k * 2.1 });
+    }
+  }
+
+  /* --- 9: tabelanın tepesinde taç --- */
+  if (lv >= 9){
+    const gold = tierM(0xffd54a, 0x9a6a00);
+    const cy = Math.min(h + 0.02, 3.42), cz = -0.3;
+    add(g, G.cyl, gold, 0, cy, cz, 0.46, 0.1, 0.46);
+    for (let k = -2; k <= 2; k++){
+      const tip = add(g, G.cone, gold, k * 0.17, cy + 0.17, cz, 0.14, 0.26, 0.14);
+      tip.castShadow = false;
+      add(g, G.sph, tierM(0xff5b9d, 0x882244), k * 0.17, cy + 0.31, cz, 0.07);
+    }
+  }
+
+  /* --- 10: zeminde dönen kraliyet halkası --- */
+  if (lv >= 10){
+    const halo = new THREE.Mesh(
+      new THREE.TorusGeometry(1.95, 0.055, 6, 40),
+      new THREE.MeshBasicMaterial({ color: 0xffd54a, transparent: true, opacity: 0.55, depthWrite: false }));
+    halo.rotation.x = Math.PI / 2;
+    halo.position.y = 0.06;
+    halo.userData.own = true;
+    g.add(halo);
+    g.userData.anim.push({ type: 'breathe', obj: halo, ph: 0 });
+    g.userData.anim.push({ type: 'pulse', obj: halo, ph: 0 });
+  }
+
+  return g;
+}
+
+/* tezgahın süs grubunu seviyeye göre yeniden kur */
+function refreshStallTier(i){
+  const p = pads[i];
+  if (!p || !p.holder) return;
+  if (p.tier){
+    p.tier.traverse(o => { if (o.isMesh && o.userData.own) o.geometry.dispose(); });
+    p.holder.remove(p.tier);
+    p.tier = null;
+  }
+  const t = buildStallTier(p.def.k, stationLevel(i));
+  if (t.children.length){
+    p.holder.add(t);
+    p.tier = t;
+  }
+}
+
+async function dressWorld(){
+  try {
+    const [treeA, treeB, treeC, lamp, bench, cloud, sign] = await Promise.all([
+      loadProp('tree_a'), loadProp('tree_b'), loadProp('tree_c'),
+      loadProp('lamp'), loadProp('bench'), loadProp('cloud'), loadProp('sign'),
+    ]);
+    const treeSrc = [treeA, treeB, treeC];
+
+    treeSpots.forEach((t, i) => {
+      scene.remove(t.group);
+      const c = prepProp(treeSrc[i % 3].clone(true), t.s * 0.92);
+      c.position.set(t.x, 0, t.z);
+      c.rotation.y = (i * 1.7) % (Math.PI * 2);
+      scene.add(c);
+    });
+
+    lampSpots.forEach(g => {
+      scene.remove(g);
+      const c = prepProp(lamp.clone(true), 1.0);
+      c.position.copy(g.position);
+      scene.add(c);
+    });
+
+    clouds.forEach((g, i) => {
+      while (g.children.length) g.remove(g.children[0]);
+      const c = prepProp(cloud.clone(true), 2.4 + (i % 3) * 0.55);
+      c.traverse(o => { if (o.isMesh) o.castShadow = false; });
+      g.add(c);
+    });
+
+    for (const [x, z, rot] of [[-9, 9.5, 0], [9, 9.5, 0], [-16, -9.5, Math.PI], [16, -9.5, Math.PI]]){
+      const b = prepProp(bench.clone(true), 1.0);
+      b.position.set(x, 0, z);
+      b.rotation.y = rot;
+      scene.add(b);
+    }
+
+    for (const x of [-3.4, 3.4]){
+      const s2 = prepProp(sign.clone(true), 1.0);
+      s2.position.set(x, 0, 16.8);
+      s2.rotation.y = Math.PI;
+      scene.add(s2);
+    }
+  } catch (e){
+    console.warn('Blender varlıkları yüklenemedi, basit modeller kullanılıyor:', e);
+  }
+}
+dressWorld();
+
+/* ==================================================================
    TEZGAHLAR
    ================================================================== */
 /* Denge: her seviye ~3x gelir, satın alma süresi 15→123 sn (toplam ~10 dk).
    Renkler nadirlik bandı: gri→yeşil→mavi→mor→turuncu→kırmızı→altın→pembe→turkuaz→efsanevi
    zone: 0 = ana plaza, 1 = ikinci bölge (ilk rebirth'te açılır) */
 const STATIONS = [
-  {n:'Limonata Standı',   p:15,      i:2,      k:'stand',    c:0xd9d9d9, zone:0},
-  {n:'Kurabiye Fırını',   p:80,      i:6,      k:'oven',     c:0x8ed36b, zone:0},
-  {n:'Dondurma Arabası',  p:320,     i:18,     k:'icecream', c:0x6fb8ff, zone:0},
-  {n:'Meyve Suyu Barı',   p:1200,    i:55,     k:'juice',    c:0xb07bff, zone:0},
-  {n:'Pasta Atölyesi',    p:4500,    i:160,    k:'cake',     c:0xffb340, zone:0},
-  {n:'Donut Kulesi',      p:16000,   i:480,    k:'donut',    c:0xff7a59, zone:0},
-  {n:'Çikolata Fabrikası',p:55000,   i:1400,   k:'choco',    c:0xffd400, zone:1},
-  {n:'Şeker Diyarı',      p:190000,  i:4200,   k:'candy',    c:0xff6b9d, zone:1},
-  {n:'Gökkuşağı Kafe',    p:650000,  i:13000,  k:'rainbow',  c:0x54e0d0, zone:1},
-  {n:'Tatlı Krallığı',    p:2200000, i:40000,  k:'castle',   c:0xff5bf0, zone:1},
+  {n:'Limonata Standı',   p:18,      i:3,      k:'stand',    c:0xd9d9d9, zone:0, e:'🍋'},
+  {n:'Kurabiye Fırını',   p:70,      i:10,     k:'oven',     c:0x8ed36b, zone:0, e:'🍪'},
+  {n:'Dondurma Arabası',  p:230,     i:34,     k:'icecream', c:0x6fb8ff, zone:0, e:'🍦'},
+  {n:'Meyve Suyu Barı',   p:750,     i:110,    k:'juice',    c:0xb07bff, zone:0, e:'🧃'},
+  {n:'Pasta Atölyesi',    p:2400,    i:360,    k:'cake',     c:0xffb340, zone:0, e:'🍰'},
+  {n:'Donut Kulesi',      p:7500,    i:1100,   k:'donut',    c:0xff7a59, zone:0, e:'🍩'},
+  {n:'Çikolata Fabrikası',p:23000,   i:3600,   k:'choco',    c:0xffd400, zone:1, e:'🍫'},
+  {n:'Şeker Diyarı',      p:70000,   i:12000,  k:'candy',    c:0xff6b9d, zone:1, e:'🍬'},
+  {n:'Gökkuşağı Kafe',    p:210000,  i:38000,  k:'rainbow',  c:0x54e0d0, zone:1, e:'🌈'},
+  {n:'Tatlı Krallığı',    p:650000,  i:120000, k:'castle',   c:0xff5bf0, zone:1, e:'👑'},
 ];
+/* Her tezgahın `i` değeri artık PASİF gelir değil, TEK MÜŞTERİ servis değeridir.
+   Kuyruğa gelen müşteriyi servis ederek kazanılır; pasif gelir bunun %3.5'idir. */
 
 /* Bölge 1: ana plazanın arkasında, offset ile ayrı bir platform */
 const ZONE1_OFFSET = { x: 0, z: -120 };
@@ -687,6 +1307,29 @@ function buildStation(kind){
 /* ==================================================================
    ETİKET + HALI
    ================================================================== */
+/* kuyruk rozeti dokusu (sayı + VİP rengi) */
+const badgeTexCache = new Map();
+function queueBadgeTex(n, vip){
+  const key = n + '|' + (vip ? 1 : 0);
+  if (badgeTexCache.has(key)) return badgeTexCache.get(key);
+  const t = canvasTex(128, 128, (g) => {
+    g.beginPath();
+    if (g.roundRect) g.roundRect(16, 12, 96, 96, 34); else g.rect(16, 12, 96, 96);
+    g.fillStyle = vip ? '#ffb300' : '#ffffff';
+    g.fill();
+    g.lineWidth = 7;
+    g.strokeStyle = vip ? '#a86f00' : '#ff5b5b';
+    g.stroke();
+    g.font = '900 62px system-ui,sans-serif';
+    g.textAlign = 'center';
+    g.textBaseline = 'middle';
+    g.fillStyle = vip ? '#5a3800' : '#3a332b';
+    g.fillText(String(n), 64, 62);
+  });
+  badgeTexCache.set(key, t);
+  return t;
+}
+
 function labelSprite(title, sub, w){
   const t = textTex(title, {sub, w:512, h:256, size:60, subSize:58, lw:12});
   const s = new THREE.Sprite(new THREE.SpriteMaterial({map:t, transparent:true, depthWrite:false, depthTest:true}));
@@ -706,16 +1349,94 @@ const pads = STATIONS.map((s, i) => {
   scene.add(ring);
 
   const label = labelSprite(s.n, s.p + ' 💰');
-  label.position.set(s.x, s.z > 0 ? 3.9 : 3.4, s.z);
+  /* tabelalar Blender modellerinin üstünde kalsın (en yüksek model ~3.7) */
+  label.position.set(s.x, 4.35, s.z);
   scene.add(label);
 
-  return { i, def: s, pad, ring, label, built: false, obj: null, pop: 0 };
+  /* kuyruk rozeti: uzaktan hangi tezgahta müşteri var görünür */
+  const badge = new THREE.Sprite(new THREE.SpriteMaterial({
+    map: queueBadgeTex(1, false), transparent: true, depthWrite: false, depthTest: false,
+  }));
+  badge.scale.set(0.95, 0.95, 1);
+  badge.position.set(s.x, 5.2, s.z);
+  badge.visible = false;
+  scene.add(badge);
+
+  /* sahipsiz tezgah: küçük ve gölgesiz önizleme (satın alınca büyür) */
+  const preview = makeStationVisual(s.k, true);
+  preview.position.set(s.x, 0, s.z);
+  preview.scale.setScalar(0.8);
+  scene.add(preview);
+
+  return { i, def: s, pad, ring, label, badge, preview, built: false, obj: null, pop: 0, qShown: -1, qVip: false };
 });
+
+/* etiket: sahipsizken fiyat, sahipliyken gelir yazar */
+function refreshPadLabel(i){
+  const p = pads[i];
+  const owned = state.owned[i] !== null && state.owned[i] !== undefined;
+  const sub = owned
+    ? 'Sv ' + stationLevel(i) + ' · ' + fmt(serveValueAt(i)) + ' 💰'
+    : Math.round(p.def.p * Math.pow(0.92, state.rebirths)) + ' 💰';
+  const oldMap = p.label.material.map;
+  p.label.material.map = textTex(p.def.n, {sub, w:512, h:256, size:60, subSize:58, lw:12});
+  p.label.material.needsUpdate = true;
+  if (oldMap) oldMap.dispose();
+}
+
+function resetPad(i){
+  const p = pads[i];
+  if (p.obj){ scene.remove(p.obj); p.obj = null; }
+  if (p.holder){ scene.remove(p.holder); p.holder = null; }
+  if (p.staffObj){ scene.remove(p.staffObj); p.staffObj = null; }
+  if (p.ownRing){ scene.remove(p.ownRing); p.ownRing = null; }
+  p.built = false;
+  p.denied = false;
+  p.pop = 0;
+  p.pad.visible = true;
+  p.ring.visible = true;
+  p.ring.scale.setScalar(1);
+  if (p.preview) p.preview.visible = true;
+  refreshPadLabel(i);
+}
+
+/* modeller gelince önizlemeleri ve kurulu tezgahları değiştir */
+async function loadStallModels(){
+  const kinds = [...new Set(STATIONS.map(s => s.k))];
+  const pairs = await Promise.all(kinds.map(async k => {
+    try { return [k, await loadProp('stall_' + k)]; } catch(e){ return [k, null]; }
+  }));
+  let n = 0;
+  for (const [k, m] of pairs){
+    if (!m) continue;
+    STALL_MODELS[k] = m;
+    const b = new THREE.Box3().setFromObject(m);
+    STALL_DIMS[k] = { w: b.max.x - b.min.x, h: b.max.y - b.min.y, d: b.max.z - b.min.z };
+    n++;
+  }
+  if (!n){ console.warn('Tezgah modelleri yüklenemedi, prosedürel modeller kullanılıyor'); return; }
+  pads.forEach(p => {
+    if (p.built && p.holder){
+      if (p.obj) p.holder.remove(p.obj);
+      p.obj = makeStationVisual(p.def.k, false);
+      p.holder.add(p.obj);
+    } else {
+      scene.remove(p.preview);
+      p.preview = makeStationVisual(p.def.k, true);
+      p.preview.position.set(p.def.x, 0, p.def.z);
+      p.preview.scale.setScalar(0.8);
+      scene.add(p.preview);
+    }
+  });
+  console.log('Blender tezgah modelleri: ' + n + '/' + kinds.length);
+}
+loadStallModels();
 
 /* ==================================================================
    PLAZA DOLGUSU (fıskiye, bank, çiçek, bayrak, tezgah süsleri)
    ================================================================== */
 let plazaDecor = null, decorAnimated = [];
+let clockT = 0;
 try {
   plazaDecor = buildDecor(THREE, { scene, M, G, add });
   decorAnimated = plazaDecor.userData.animated || [];
@@ -732,9 +1453,14 @@ function startNpcs(){
   try {
     npcSystem = createNpcSystem(THREE, {
       scene,
-      helpers: { M, G, add },
-      count: 9,
-      owned: state.owned,
+      count: 16,
+      stations: STATIONS.map(s => ({ x: s.x, z: s.z, emoji: s.e })),
+      getOwned: () => state.owned,
+      getLevel: (i) => stationLevel(i),
+      getPlayer: () => playerPos,
+      getQueueBonus: () => skillLevel('queue'),
+      isRush: () => rush.active,
+      onLost: () => { state.lost++; },
     });
   } catch (e) {
     console.warn('NPC sistemi yüklenemedi:', e);
@@ -944,6 +1670,12 @@ function burst(x, y, z, colors, n){
     spawnParticle(x, y, z, colors[i % colors.length]);
 }
 
+/* kutlama patlaması: kameranın önüne düşsün, ekranı kaplamasın */
+function burstAhead(colors, n, y){
+  const fx = -Math.sin(yaw), fz = -Math.cos(yaw);
+  burst(playerPos.x + fx*3.4, y === undefined ? 2.4 : y, playerPos.z + fz*3.4, colors, n);
+}
+
 function updateParticles(dt){
   for (const p of particlePool){
     if (!p.visible) continue;
@@ -956,7 +1688,8 @@ function updateParticles(dt){
     p.rotation.y += u.ry*dt;
     u.life -= dt;
     if (u.life <= 0 || p.position.y < -0.4){ p.visible = false; continue; }
-    p.scale.setScalar(Math.min(1, u.life * 1.8));
+    const dCam = p.position.distanceTo(camera.position);
+    p.scale.setScalar(Math.min(1, u.life * 1.8) * Math.min(1, dCam / 3));
   }
 }
 
@@ -1057,128 +1790,23 @@ menuScene.add(diorama);
       add(grp, G.sphLo, M(0xff5b5b), 0, 0.42, 0, 0.18);
     }
     grp.userData.phase = i / 7 * Math.PI * 2;
-    grp.userData.radius = 13.5 + (i % 3) * 1.6;
+    grp.userData.radius = 7.2 + (i % 3) * 0.9;
     grp.userData.speed = 0.22 + (i % 3) * 0.05;
-    grp.userData.height = -1.5 + (i % 4) * 1.1;
-    menuScene.add(grp);
+    grp.userData.height = 1.4 + (i % 4) * 0.9;
+    diorama.add(grp);
     orbitCandies.push(grp);
   }
 }
 
-/* --- tüm menü UI tek grupta: ekrana göre ölçeklenir --- */
-const menuUI = new THREE.Group();
-menuUI.position.set(0, 0, 5.2);
-menuScene.add(menuUI);
-menuUI.userData.planeZ = 5.2;
-
-/* --- 3D başlık --- */
-{
-  const t = canvasTex(1024, 384, (g) => {
-    g.textAlign = 'center';
-    g.lineJoin = 'round';
-    g.font = '900 150px system-ui,sans-serif';
-    g.strokeStyle = '#c93b3b'; g.lineWidth = 22;
-    g.strokeText('TATLI', 512, 130);
-    g.fillStyle = '#ff5b5b'; g.fillText('TATLI', 512, 130);
-    g.strokeStyle = '#b87900'; g.lineWidth = 22;
-    g.strokeText('TYCOON', 512, 290);
-    g.fillStyle = '#ffc21a'; g.fillText('TYCOON', 512, 290);
-    g.strokeStyle = 'rgba(255,255,255,.9)'; g.lineWidth = 8;
-    g.font = '900 52px system-ui,sans-serif';
-    g.strokeText('KENDİ TATLI İMPARATORLUĞUNU KUR', 512, 356);
-    g.fillStyle = '#fff'; g.fillText('KENDİ TATLI İMPARATORLUĞUNU KUR', 512, 356);
-  });
-  const sign = new THREE.Mesh(G.plane, new THREE.MeshBasicMaterial({map:t, transparent:true, depthWrite:false}));
-  sign.scale.set(7.2, 2.7, 1);
-  menuUI.add(sign);
-  var titleSign = sign;
-}
-
-/* --- 3D butonlar --- */
-const menuButtons = [];
-function make3DButton(text, color, x, y, z, w, h, action){
-  const grp = new THREE.Group();
-  grp.position.set(x, y, 0);
-  const body = new THREE.Mesh(new THREE.BoxGeometry(w, h, 0.55), M(color));
-  body.castShadow = true;
-  grp.add(body);
-  const lip = new THREE.Mesh(new THREE.BoxGeometry(w * 0.98, h * 0.98, 0.3), M(0x000000, {transparent:true, opacity:0.2}));
-  lip.position.set(0, -0.1, -0.14);
-  grp.add(lip);
-  const t = textTex(text, {w:512, h:192, size:96, lw:14, bg:null});
-  const face = new THREE.Mesh(G.plane, new THREE.MeshBasicMaterial({map:t, transparent:true, depthWrite:false}));
-  face.scale.set(w * 0.82, w * 0.82 * (192/512), 1);
-  face.position.z = 0.29;
-  grp.add(face);
-  grp.userData = { action, body, face, baseY: y, hover: 0 };
-  menuUI.add(grp);
-  menuButtons.push(grp);
-  return grp;
-}
-make3DButton('TEK OYNA',    0x4cb42f, 0, -1.30, 0, 4.4, 1.05, () => beginSolo());
-make3DButton('ODA KUR',     0xf08c00, 0, -2.55, 0, 4.4, 1.05, () => beginHost());
-make3DButton('ODAYA KATIL', 0x2b8fe0, 0, -3.80, 0, 4.4, 1.05, () => openJoin());
-make3DButton('🎨 GÖRÜNÜM',  0x9b8bff, 0, -5.05, 0, 4.4, 0.85, () => openCosmetics());
-
-/* --- isim alanı (3D panel + HTML input overlay) --- */
-const namePanel = new THREE.Group();
-namePanel.position.set(0, 0.10, 0);
-{
-  const bg = new THREE.Mesh(new THREE.BoxGeometry(4.4, 0.95, 0.28), M(0xfffdf7));
-  bg.castShadow = true;
-  namePanel.add(bg);
-  const t = textTex('ADIN', {w:512, h:128, size:70, color:'#b3a894', stroke:null, bg:null});
-  const lb = new THREE.Mesh(G.plane, new THREE.MeshBasicMaterial({map:t, transparent:true, depthWrite:false}));
-  lb.scale.set(1.3, 0.325, 1);
-  lb.position.set(-1.55, 0, 0.16);
-  namePanel.add(lb);
-}
-menuUI.add(namePanel);
-
-/* başlık y konumu */
-titleSign.position.set(0, 1.80, 0);
-titleSign.scale.set(5.4, 2.03, 1);
-
-const nameInput = document.createElement('input');
-nameInput.maxLength = 12;
-nameInput.placeholder = 'Oyuncu';
+/* --- menü HTML katmanı; 3D sahne sadece diorama/parallax arka plan --- */
+const nameInput = document.getElementById('nameInput');
 nameInput.value = localStorage.getItem('tatli_name') || '';
-Object.assign(nameInput.style, {
-  position:'fixed', left:'0', top:'0', width:'0', height:'0',
-  border:'0', padding:'0', margin:'0', opacity:'0', pointerEvents:'none',
-  fontSize:'16px'
-});
-document.body.appendChild(nameInput);
-
-/* isim panelinin ekran konumunu her karede güncelle */
-function projectToScreen(obj, out){
-  const v = new THREE.Vector3();
-  obj.getWorldPosition(v);
-  v.project(menuCam);
-  out.x = (v.x * 0.5 + 0.5) * innerWidth;
-  out.y = (-v.y * 0.5 + 0.5) * innerHeight;
-  out.visible = v.z < 1;
-  return out;
+const menuEl = document.getElementById('menu');
+const bestScoreEl = document.getElementById('bestScore');
+function refreshMenuHud(){
+  bestScoreEl.textContent = fmt(Number(localStorage.getItem('tatli_best') || 0));
 }
-const nameScreen = {x:0, y:0, visible:false};
-
-const hitPlane = new THREE.Plane(new THREE.Vector3(0,0,1), 0);
-const menuRay = new THREE.Raycaster();
-const mouseNdc = new THREE.Vector2();
-
-function menuPick(cx, cy){
-  mouseNdc.set((cx / innerWidth) * 2 - 1, -(cy / innerHeight) * 2 + 1);
-  menuRay.setFromCamera(mouseNdc, menuCam);
-  const hits = menuRay.intersectObjects(menuButtons, true);
-  if (hits.length) {
-    let o = hits[0].object;
-    while (o && !o.userData.action) o = o.parent;
-    if (o) return o;
-  }
-  const np = menuRay.intersectObject(namePanel, true);
-  if (np.length) return namePanel;
-  return null;
-}
+refreshMenuHud();
 
 /* ==================================================================
    SES — prosedürel + CC0 örnekler (jsDelivr, Kenney, CC0)
@@ -1199,6 +1827,12 @@ function audio(){
   }
   if (actx.state === 'suspended') actx.resume();
   return actx;
+}
+
+let _aj = null;
+function AJ(){
+  if (!_aj){ const a = audio(); if (!a) return null; _aj = createAudioJuice(a); }
+  return _aj;
 }
 
 function loadSfx(){
@@ -1257,6 +1891,43 @@ function stopMusic(){
   if (musicSrc){ try { musicSrc.stop(); } catch(e){} musicSrc = null; }
 }
 
+/* --- kalabalık ambiyansı: filtrelenmiş gürültü + yavaş nefes (prosedürel) --- */
+let ambSrc = null, ambGain = null;
+function startAmbience(){
+  if (localStorage.getItem('tatli_music') === '0') return;
+  const a = audio();
+  if (!a || ambSrc) return;
+  const len = Math.floor(a.sampleRate * 3);
+  const buf = a.createBuffer(1, len, a.sampleRate);
+  const d = buf.getChannelData(0);
+  let last = 0;
+  for (let i = 0; i < len; i++){
+    last = last * 0.965 + (Math.random() * 2 - 1) * 0.035;
+    d[i] = last * 3.4;
+  }
+  ambSrc = a.createBufferSource();
+  ambSrc.buffer = buf;
+  ambSrc.loop = true;
+  const bp = a.createBiquadFilter();
+  bp.type = 'bandpass';
+  bp.frequency.value = 430;
+  bp.Q.value = 0.55;
+  const lp = a.createBiquadFilter();
+  lp.type = 'lowpass';
+  lp.frequency.value = 1400;
+  ambGain = a.createGain();
+  ambGain.gain.value = 0.0001;
+  const lfo = a.createOscillator();
+  lfo.frequency.value = 0.07;
+  const lfoGain = a.createGain();
+  lfoGain.gain.value = 150;
+  lfo.connect(lfoGain).connect(bp.frequency);
+  ambSrc.connect(bp).connect(lp).connect(ambGain).connect(a.destination);
+  ambSrc.start();
+  lfo.start();
+  ambGain.gain.linearRampToValueAtTime(0.03, a.currentTime + 5);
+}
+
 function beep(freq, dur, type, vol){
   const a = audio();
   if (!a) return;
@@ -1308,6 +1979,8 @@ function sfxHatch(){
   setTimeout(() => playSample('coin', 0.2, 0.2), 260);
 }
 function sfxClick(){ if (!playSample('toggle', 0.18)) beep(660, 0.06, 'square', 0.07); }
+/* mükemmel servis: parlak çan arpeji */
+function sfxPerfect(){ arpeggio([1046, 1318, 1568, 2093], 45); }
 function sfxNo(){ beep(180, 0.14, 'sawtooth', 0.08); }
 
 /* --- kamera sarsıntısı (konum tabanlı, sıfırlanır) --- */
@@ -1329,16 +2002,24 @@ let hitstop = 0;
    OYUN DURUMU
    ================================================================== */
 const SAVE_KEY = 'tatli_save_v2';
+const START_COINS = 40;
 
 const state = {
   mode: 'menu',              // menu | game
   netMode: 'solo',           // solo | host | client
-  coins: 0,
+  coins: START_COINS,
   rate: 1,
   rebirths: 0,
   pets: [],                  // [{id, name, mult, color}]
   petLevel: 0,
   owned: new Array(STATIONS.length).fill(null),
+  levels: new Array(STATIONS.length).fill(1),
+  staff: new Array(STATIONS.length).fill(false),
+  served: 0,
+  lost: 0,
+  vipServed: 0,
+  bestCombo: 0,
+  skills: { speed:0, reach:0, combo:0, tip:0, queue:0 },
   totalEarned: 0,
   playTime: 0,
   myId: 'me',
@@ -1380,10 +2061,49 @@ function petMult(){
   for (const p of state.pets) m += p.mult;
   return m;
 }
+function stationLevel(i){ return state.levels[i] || 1; }
+function serveValueAt(i){ return levelServeValue(STATIONS[i].i, stationLevel(i)); }
+
+/* Teorik gelir hızı: her tezgahın müşteri akışı x servis değeri. Sıralama ve görevler bunu kullanır. */
 function incomePerSec(){
-  let base = 1;
-  for (let i=0;i<STATIONS.length;i++) if (state.owned[i] !== null) base += STATIONS[i].i;
+  let base = 0;
+  for (let i=0;i<STATIONS.length;i++){
+    if (state.owned[i] === null) continue;
+    base += serveValueAt(i) / levelSpawnGap(stationLevel(i));
+  }
   return base * rebirthMult() * petMult();
+}
+
+/* Tezgahların kendi kendine ürettiği (servis edilmeyen) gelir. */
+function passiveIncome(){
+  let base = 0;
+  for (let i=0;i<STATIONS.length;i++){
+    if (state.owned[i] === null) continue;
+    base += serveValueAt(i);
+  }
+  return base * TUNING.passiveRate * rebirthMult() * petMult();
+}
+
+/* --- görev zinciri (src/quests.js) --- */
+const quest = createQuestSystem({
+  stations: STATIONS,
+  onComplete: (q) => {
+    if (state.mode !== 'game' || state.netMode === 'client') return;
+    state.coins += q.reward;
+    state.totalEarned += q.reward;
+    toast('📜 ' + q.title + '\n+' + fmt(q.reward) + ' 💰');
+    sfxBig();
+    saveGame();
+  },
+});
+function questStats(){
+  return {
+    owned: state.owned.filter(o => o !== null).length,
+    rate: incomePerSec(),
+    pets: state.pets.length,
+    online: state.netMode !== 'solo',
+    coins: state.coins,
+  };
 }
 
 /* --- toast + floater --- */
@@ -1410,6 +2130,398 @@ function floater(text, worldPos, color){
 }
 
 /* ==================================================================
+   SERVİS DÖNGÜSÜ — kombo, tatlı saati, seviye, personel
+   ================================================================== */
+const combo = createCombo();
+const rush = createRush();
+const staffTimers = new Array(STATIONS.length).fill(0);
+let nearStation = -1;
+let rhythmPos = 0.5;
+const RHYTHM_PERFECT = 0.085;
+const RHYTHM_GOOD = 0.17;
+
+function isMine(i){
+  return state.owned[i] !== null && (state.netMode === 'solo' || state.owned[i] === state.myId);
+}
+
+function nearestStation(maxDist){
+  let best = -1, bd = maxDist === undefined ? 99 : maxDist;
+  for (let i=0;i<STATIONS.length;i++){
+    const s = STATIONS[i];
+    const d = Math.hypot(playerPos.x - s.x, playerPos.z - s.z);
+    if (d < bd){ bd = d; best = i; }
+  }
+  nearStation = best;
+  return best;
+}
+
+function sfxServed(count){
+  const f = 540 + Math.min(14, count) * 20;
+  beep(f, 0.09, 'triangle', 0.11);
+  setTimeout(() => beep(f * 1.25, 0.08, 'sine', 0.06), 55);
+}
+
+/* Kuyruğun önündeki müşteriyi servis et. */
+function serveAt(i){
+  if (state.mode !== 'game' || !npcSystem) return false;
+  if (i < 0 || i >= STATIONS.length || !isMine(i)) return false;
+  if (Math.hypot(playerPos.x - STATIONS[i].x, playerPos.z - STATIONS[i].z) > serveReach() + 0.6) return false;
+  const info = npcSystem.queueInfo(i);
+  if (!info) return false;
+  const npc = npcSystem.serve(i);
+  if (!npc) return false;
+
+  const def = STATIONS[i];
+  const speed = speedFactor(info.wait, info.patience);
+  const vip = !!npc.vip;
+  /* ritim zamanlaması: ibre merkeze ne kadar yakınsa o kadar çok bahşiş */
+  const timing = Math.abs(rhythmPos - 0.5);
+  const timed = timing < RHYTHM_PERFECT ? 1.8 : timing < RHYTHM_GOOD ? 1.25 : 1;
+  rhythmEl.classList.remove('hit');
+  void rhythmEl.offsetWidth;
+  rhythmEl.classList.add('hit');
+  combo.hit();
+  const gain = Math.floor(
+    servePayout(def.i, stationLevel(i), { combo: combo.mult, speed, rush: rush.active })
+    * rebirthMult() * petMult() * (vip ? 3 : 1) * (1 + 0.06 * skillLevel('tip')) * timed
+  );
+  state.coins += gain;
+  state.totalEarned += gain;
+  state.served++;
+  if (vip) state.vipServed++;
+  state.bestCombo = Math.max(state.bestCombo, combo.count);
+
+  const fast = info.wait < 1.1;
+  const perfect = timed > 1.5;
+  vmKick = 1;
+  spawnCoinFx(new THREE.Vector3(npc.x, 1.5, npc.z));
+  floater((vip ? '⭐ ' : '') + (perfect ? 'MÜKEMMEL ' : timed > 1 ? 'İYİ ' : fast ? 'HIZLI ' : '') + '+' + fmt(gain),
+    { x: def.x, y: 3.1, z: def.z }, vip ? '#ffb300' : perfect ? '#7bf06a' : timed > 1 ? '#b6ff8f' : '#ffe14d');
+  if (perfect){ sfxPerfect(); burst(def.x, 2.6, def.z, [0xffffff, 0x7bf06a], 16); }
+  else if (fast) sfxServed(combo.count + 6);
+  if (combo.count > 1) floater('x' + combo.mult.toFixed(1), { x: def.x, y: 3.9, z: def.z }, '#ff9ecb');
+  if (vip){ burst(def.x, 2.6, def.z, [0xffd400, 0xffffff], 18); sfxBig(); AJ()?.vipArrive(); }
+  burst(def.x, 2.2, def.z, [0xffd400, 0xffffff, def.c], 7 + Math.min(8, combo.count));
+  burst(npc.x, 1.5, npc.z, [0xffd400, 0xffffff], 6);
+  sfxServed(combo.count);
+  AJ()?.coinStreak(combo.count);
+  if (state.netMode !== 'solo') broadcastServe(i, gain, vip);
+  if (vip) flashScreen(0.28);
+  shake(0.03);
+  if (combo.count % 5 === 0){
+    toast('🔥 ' + combo.count + ' KOMBO!');
+    sfxBig();
+    burstAhead([0xffd400, 0xff6b9d, 0x54b8ff], 24, 2.6);
+  }
+  checkAchievements();
+  return true;
+}
+
+/* Servis efektini odadaki diğer oyunculara yayınla. */
+function broadcastServe(i, g, v){
+  const msg = { t: 'fx', i, g, v: v ? 1 : 0 };
+  if (state.netMode === 'host'){
+    for (const c of clientConns) if (c.open) c.send(msg);
+  } else if (state.netMode === 'client' && hostConn && hostConn.open){
+    hostConn.send(msg);
+  }
+}
+
+/* Uzaktan gelen servis: aynı tezgahta parıltı + para yazısı. */
+function remoteServeFx(d){
+  const i = d.i | 0;
+  if (!(i >= 0 && i < STATIONS.length)) return;
+  const def = STATIONS[i];
+  burst(def.x, 2.0, def.z, d.v ? [0xffd400, 0xffffff, 0xff6b9d] : [0xffd400, 0xffffff], d.v ? 16 : 8);
+  floater((d.v ? '⭐ ' : '') + '+' + fmt(d.g || 0), { x: def.x, y: 2.9, z: def.z }, d.v ? '#ffb300' : '#ffe14d');
+  if (d.v) flashScreen(0.16);
+}
+
+/* Personel: otomatik servis (kombosuz, %65 ödeme). */
+function autoServe(i){
+  if (!npcSystem || state.owned[i] === null) return false;
+  const info = npcSystem.queueInfo(i);
+  if (!info) return false;
+  if (!npcSystem.serve(i)) return false;
+  const def = STATIONS[i];
+  const speed = speedFactor(info.wait, info.patience);
+  const vip = !!info.vip;
+  const gain = Math.floor(
+    servePayout(def.i, stationLevel(i), { combo: 1, speed, rush: rush.active })
+    * TUNING.staffPay * rebirthMult() * petMult() * (vip ? 2 : 1) * (1 + 0.06 * skillLevel('tip'))
+  );
+  state.coins += gain;
+  state.totalEarned += gain;
+  state.served++;
+  floater('+' + fmt(gain), { x: def.x, y: 2.6, z: def.z }, '#8fdcff');
+  return true;
+}
+
+function upgradeAt(i){
+  if (state.mode !== 'game' || !isMine(i)) return;
+  const lv = stationLevel(i);
+  if (lv >= MAX_LEVEL){ sfxNo(); return; }
+  const cost = upgradeCost(STATIONS[i].p, lv);
+  if (state.coins < cost){
+    sfxNo();
+    toast('Yükseltme için para lazım!\n' + fmt(cost) + ' 💰');
+    return;
+  }
+  state.coins -= cost;
+  state.levels[i] = lv + 1;
+  const def = STATIONS[i];
+  sfxServed(6);
+  AJ()?.levelUp(lv + 1);
+  shake(0.1);
+  burst(def.x, 1.6, def.z, [0xffd400, 0xff6b9d, 0xffffff], 20);
+  floater('SEVİYE ' + (lv + 1), { x: def.x, y: 3.6, z: def.z }, '#ffd400');
+  applyStationLevel(i);
+  /* kademe atlandıysa süsün adını söyle: yükseltmenin karşılığı görünsün */
+  const step = TIER_STEPS.find(s => s.lv === lv + 1);
+  if (step){
+    toast('✨ ' + def.n + '\nSeviye ' + (lv + 1) + ' — ' + step.text);
+    burst(def.x, 2.2, def.z, [0xffd400, 0xffffff, 0x54b8ff], 26);
+  }
+  updateHud();
+  saveGame();
+}
+
+function hireAt(i){
+  if (state.mode !== 'game' || !isMine(i)) return;
+  if (state.staff[i]){ sfxNo(); return; }
+  if (stationLevel(i) < TUNING.staffLevel){
+    sfxNo();
+    toast('Personel için önce\n' + TUNING.staffLevel + '. seviyeye getir!');
+    return;
+  }
+  const cost = staffCost(STATIONS[i].p);
+  if (state.coins < cost){
+    sfxNo();
+    toast('Personel için para lazım!\n' + fmt(cost) + ' 💰');
+    return;
+  }
+  state.coins -= cost;
+  state.staff[i] = true;
+  const def = STATIONS[i];
+  spawnStaffMesh(i);
+  sfxBig();
+  shake(0.12);
+  burst(def.x, 1.8, def.z, [0x54b8ff, 0xffffff, 0x6fdc4f], 24);
+  toast('👩‍🍳 Personel işe başladı!\n' + def.n + ' artık kendi servis yapıyor');
+  updateHud();
+  saveGame();
+}
+
+function applyStationLevel(i){
+  const p = pads[i];
+  const scale = 1 + 0.045 * (stationLevel(i) - 1);
+  if (p.holder) p.holder.scale.setScalar(scale);
+  refreshStallTier(i);
+  refreshPadLabel(i);
+}
+
+function spawnStaffMesh(i){
+  const p = pads[i];
+  if (p.staffObj) return;
+  const chef = makeAvatar(6, 'chef');
+  chef.scale.setScalar(0.92);
+  chef.position.set(p.def.x, 0, p.def.z - 1.15);
+  chef.rotation.y = 0;
+  scene.add(chef);
+  p.staffObj = chef;
+}
+
+/* ==================================================================
+   YETENEKLER — kalıcı oyuncu yükseltmeleri
+   ================================================================== */
+const SKILLS = [
+  {id:'speed', icon:'🏃', name:'Hız',          desc:'Yürüme hızı +%8',               max:5, base:120, grow:2.1},
+  {id:'reach', icon:'🎯', name:'Servis Menzili', desc:'+0.6 birim yakından servis',   max:5, base:180, grow:2.1},
+  {id:'combo', icon:'🔥', name:'Kombo Süresi', desc:'Kombo penceresi +0.7 sn',        max:5, base:240, grow:2.2},
+  {id:'tip',   icon:'💰', name:'Bahşiş',       desc:'Servis geliri +%6',              max:5, base:300, grow:2.2},
+  {id:'queue', icon:'👥', name:'Kuyruk',       desc:'Tüm tezgahlara +1 kuyruk yeri',  max:3, base:450, grow:2.4},
+];
+
+function skillLevel(id){ return state.skills[id] || 0; }
+function skillCost(def){
+  const lv = skillLevel(def.id);
+  return lv >= def.max ? Infinity : Math.round(def.base * Math.pow(def.grow, lv));
+}
+function serveReach(){ return 4.2 + 0.6 * skillLevel('reach'); }
+
+function applySkillEffects(){
+  combo.setWindowBonus(0.7 * skillLevel('combo'));
+}
+
+function buySkill(id){
+  const def = SKILLS.find(s => s.id === id);
+  if (!def) return;
+  const lv = skillLevel(id);
+  if (lv >= def.max){ sfxNo(); return; }
+  const cost = skillCost(def);
+  if (state.coins < cost){
+    sfxNo();
+    toast('Yetenek için para lazım!\n' + fmt(cost) + ' 💰');
+    return;
+  }
+  state.coins -= cost;
+  state.skills[id] = lv + 1;
+  applySkillEffects();
+  sfxBig();
+  burstAhead([0xffd400, 0xffffff, 0x54b8ff], 24, 2.4);
+  toast(def.icon + ' ' + def.name + ' Sv ' + (lv + 1));
+  renderSkills();
+  updateHud();
+  saveGame();
+}
+
+function renderSkills(){
+  const el = $('skillList');
+  if (!el) return;
+  el.innerHTML = SKILLS.map(def => {
+    const lv = skillLevel(def.id);
+    const cost = skillCost(def);
+    const maxed = lv >= def.max;
+    const pips = '●'.repeat(lv) + '○'.repeat(Math.max(0, def.max - lv));
+    return `<div style="display:flex;align-items:center;gap:9px;padding:8px 10px;border-radius:13px;background:#f6f1e6;margin-bottom:6px">
+      <span style="font-size:20px">${def.icon}</span>
+      <div style="flex:1;min-width:0">
+        <div style="font-weight:900;font-size:13.5px">${def.name} <span style="color:#e08b00;letter-spacing:1px;font-size:11px">${pips}</span></div>
+        <div style="font-size:11px;color:#9a8f7d;font-weight:700">${def.desc}</div>
+      </div>
+      <button class="btn ${maxed ? 'ghost' : 'orange'}" data-skill="${def.id}" style="width:auto;margin:0;padding:8px 11px;font-size:12.5px;border-radius:11px" ${maxed || state.coins < cost ? 'disabled' : ''}>${maxed ? 'MAX' : fmt(cost)}</button>
+    </div>`;
+  }).join('');
+  el.querySelectorAll('[data-skill]').forEach(b => {
+    b.onclick = () => buySkill(b.dataset.skill);
+  });
+  const total = SKILLS.reduce((n, d) => n + skillLevel(d.id), 0);
+  $('skillSub').textContent = total + ' seviye açık · rebirth\'te korunur';
+}
+
+/* --- servis arayüzü --- */
+const spEl = $('stationPanel'), spNameEl = $('spName'), spLvEl = $('spLv'), spInfoEl = $('spInfo');
+const spUpEl = $('spUp'), spStaffEl = $('spStaff');
+const serveBtnEl = $('serveBtn');
+const rhythmEl = $('rhythm');
+const rhythmNeedle = rhythmEl ? rhythmEl.querySelector('.rNeedle') : null;
+const rushEl = $('rushBanner');
+const comboGlowEl = $('comboGlow'), flashEl = $('flash'), coinsPillEl = coinsEl.closest('.pill');
+
+/* --- servis anı: altın para uçuşu + HUD nabzı --- */
+const coinGeo = new THREE.CylinderGeometry(0.17, 0.17, 0.05, 12);
+const coinMat = new THREE.MeshBasicMaterial({ color: 0xffd400 });
+const coinFx = [];
+
+function spawnCoinFx(from){
+  let fx = coinFx.find(c => !c.active);
+  if (!fx){
+    if (coinFx.length >= 14) return;
+    fx = { mesh: new THREE.Mesh(coinGeo, coinMat) };
+    scene.add(fx.mesh);
+    coinFx.push(fx);
+  }
+  fx.active = true;
+  fx.t = 0;
+  fx.dur = 0.42;
+  fx.from = from.clone();
+  fx.mesh.visible = true;
+  fx.mesh.position.copy(from);
+}
+
+function popCoins(){
+  coinsPillEl.classList.remove('pop');
+  void coinsPillEl.offsetWidth;
+  coinsPillEl.classList.add('pop');
+}
+
+function flashScreen(power){
+  flashEl.style.transition = 'none';
+  flashEl.style.opacity = String(power);
+  requestAnimationFrame(() => {
+    flashEl.style.transition = 'opacity .38s';
+    flashEl.style.opacity = '0';
+  });
+}
+
+function updateCoinFx(dt){
+  const aim = new THREE.Vector3();
+  for (const c of coinFx){
+    if (!c.active) continue;
+    c.t += dt / c.dur;
+    const k = Math.min(1, c.t);
+    aim.set(0, -0.12, -0.25).applyEuler(camera.rotation).add(camera.position);
+    const p = c.from.clone().lerp(aim, k);
+    p.y += Math.sin(k * Math.PI) * 1.35;
+    c.mesh.position.copy(p);
+    c.mesh.rotation.y += dt * 16;
+    c.mesh.rotation.x += dt * 10;
+    c.mesh.scale.setScalar(0.75 + (1 - k) * 0.6);
+    if (k >= 1){
+      c.active = false;
+      c.mesh.visible = false;
+      popCoins();
+    }
+  }
+}
+let spSig = '';
+let serveSig = '';
+
+function updateServiceUI(){
+  const i = nearestStation(serveReach());
+  const owned = i >= 0 && isMine(i);
+  const lv = owned ? stationLevel(i) : 1;
+  const q = owned && npcSystem ? npcSystem.queueLen(i) : 0;
+
+  if (owned && state.mode === 'game' && !document.querySelector('.sheet.on')){
+    const upCost = lv >= MAX_LEVEL ? Infinity : upgradeCost(STATIONS[i].p, lv);
+    const sCost = staffCost(STATIONS[i].p);
+    const canUp = lv < MAX_LEVEL && state.coins >= upCost;
+    const canStaff = !state.staff[i] && lv >= TUNING.staffLevel && state.coins >= sCost;
+    const sig = [i, lv, q, state.staff[i] ? 1 : 0, canUp ? 1 : 0, canStaff ? 1 : 0].join('|');
+    spEl.classList.add('on');
+    if (sig !== spSig){
+      spSig = sig;
+      spNameEl.textContent = STATIONS[i].n;
+      spLvEl.textContent = 'Sv ' + lv + (lv >= MAX_LEVEL ? ' ★' : '');
+      /* sıradaki görsel kademe: yükseltmenin ne getireceği panelde görünsün */
+      const nextTier = TIER_STEPS.find(s => s.lv > lv);
+      spInfoEl.innerHTML = 'Servis ' + fmt(serveValueAt(i)) + ' 💰 · Kuyruk ' + q + '/' + levelQueue(lv)
+        + (nextTier ? '<br><span style="color:#e08b00">Sv ' + nextTier.lv + ': ' + nextTier.text + '</span>' : '');
+      spUpEl.innerHTML = lv >= MAX_LEVEL ? 'TAM SEVİYE' : 'Yükselt<small>' + fmt(upCost) + ' 💰</small>';
+      spUpEl.disabled = !canUp;
+      spStaffEl.innerHTML = state.staff[i] ? 'Personel ✓' : 'Personel<small>' + (lv < TUNING.staffLevel ? 'Sv ' + TUNING.staffLevel + ' gerek' : fmt(sCost) + ' 💰') + '</small>';
+      spStaffEl.disabled = !canStaff;
+    }
+  } else if (spEl.classList.contains('on')){
+    spEl.classList.remove('on');
+    spSig = '';
+  }
+
+  const heat = state.mode === 'game' ? Math.min(1, Math.max(0, (combo.count - 2) / 9)) : 0;
+  comboGlowEl.style.opacity = String(heat * 0.9);
+
+  const canServe = owned && q > 0 && state.mode === 'game';
+  serveBtnEl.classList.toggle('on', canServe);
+  /* servis ritmi: ibre yeşil bölgedeyken servis et → mükemmel bahşiş */
+  rhythmEl.classList.toggle('on', canServe);
+  if (canServe){
+    rhythmPos = 0.5 + 0.5 * Math.sin(elapsed * 4.4);
+    rhythmNeedle.style.left = (3 + rhythmPos * 94).toFixed(2) + '%';
+  }
+  if (canServe){
+    const info = npcSystem ? npcSystem.queueInfo(i) : null;
+    const sSig = i + '|' + q + '|' + (info && info.vip ? 1 : 0);
+    if (sSig !== serveSig){
+      serveSig = sSig;
+      serveBtnEl.dataset.n = String(q);
+      serveBtnEl.innerHTML = (info && info.vip ? '⭐ VİP' : '🍰 SERVİS') + '<small>dokun / E</small>';
+      serveBtnEl.title = STATIONS[i].n + ' · ' + q + ' müşteri bekliyor';
+    }
+  }
+}
+
+/* ==================================================================
    KAYIT / YÜKLE
    ================================================================== */
 function saveGame(){
@@ -1423,6 +2535,13 @@ function saveGame(){
       petLevel: state.petLevel,
       eggCost: state.eggCost,
       owned: state.owned,
+      levels: state.levels,
+      staff: state.staff,
+      served: state.served,
+      lost: state.lost,
+      vipServed: state.vipServed,
+      bestCombo: state.bestCombo,
+      skills: state.skills,
       totalEarned: state.totalEarned,
       playTime: state.playTime,
       lastSeen: Date.now(),
@@ -1431,6 +2550,7 @@ function saveGame(){
       name: state.myName,
       color: state.myColor,
       hat: state.myHat,
+      quest: quest.serialize(),
     }));
   } catch(e){}
 }
@@ -1453,12 +2573,19 @@ function buildPad(i){
 
   p.pad.visible = false;
   p.ring.visible = false;
+  if (p.preview) p.preview.visible = false;
 
-  const obj = buildStation(p.def.k);
-  obj.position.set(p.def.x, 0, p.def.z);
+  const obj = makeStationVisual(p.def.k, false);
+  const holder = new THREE.Group();
+  holder.position.set(p.def.x, 0, p.def.z);
+  obj.position.set(0, 0, 0);
   obj.scale.setScalar(0.01);
-  scene.add(obj);
+  holder.scale.setScalar(1 + 0.045 * (stationLevel(i) - 1));
+  holder.add(obj);
+  scene.add(holder);
+  p.holder = holder;
   p.obj = obj;
+  refreshStallTier(i);
 
   /* sahiplik halkası */
   const ownerId = state.owned[i];
@@ -1471,6 +2598,7 @@ function buildPad(i){
 
   burst(p.def.x, 2.0, p.def.z, [0xffd400, 0xff6b9d, 0x54b8ff, 0x6fdc4f], 26);
   sfxBuy();
+  refreshPadLabel(i);
 }
 
 function tryBuy(i){
@@ -1493,6 +2621,8 @@ function tryBuy(i){
   }
   state.coins -= price;
   state.owned[i] = state.myId;
+  if (!Number.isFinite(state.levels[i]) || state.levels[i] < 1) state.levels[i] = 1;
+  state.staff[i] = false;
   if (!state.firstBuyAt && state.sessionStart)
     state.firstBuyAt = performance.now() - state.sessionStart;
 
@@ -1502,13 +2632,12 @@ function tryBuy(i){
   hitstop = 0.07;
   shake(0.14);
   punchFov();
-  setTimeout(() => floater('+' + fmt(def.i) + '/sn', {x:def.x, y:3.2, z:def.z}, '#ffe14d'), 130);
-  setTimeout(() => toast('+' + fmt(def.i) + '/sn\n' + def.n + '!'), 40);
+  setTimeout(() => toast('Servis başı +' + fmt(serveValueAt(i)) + ' 💰\n' + def.n + '!'), 40);
 
   /* ilk tezgah: ekstra kutlama */
   if (state.owned.filter(o => o !== null).length === 1){
     setTimeout(() => {
-      burst(playerPos.x, 2.4, playerPos.z, [0xffd400,0xff6b9d,0x54b8ff,0x6fdc4f,0xb06bff], 40);
+      burstAhead([0xffd400,0xff6b9d,0x54b8ff,0x6fdc4f,0xb06bff], 40);
       sfxBig();
       toast('İLK TEZGAHIN!\nŞimdi para kazanmaya başla 🎉');
     }, 420);
@@ -1531,32 +2660,28 @@ function checkWin(){
 /* ==================================================================
    REBIRTH
    ================================================================== */
+/* Rebirth için yalnızca ana plazadaki 6 tezgah gerekir; Bölge 2 ödüldür. */
 function canRebirth(){
-  return state.owned.every(o => o !== null);
+  for (let i=0;i<STATIONS.length;i++){
+    if (STATIONS[i].zone === 0 && state.owned[i] === null) return false;
+  }
+  return true;
 }
 
 function doRebirth(){
   if (!canRebirth()) return;
   state.rebirths++;
-  state.coins = 0;
+  /* Sıfırdan başlıyoruz ama ilk tezgahları açacak tohum para kalmalı. */
+  state.coins = Math.round(START_COINS * (1 + 0.5 * state.rebirths));
   state.owned.fill(null);
+  state.levels.fill(1);
+  state.staff.fill(false);
+  staffTimers.fill(0);
+  combo.reset();
+  if (npcSystem && npcSystem.reset) npcSystem.reset();
 
   /* sıfırlama maliyetlerini düşür: her rebirth %12 daha hızlı dönüş */
-  const discount = Math.pow(0.92, state.rebirths);
-
-  for (const p of pads){
-    if (p.obj) { scene.remove(p.obj); p.obj = null; }
-    if (p.ownRing) { scene.remove(p.ownRing); p.ownRing = null; }
-    p.built = false;
-    p.pad.visible = true;
-    p.ring.visible = true;
-    /* etiketi güncelle: indirimli fiyat */
-    scene.remove(p.label);
-    const shown = Math.round(p.def.p * discount);
-    p.label = labelSprite(p.def.n, shown + ' 💰');
-    p.label.position.set(p.def.x, p.def.z > 0 ? 3.9 : 3.4, p.def.z);
-    scene.add(p.label);
-  }
+  for (let i=0;i<pads.length;i++) resetPad(i);
 
   /* rebirth görsel ödülü: karakter etrafında altın halka */
   const halo = new THREE.Mesh(new THREE.TorusGeometry(2.6, 0.14, 10, 40), M(0xffd400, {emissive:0xffaa00, emissiveIntensity:0.9}));
@@ -1575,12 +2700,14 @@ function doRebirth(){
     requestAnimationFrame(haloAnim);
   })();
 
-  burst(playerPos.x, 3, playerPos.z, [0xffd400, 0xffe14d, 0xffffff], 70);
+  burstAhead([0xffd400, 0xffe14d, 0xffffff], 70, 3);
+  AJ()?.rebirth();
   shake(0.24);
   hitstop = 0.14;
   punchFov();
   sfxBig();
-  toast('REBIRTH ' + state.rebirths + '!\nGelir x' + rebirthMult().toFixed(1) + '\nFiyatlar %' + Math.round((1-discount)*100) + ' daha ucuz');
+  const discountPct = Math.round((1 - Math.pow(0.92, state.rebirths)) * 100);
+  toast('REBIRTH ' + state.rebirths + '!\nGelir x' + rebirthMult().toFixed(1) + '\nFiyatlar %' + discountPct + ' daha ucuz');
   saveGame();
   updateHud();
   $('winSheet').classList.remove('on');
@@ -1609,10 +2736,39 @@ function rollPet(){
 }
 
 const petOrbiters = [];
+const PET_MODELS = {};
+function petModelKey(id){
+  return id === 'gold' ? 'pet_cat' : 'pet_' + id;
+}
+async function loadPetModels(){
+  const ids = ['cat', 'dog', 'bunny', 'dragon', 'unicorn', 'gold'];
+  await Promise.all(ids.map(async id => {
+    try { PET_MODELS[id] = await loadProp(petModelKey(id)); } catch(e){}
+  }));
+}
+loadPetModels();
+
 function spawnPetMesh(pet){
   const g = new THREE.Group();
   const c = pet.color;
-  if (pet.id === 'cat' || pet.id === 'gold'){
+  const glb = PET_MODELS[pet.id];
+  if (glb){
+    const m = glb.clone(true);
+    m.traverse(o => { if (o.isMesh){ o.castShadow = true; o.receiveShadow = false; } });
+    const b = new THREE.Box3().setFromObject(m);
+    const h = Math.max(0.001, b.max.y - b.min.y);
+    const s = 0.9 / h;
+    m.scale.setScalar(s);
+    m.position.y = -b.min.y * s;
+    g.add(m);
+    if (pet.id === 'gold'){
+      m.traverse(o => { if (o.isMesh && o.material){
+        o.material = o.material.clone();
+        o.material.emissive = new THREE.Color(0xffc400);
+        o.material.emissiveIntensity = 0.45;
+      }});
+    }
+  } else if (pet.id === 'cat' || pet.id === 'gold'){
     add(g, G.sphLo, M(c), 0, 0, 0, 0.62);
     add(g, G.sphLo, M(c), 0, 0.36, 0.06, 0.44);
     add(g, G.cone, M(c), -0.22, 0.6, 0.06, 0.22, 0.34, 0.22);
@@ -1673,7 +2829,7 @@ function hatchEgg(){
   const pet = rollPet();
   addPet(pet);
   sfxHatch();
-  burst(playerPos.x, 1.6, playerPos.z, [pet.color, 0xffd400, 0xffffff], 34);
+  burstAhead([pet.color, 0xffd400, 0xffffff], 34, 1.8);
   toast('🥚 → ' + pet.name + '!\nGelir +%' + Math.round(pet.mult*100));
   renderPets();
   updateHud();
@@ -1701,25 +2857,26 @@ function renderPets(){
 /* ==================================================================
    GÜNLÜK ÖDÜL
    ================================================================== */
-const DAILY = [100, 250, 600, 1500, 4000, 10000, 25000];
+const DAILY = [25, 60, 150, 400, 1000, 2500, 6000];
 function dayIndex(){ return Math.floor(Date.now() / 86400000); }
 
 function checkDaily(){
+  if ($('rewardSheet').classList.contains('on')) return;
   const today = dayIndex();
   if (state.dailyLast === today) return;
   const continued = state.dailyLast === today - 1;
   const day = continued ? Math.min(state.dailyDay + 1, 7) : 1;
-  state.dailyDay = day;
-  state.dailyLast = today;
   const amt = DAILY[day - 1];
   $('rwTitle').textContent = '🎁 Günlük Ödül';
   $('rwSub').textContent = `${day}. gün${continued && day > 1 ? ' · seri devam ediyor!' : ''}`;
   $('rwAmt').textContent = fmt(amt) + ' 💰';
   $('rwBtn').onclick = () => {
+    state.dailyDay = day;
+    state.dailyLast = today;
     state.coins += amt;
     state.totalEarned += amt;
     $('rewardSheet').classList.remove('on');
-    burst(playerPos.x, 2, playerPos.z, [0xffd400, 0xff6b9d, 0x54b8ff], 30);
+    burstAhead([0xffd400, 0xff6b9d, 0x54b8ff], 30, 2.8);
     sfxBig();
     toast('+' + fmt(amt) + ' 💰');
     updateHud(); saveGame();
@@ -1762,12 +2919,7 @@ function beginHost(){
         for (let i=0;i<state.owned.length;i++){
           if (state.owned[i] === conn.peer){
             state.owned[i] = null;
-            const p = pads[i];
-            if (p.obj){ scene.remove(p.obj); p.obj = null; }
-            if (p.ownRing){ scene.remove(p.ownRing); p.ownRing = null; }
-            p.built = false;
-            p.pad.visible = true;
-            p.ring.visible = true;
+            resetPad(i);
           }
         }
         sendState();
@@ -1841,6 +2993,10 @@ function onNet(d, conn){
       for (const c of clientConns) if (c !== conn && c.open) c.send({t:'emo', e:d.e, id:conn.peer});
       const r = remote.get(conn.peer);
       if (r) showEmojiAbove(r.group.position, d.e);
+    } else if (d.t === 'fx'){
+      /* servis efekti: diğer oyunculara da ilet, kendim de göster */
+      for (const c of clientConns) if (c !== conn && c.open) c.send({t:'fx', i:d.i, g:d.g, v:d.v});
+      remoteServeFx(d);
     }
   } else if (state.netMode === 'client'){
     if (d.t === 's'){
@@ -1849,19 +3005,14 @@ function onNet(d, conn){
           state.owned[i] = d.o[i];
           if (d.o[i] === state.myId){
             state.coins -= Math.round(STATIONS[i].p * Math.pow(0.92, state.rebirths));
-            toast('+' + fmt(STATIONS[i].i) + '/sn\n' + STATIONS[i].n + '!');
-            floater('+' + fmt(STATIONS[i].i) + '/sn', {x:STATIONS[i].x, y:3.2, z:STATIONS[i].z}, '#ffe14d');
+            toast('Servis başı +' + fmt(serveValueAt(i)) + ' 💰\n' + STATIONS[i].n + '!');
+            floater('+' + fmt(serveValueAt(i)) + ' 💰', {x:STATIONS[i].x, y:3.2, z:STATIONS[i].z}, '#ffe14d');
             sfxBuy();
           }
           buildPad(i);
         } else if (d.o[i] === null && state.owned[i] !== null){
           state.owned[i] = null;
-          const p = pads[i];
-          if (p.obj){ scene.remove(p.obj); p.obj = null; }
-          if (p.ownRing){ scene.remove(p.ownRing); p.ownRing = null; }
-          p.built = false;
-          p.pad.visible = true;
-          p.ring.visible = true;
+          resetPad(i);
         }
       }
       const seen = new Set();
@@ -1878,6 +3029,8 @@ function onNet(d, conn){
     } else if (d.t === 'emo'){
       const src = d.id ? remote.get(d.id) : null;
       showEmojiAbove(src ? src.group.position : playerPos, d.e);
+    } else if (d.t === 'fx'){
+      remoteServeFx(d);
     }
   }
 }
@@ -1966,7 +3119,7 @@ function saveBest(){
    BAŞARIMLAR
    ================================================================== */
 const ACHIEVEMENTS = [
-  {id:'first',   icon:'🥇', name:'İlk Adım',        desc:'İlk tezgahını aç',                  test:() => state.totalEarned > 0 || state.owned.some(o=>o!==null)},
+  {id:'first',   icon:'🥇', name:'İlk Adım',        desc:'İlk tezgahını aç',                  test:() => state.owned.some(o=>o!==null)},
   {id:'three',   icon:'🍦', name:'Tatlıcı',          desc:'3 tezgah aç',                       test:() => state.owned.filter(o=>o!==null).length >= 3},
   {id:'half',    icon:'🍰', name:'Pastane',          desc:'5 tezgah aç',                       test:() => state.owned.filter(o=>o!==null).length >= 5},
   {id:'all',     icon:'👑', name:'Tatlı Kralı',      desc:'Bütün tezgahları aç',               test:() => state.owned.every(o=>o!==null)},
@@ -1978,6 +3131,9 @@ const ACHIEVEMENTS = [
   {id:'million', icon:'🏦', name:'Milyoner',         desc:'Toplam 1M kazan',                   test:() => state.totalEarned >= 1000000},
   {id:'fast',    icon:'⚡', name:'Hızlı Başlangıç',  desc:'5 sn içinde ilk tezgahı aç',        test:() => state.firstBuyAt > 0 && state.firstBuyAt < 5000},
   {id:'daily',   icon:'📅', name:'Sadık Müşteri',    desc:'Günlük ödülü topla',                test:() => state.dailyDay >= 1},
+  {id:'combo10', icon:'🔥', name:'Kombo Ustası',     desc:'10\'luk kombo yap',                 test:() => state.bestCombo >= 10},
+  {id:'skill3',  icon:'⚡', name:'Yetenekli',        desc:'3 yetenek seviyesi aç',             test:() => SKILLS.reduce((n, d) => n + skillLevel(d.id), 0) >= 3},
+  {id:'vip',     icon:'⭐', name:'VİP Ağırlama',     desc:'Bir VİP müşteriyi servis et',        test:() => state.served >= 1 && state.vipServed >= 1},
 ];
 
 const unlockedAch = new Set();
@@ -1989,7 +3145,8 @@ function checkAchievements(){
       setTimeout(() => {
         toast('⭐ ' + a.name + '\n' + a.desc);
         sfxBig();
-        burst(playerPos.x, 2.4, playerPos.z, [0xffd400, 0xffffff, 0xff6b9d], 30);
+        AJ()?.achievement();
+        burstAhead([0xffd400, 0xffffff, 0xff6b9d], 30);
       }, 800);
     }
   }
@@ -2131,19 +3288,29 @@ function nextGoal(){
   const owned = state.owned.filter(o => o !== null).length;
   const total = STATIONS.length;
 
-  if (owned === 0) return {k:'g0', icon:'🎯', text:'Kırmızı halıya yürü ve ilk tezgahını aç'};
-  if (owned === 1) return {k:'g1', icon:'🎯', text:'Gelirin artıyor! Sıradaki tezgahı aç'};
-  if (owned === 2) return {k:'g2', icon:'🥚', text:'Pet yumurtası al, gelirin çarpanlansın'};
-  if (owned < 5)  return {k:'g3', icon:'🎯', text:`${5 - owned} tezgah daha aç`};
-  if (state.pets.length === 0) return {k:'g4', icon:'🥚', text:'Pet almayı unutma!'};
-  if (owned < total) return {k:'g5', icon:'🎯', text:`${total - owned} tezgah daha aç`};
-  if (state.rebirths === 0) return {k:'g6', icon:'🔄', text:'Hepsi açık! Şimdi REBIRTH yap'};
-  return {k:'g7', icon:'✨', text:`Rebirth ${state.rebirths + 1} için tezgahları yeniden aç`};
+  if (owned === 0) return {k:'g0', icon:'🎯', text:'Halıya yürü ve ilk tezgahını aç'};
+  if (state.served < 1) return {k:'g1', icon:'🍰', text:'Müşteri gelince E / SERVİS ile servis yap'};
+  if (state.served < 4) return {k:'g2', icon:'🔥', text:'Peş peşe servis yap, kombo kazan'};
+  if (owned === 1 && stationLevel(0) === 1) return {k:'g3', icon:'⬆️', text:'Tezgahın yanında YÜKSELT ile güçlendir'};
+  if (owned === 1) return {k:'g4', icon:'🎯', text:'Sıradaki tezgahı aç (ok onu gösteriyor)'};
+  if (state.pets.length === 0 && owned >= 3) return {k:'g5', icon:'🥚', text:'Pet yumurtası al, servis gelirin çarpılsın'};
+  if (state.staff.every(s => !s) && owned >= 3) return {k:'g6', icon:'👩‍🍳', text:'Bir tezgaha personel al, o kendi servis yapsın'};
+  if (owned < 5) return {k:'g7', icon:'🎯', text:`${5 - owned} tezgah daha aç`};
+  if (owned < total) return {k:'g8', icon:'🎯', text:`${total - owned} tezgah daha aç`};
+  if (state.rebirths === 0) return {k:'g9', icon:'🔄', text:'Hepsi açık! Şimdi REBIRTH yap'};
+  return {k:'g10', icon:'✨', text:`Rebirth ${state.rebirths + 1} için tezgahları yeniden aç`};
 }
 
 let goalAge = 0;
 function updateGoal(dt){
-  const g = nextGoal();
+  const qs = quest.getState(questStats());
+  /* İlk dakika öğretici hedefler anlatılır: servis → kombo → yükseltme.
+     Sonra görev zinciri devralır. */
+  const tutorialDone = state.served >= 4 && stationLevel(0) >= 2;
+  const showQuest = !!qs.active && state.netMode !== 'client' && tutorialDone;
+  const g = showQuest
+    ? {k:'q' + qs.index, icon:'📜', text:qs.active.title}
+    : nextGoal();
   if (g.k !== goalKey){
     goalKey = g.k;
     goalIconEl.textContent = g.icon;
@@ -2153,6 +3320,11 @@ function updateGoal(dt){
     goalEl.style.transform = 'translateX(-50%) scale(1)';
     goalAge = 0;
     beep(880, 0.08, 'sine', 0.06);
+  }
+  /* görev ilerlemesi her karede değişebilir: yazıyı beep'siz tazele */
+  if (showQuest){
+    const t = g.text + ' · ' + fmt(Math.floor(qs.progress)) + '/' + fmt(qs.active.goal);
+    if (goalTextEl.textContent !== t) goalTextEl.textContent = t;
   }
   goalAge += dt;
   /* uzun süre aynı hedefse nefes animasyonu */
@@ -2171,7 +3343,14 @@ function updateHud(){
   hudCoinsShown += (target - hudCoinsShown) * 0.35;
   if (Math.abs(target - hudCoinsShown) < 1) hudCoinsShown = target;
   coinsEl.textContent = fmt(hudCoinsShown);
-  rateEl.textContent = '+' + fmt(incomePerSec()) + ' /sn';
+  if (combo.count > 0 && state.mode === 'game'){
+    rateEl.textContent = '🔥 x' + combo.mult.toFixed(1) + ' kombo';
+    rateEl.style.color = '#e08b00';
+  } else {
+    const r = incomePerSec();
+    rateEl.textContent = '≈' + (r < 10 ? (Math.round(r * 10) / 10) : fmt(r)) + '/sn';
+    rateEl.style.color = '';
+  }
   const rm = rebirthMult();
   if (state.rebirths > 0){
     multPill.style.display = '';
@@ -2198,6 +3377,15 @@ addEventListener('keydown', e => {
   if (e.code === 'Escape'){
     document.querySelectorAll('.sheet.on').forEach(s => s.classList.remove('on'));
   }
+  if (state.mode !== 'game') return;
+  if (e.code === 'KeyE' || e.code === 'Space'){
+    e.preventDefault();
+    if (!e.repeat){
+      if (nearStation >= 0) serveAt(nearStation);
+    }
+  } else if (e.code === 'KeyU' && !e.repeat){
+    if (nearStation >= 0) upgradeAt(nearStation);
+  }
 });
 addEventListener('keyup', e => { keys[e.code] = false; });
 
@@ -2207,25 +3395,10 @@ const look = { id:null, x:0, y:0 };
 const LOOK_SPEED = 0.0034;
 
 /* menü tıklaması */
-const raycaster = new THREE.Raycaster();
 
 addEventListener('pointerdown', e => {
-  if (state.mode === 'menu'){
-    const hit = menuPick(e.clientX, e.clientY);
-    if (hit === namePanel){
-      audio();
-      nameInput.focus();
-      return;
-    }
-    if (hit && hit.userData.action){
-      audio();
-      sfxClick();
-      hit.scale.setScalar(0.94);
-      setTimeout(() => hit.scale.setScalar(1), 110);
-      hit.userData.action();
-    }
-    return;
-  }
+  if (state.mode === 'menu') return;   /* menü tıklamaları HTML katmanında */
+  if (e.target && e.target.closest && e.target.closest('button,.sheet,#stationPanel,#serveBtn,#emojiBar')) return;
 
   /* oyun içi — joystick yalnızca dokunmatik cihazlarda */
   if (isTouch && e.clientX < innerWidth * 0.45 && e.clientY > innerHeight * 0.35){
@@ -2241,15 +3414,7 @@ addEventListener('pointerdown', e => {
 }, {passive:true});
 
 addEventListener('pointermove', e => {
-  if (state.mode === 'menu'){
-    const hit = menuPick(e.clientX, e.clientY);
-    for (const b of menuButtons){
-      const on = (hit === b) ? 1 : 0;
-      b.userData.hover += (on - b.userData.hover) * 0.25;
-    }
-    renderer.domElement.style.cursor = hit ? 'pointer' : 'default';
-    return;
-  }
+  if (state.mode === 'menu') return;
 
   if (e.pointerId === stick.id){
     let dx = e.clientX - stick.cx, dy = e.clientY - stick.cy;
@@ -2304,6 +3469,7 @@ function beginSolo(){
 
 function startGame(){
   state.mode = 'game';
+  menuEl.classList.add('off');
   document.getElementById('loading')?.remove();
   hudEl.classList.add('on');
   topRightEl.classList.add('on');
@@ -2321,27 +3487,52 @@ function startGame(){
   state.firstBuyAt = 0;
   startNpcs();
 
-  if (isTouch) hintEl.textContent = 'Sol yarı: yürü · Sağ yarı: etrafa bak';
-  else hintEl.textContent = 'WASD ile yürü · Fare ile bak · Kırmızı halıya bas';
+  if (isTouch) hintEl.textContent = 'Sol yarı: yürü · Sağ yarı: bak · SERVİS ile müşteriye dokun';
+  else hintEl.textContent = 'WASD yürü · Fare bak · E servis · U yükselt';
   setTimeout(() => hintEl.style.opacity = '0', 7000);
 
   /* hedef sistemi sıfırla */
   goalKey = '';
+  combo.reset();
+  applySkillEffects();
+  rush.reset();
+  staffTimers.fill(0);
   updateGoal(0);
 
   if (state.netMode === 'host') setRoomTag(roomCodeEl.textContent);
 
   startMusic();
+  startAmbience();
 
   /* kayıtlı oyunu yükle (sadece solo) */
   if (state.netMode === 'solo'){
     const d = loadGame();
-    if (d){
-      state.coins = d.coins || 0;
+    if (d){      state.coins = d.coins || 0;
       state.rebirths = d.rebirths || 0;
       state.pets = d.pets || [];
       state.petLevel = d.petLevel || 0;
       state.eggCost = d.eggCost || 500;
+      state.served = d.served || 0;
+      state.lost = d.lost || 0;
+      state.vipServed = d.vipServed || 0;
+      state.bestCombo = d.bestCombo || 0;
+      if (d.skills && typeof d.skills === 'object'){
+        for (const k of Object.keys(state.skills)){
+          const lv = Math.floor(Number(d.skills[k]));
+          state.skills[k] = Number.isFinite(lv) ? Math.min(9, Math.max(0, lv)) : 0;
+        }
+      }
+      state.levels = new Array(STATIONS.length).fill(1);
+      state.staff = new Array(STATIONS.length).fill(false);
+      if (Array.isArray(d.levels)){
+        for (let i=0;i<d.levels.length && i<STATIONS.length;i++){
+          const lv = Math.floor(Number(d.levels[i]));
+          state.levels[i] = Number.isFinite(lv) ? Math.min(MAX_LEVEL, Math.max(1, lv)) : 1;
+        }
+      }
+      if (Array.isArray(d.staff)){
+        for (let i=0;i<d.staff.length && i<STATIONS.length;i++) state.staff[i] = !!d.staff[i];
+      }
       state.totalEarned = d.totalEarned || 0;
       state.playTime = d.playTime || 0;
       state.dailyDay = d.dailyDay || 0;
@@ -2354,6 +3545,7 @@ function startGame(){
           if (d.owned[i] !== null){
             state.owned[i] = state.myId;
             buildPad(i);
+            if (state.staff[i]) spawnStaffMesh(i);
           }
         }
       }
@@ -2361,9 +3553,14 @@ function startGame(){
         const def = PET_TYPES.find(t => t.id === p.id) || PET_TYPES[0];
         spawnPetMesh(def);
       }
+      /* görev zinciri: eski kayıtta indeks yoksa hak edilenleri ödülsüz geç */
+      if (d.quest) quest.load(d.quest);
+      else { quest.reset(); quest.fastForward(questStats()); }
       /* çevrimdışı kazanç */
       const away = Math.max(0, (Date.now() - (d.lastSeen || Date.now())) / 1000);
-      const offline = Math.min(away, 4 * 3600) * incomePerSec() * 0.5;
+      /* Çevrimdışı: pasif gelir + potansiyelin küçük bir kısmı (personel etkisi). */
+      const offlineRate = passiveIncome() + incomePerSec() * 0.12;
+      const offline = Math.min(away, TUNING.offlineCapHours * 3600) * offlineRate * TUNING.offlineMult;
       if (offline > 1){
         state.coins += offline;
         state.totalEarned += offline;
@@ -2373,7 +3570,9 @@ function startGame(){
         setTimeout(() => toast('Tekrar hoş geldin!'), 600);
       }
     }
-    setTimeout(checkDaily, 1600);
+    /* ilk oturumda günlük ödül 30 sn sonra; kayıtlı oyuncuda hemen */
+    setTimeout(checkDaily, d ? 2200 : 30000);
+    applySkillEffects();
   }
 
   updateHud();
@@ -2385,29 +3584,41 @@ function backToMenu(){
   leaveRoom();
   state.mode = 'menu';
   state.netMode = 'solo';
+  menuEl.classList.remove('off');
+  refreshMenuHud();
 
-  for (const p of pads){
-    if (p.obj){ scene.remove(p.obj); p.obj = null; }
-    if (p.ownRing){ scene.remove(p.ownRing); p.ownRing = null; }
-    p.built = false;
-    p.pad.visible = true;
-    p.ring.visible = true;
-  }
+  state.coins = START_COINS;
+  state.rebirths = 0;
+  state.owned.fill(null);
+  state.levels.fill(1);
+  state.staff.fill(false);
+  state.served = 0;
+  state.lost = 0;
+  state.vipServed = 0;
+  state.bestCombo = 0;
+  state.skills = { speed:0, reach:0, combo:0, tip:0, queue:0 };
+  applySkillEffects();
+  state.pets = [];
+  state.eggCost = 500;
+  staffTimers.fill(0);
+  combo.reset();
+  rush.reset();
+  if (npcSystem) npcSystem.reset();
+  quest.reset();
+
+  for (let i=0;i<pads.length;i++) resetPad(i);
   for (const o of petOrbiters){ scene.remove(o.obj); }
   petOrbiters.length = 0;
   if (playerAvatar){ scene.remove(playerAvatar); playerAvatar = null; }
   for (const p of particlePool) p.visible = false;
 
-  state.coins = 0;
-  state.rebirths = 0;
-  state.owned.fill(null);
-  state.pets = [];
-  state.eggCost = 500;
-
   hudEl.classList.remove('on');
   topRightEl.classList.remove('on');
   hintEl.classList.remove('on');
   hideGoal();
+  spEl.classList.remove('on');
+  serveBtnEl.classList.remove('on');
+  rushEl.classList.remove('on');
   crossEl.classList.remove('on');
   stickEl.classList.remove('on');
   multPill.style.display = 'none';
@@ -2416,24 +3627,29 @@ function backToMenu(){
   stopMusic();
 
   /* isim girişine geri dön */
-  setTimeout(() => nameInput.focus(), 100);
+  setTimeout(() => { if (!isTouch) nameInput.focus(); }, 100);
 }
 
 /* ==================================================================
    UI BAĞLANTILARI
    ================================================================== */
 $('lbBtn').onclick = () => { renderLeaderboard(); $('lbSheet').classList.add('on'); sfxClick(); };
+$('skillBtn').onclick = () => { renderSkills(); $('skillSheet').classList.add('on'); sfxClick(); };
 $('achBtn').onclick = () => { checkAchievements(); renderAchievements(); $('achSheet').classList.add('on'); sfxClick(); };
 $('eggBtn').onclick = () => { renderPets(); $('eggSheet').classList.add('on'); sfxClick(); };
 $('rebBtn').onclick = () => {
   $('rebMult').textContent = 'x' + rebirthMult().toFixed(1);
-  $('rebNext').textContent = 'Sonraki: x' + (rebirthMult() + 0.5).toFixed(1);
-  $('rebSub').textContent = canRebirth() ? 'Tüm tezgahlar açık! Hazırsın.' : 'Önce bütün tezgahları aç';
+  $('rebNext').textContent = 'Sonraki: x' + (rebirthMult() + 0.4).toFixed(1);
+  $('rebSub').textContent = canRebirth() ? 'Ana plaza tamam! Hazırsın.' : 'Önce ana plazadaki 6 tezgahı aç';
   $('rebDo').disabled = !canRebirth();
   $('rebSheet').classList.add('on');
   sfxClick();
 };
 $('leaveBtn').onclick = () => { if (confirm('Ana menüye dön? İlerlemen kaydedilir.')) backToMenu(); };
+serveBtnEl.onclick = (e) => { e.stopPropagation(); if (nearStation >= 0) serveAt(nearStation); };
+spUpEl.onclick = (e) => { e.stopPropagation(); if (nearStation >= 0) upgradeAt(nearStation); };
+spStaffEl.onclick = (e) => { e.stopPropagation(); if (nearStation >= 0) hireAt(nearStation); };
+[serveBtnEl, spUpEl, spStaffEl].forEach(b => b.addEventListener('pointerdown', e => e.stopPropagation()));
 $('hatchBtn').onclick = hatchEgg;
 $('rebDo').onclick = doRebirth;
 $('winReb').onclick = () => { $('winSheet').classList.remove('on'); $('rebBtn').click(); };
@@ -2442,14 +3658,20 @@ document.querySelectorAll('[data-close]').forEach(b => {
   b.onclick = () => b.closest('.sheet').classList.remove('on');
 });
 document.querySelectorAll('.sheet').forEach(s => {
-  s.addEventListener('click', e => { if (e.target === s) s.classList.remove('on'); });
+  s.addEventListener('click', e => { if (e.target === s && s.id !== 'rewardSheet') s.classList.remove('on'); });
 });
 
-nameInput.addEventListener('focus', () => {
-  nameInput.style.pointerEvents = 'auto';
-});
+/* ana menü butonları */
+function menuStart(fn){
+  return () => { audio(); sfxClick(); fn(); };
+}
+$('btnSolo').onclick = menuStart(beginSolo);
+$('btnHost').onclick = menuStart(beginHost);
+$('btnJoin').onclick = menuStart(openJoin);
+$('btnCos').onclick = menuStart(openCosmetics);
+
 nameInput.addEventListener('keydown', e => {
-  if (e.key === 'Enter'){ nameInput.blur(); }
+  if (e.key === 'Enter'){ nameInput.blur(); beginSolo(); }
 });
 
 /* ==================================================================
@@ -2481,20 +3703,23 @@ function tick(){
     menuTime += dt;
     menuAngle += dt * 0.14;
 
-    /* kamera: sabit mesafe, FOV hem yükseklik hem genişliğe göre seçilir */
+    /* kamera: masaüstünde menü solda → diorama sağda; dikeyde ortada */
     const aspect = innerWidth / innerHeight;
-    const dist = 12;
-    const needH = 9.8, needW = 5.8;   // UI kutusu (birim)
-    const fovH = 2 * Math.atan(needH / 2 / dist);
-    const fovW = 2 * Math.atan(needW / 2 / (dist * aspect));
-    menuCam.fov = Math.min(80, Math.max(fovH, fovW) * 180 / Math.PI * 1.06);
-    menuCam.position.set(Math.sin(menuAngle * 0.35) * 0.8, 6.0 + Math.sin(menuTime * 0.5) * 0.18, dist);
-    menuCam.lookAt(0, 6.0, 0);
+    const portrait = aspect < 1.0;
+    if (portrait){
+      menuCam.fov = 65;
+      menuCam.position.set(Math.sin(menuAngle * 0.3) * 0.5, 4.4, 11);
+      menuCam.lookAt(0, 4.4, -9);
+      diorama.scale.setScalar(1.15);
+      diorama.position.set(0, 2.6, -10);
+    } else {
+      menuCam.fov = 50;
+      menuCam.position.set(Math.sin(menuAngle * 0.3) * 0.6, 4.9, 11);
+      menuCam.lookAt(4.0, 4.2, -9);
+      diorama.scale.setScalar(0.72);
+      diorama.position.set(7.5, 4.0, -9);
+    }
     menuCam.updateProjectionMatrix();
-
-    /* menü UI dünya birimi 1:1 — grup sadece konumlanır */
-    menuUI.scale.setScalar(1);
-    menuUI.position.set(0, 6.0, 0);
 
     /* diorama döner */
     diorama.rotation.y += dt * 0.09;
@@ -2512,44 +3737,6 @@ function tick(){
       g.position.set(Math.cos(a) * u.radius, u.height + Math.sin(menuTime * 1.4 + u.phase) * 0.35, Math.sin(a) * u.radius);
       g.rotation.y += dt * 1.1;
       g.rotation.x = Math.sin(menuTime + u.phase) * 0.3;
-    }
-
-    /* başlık sallanır */
-    if (titleSign){
-      titleSign.position.y = 1.85 + Math.sin(menuTime * 1.1) * 0.07;
-      titleSign.rotation.z = Math.sin(menuTime * 0.8) * 0.02;
-    }
-
-    /* buton hover animasyonu */
-    for (const b of menuButtons){
-      const u = b.userData;
-      b.position.y = u.baseY + u.hover * 0.2;
-      b.scale.setScalar(1 + u.hover * 0.055);
-    }
-
-    /* isim paneli ekran konumu */
-    projectToScreen(namePanel, nameScreen);
-    if (nameScreen.visible){
-      const w = Math.min(300, innerWidth * 0.42);
-      const h = Math.max(34, w * 0.16);
-      Object.assign(nameInput.style, {
-        left: (nameScreen.x + w * 0.12) + 'px',
-        top: (nameScreen.y - h/2) + 'px',
-        width: w * 0.70 + 'px',
-        height: h + 'px',
-        opacity: '1',
-        pointerEvents: 'auto',
-        fontSize: Math.round(h * 0.46) + 'px',
-        fontWeight: '900',
-        textAlign: 'center',
-        color: '#4a4238',
-        caretColor: '#ffb300',
-        background: 'transparent',
-        border: '0',
-        borderRadius: '12px',
-        outline: 'none',
-        zIndex: '5'
-      });
     }
 
     updateParticles(dt);
@@ -2573,7 +3760,7 @@ function tick(){
   const moving = wish.lengthSq() > 0.0006;
   if (moving){
     if (wish.length() > 1) wish.normalize();
-    playerPos.addScaledVector(wish, SPEED * dt);
+    playerPos.addScaledVector(wish, SPEED * (1 + 0.08 * skillLevel('speed')) * dt);
 
     /* bölge sınırları: hangi bölgedeysem onun sınırı */
     const dz1 = Math.hypot(playerPos.x - ZONE1_OFFSET.x, playerPos.z - ZONE1_OFFSET.z);
@@ -2585,6 +3772,34 @@ function tick(){
     } else {
       playerPos.x = Math.max(-LIMIT, Math.min(LIMIT, playerPos.x));
       playerPos.z = Math.max(-LIMIT, Math.min(LIMIT, playerPos.z));
+    }
+
+    /* çarpışma: tezgah, havuz ve müşterilerin içine girme */
+    {
+      const dx = playerPos.x, dz = playerPos.z;
+      const d = Math.hypot(dx, dz), R = 2.9;
+      if (d < R && d > 0.0001){
+        playerPos.x = dx / d * R;
+        playerPos.z = dz / d * R;
+      }
+    }
+    for (const s of STATIONS){
+      const dx = playerPos.x - s.x, dz = playerPos.z - s.z;
+      const d = Math.hypot(dx, dz), R = 3.4;
+      if (d < R && d > 0.0001){
+        playerPos.x = s.x + dx / d * R;
+        playerPos.z = s.z + dz / d * R;
+      }
+    }
+    if (npcSystem && npcSystem.npcs){
+      for (const n of npcSystem.npcs){
+        const dx = playerPos.x - n.x, dz = playerPos.z - n.z;
+        const d = Math.hypot(dx, dz), R = 2.6;
+        if (d < R && d > 0.0001){
+          playerPos.x = n.x + dx / d * R;
+          playerPos.z = n.z + dz / d * R;
+        }
+      }
     }
     bob += dt * 12;
     walkPhase += dt * 12;
@@ -2603,10 +3818,11 @@ function tick(){
   }
 
   /* FOV punch: geri yay */
-  if (fovPunch > 0.01 || camera.fov !== 75){
+  const baseFov = innerWidth / innerHeight < 0.85 ? 74 : 68;
+  if (fovPunch > 0.01 || camera.fov !== baseFov){
     fovPunch *= Math.exp(-11 * rawDt);
-    camera.fov = 75 - fovPunch;
-    if (Math.abs(camera.fov - 75) < 0.02){ camera.fov = 75; fovPunch = 0; }
+    camera.fov = baseFov - fovPunch;
+    if (Math.abs(camera.fov - baseFov) < 0.02){ camera.fov = baseFov; fovPunch = 0; }
     camera.updateProjectionMatrix();
   }
 
@@ -2622,12 +3838,15 @@ function tick(){
     }
   }
 
+  /* birinci şahıs tepsisi */
+  updateViewmodel(dt, moving);
+
   /* satın alma */
   for (let i=0;i<STATIONS.length;i++){
     if (state.owned[i] !== null) continue;
     const s = STATIONS[i];
     const d = Math.hypot(playerPos.x - s.x, playerPos.z - s.z);
-    if (d < 3.1) tryBuy(i);
+    if (d < 3.8) tryBuy(i);
   }
 
   /* tezgah pop animasyonu */
@@ -2640,8 +3859,36 @@ function tick(){
       if (p.pop === 0) p.obj.scale.setScalar(1);
     }
     if (p.ring.visible && !p.built){
+      const afford = state.coins >= Math.round(p.def.p * Math.pow(0.92, state.rebirths));
+      const col = afford ? 0x54e85c : 0xffffff;
+      p.ring.material.color.setHex(col);
+      p.ring.material.emissive.setHex(col);
       p.ring.material.emissiveIntensity = 0.25 + Math.sin(elapsed * 2.2 + p.i) * 0.22;
       p.ring.rotation.z += dt * 0.35;
+    }
+  }
+
+  /* kuyruk rozetleri: hangi tezgahta kaç müşteri var */
+  if (npcSystem){
+    for (const p of pads){
+      if (!p.built){ if (p.badge.visible){ p.badge.visible = false; p.qShown = -1; } continue; }
+      const n = npcSystem.queueLen(p.i);
+      const info = n ? npcSystem.queueInfo(p.i) : null;
+      const vip = !!(info && info.vip);
+      if (info && info.patience - info.wait < 2.5) AJ()?.patienceWarn();
+      if (n !== p.qShown || vip !== p.qVip){
+        p.qShown = n;
+        p.qVip = vip;
+        p.badge.visible = n > 0;
+        if (n > 0){
+          p.badge.material.map = queueBadgeTex(Math.min(9, n), vip);
+          p.badge.material.needsUpdate = true;
+        }
+      }
+      if (p.badge.visible){
+        p.badge.position.y = 5.2 + Math.sin(elapsed * 3 + p.i) * 0.08;
+        p.badge.scale.setScalar(vip ? 1.15 : 0.95);
+      }
     }
   }
 
@@ -2669,11 +3916,38 @@ function tick(){
     r.group.rotation.y = r.yaw + Math.PI;
   }
 
-  /* para akışı */
-  const inc = incomePerSec() * dt;
+  /* pasif gelir (tezgahlar kendi kendine az da olsa kazandırır) */
+  const inc = passiveIncome() * dt;
   state.coins += inc;
   state.totalEarned += inc;
   state.playTime += dt;
+
+  /* personel: kuyrukta müşteri varsa otomatik servis */
+  if (state.mode === 'game' && npcSystem){
+    for (let i=0;i<STATIONS.length;i++){
+      if (!state.staff[i] || state.owned[i] === null) continue;
+      staffTimers[i] -= dt;
+      if (staffTimers[i] <= 0 && npcSystem.queueLen(i) > 0){
+        staffTimers[i] = TUNING.staffInterval;
+        autoServe(i);
+      }
+    }
+  }
+
+  /* kombo süresi ve tatlı saati */
+  const _comboBefore = combo.count;
+  combo.update(dt);
+  if (_comboBefore && !combo.count) AJ()?.comboBreak(_comboBefore);
+  AJ()?.update(dt);
+  const rushEvent = rush.update(dt);
+  if (rushEvent === 'start'){
+    rushEl.classList.add('on');
+    toast('🍭 TATLI SAATİ!\nMüşteriler akın ediyor');
+    sfxBig();
+  } else if (rushEvent === 'end'){
+    rushEl.classList.remove('on');
+    toast('Tatlı saati bitti\nYine gelir!');
+  }
 
   /* altın parçacıkları (sahip olunan tezgahlardan ara sıra) */
   if (Math.random() < dt * 1.6){
@@ -2694,11 +3968,11 @@ function tick(){
       sfxNo();
       toast('Bölge 2 kilitli\nÖnce REBIRTH yap!');
     } else {
-      burst(playerPos.x, 1.6, playerPos.z, [0x9b8bff, 0xffffff, 0xffd400], 24);
+      burstAhead([0x9b8bff, 0xffffff, 0xffd400], 24, 1.8);
       whoosh();
       shake(0.1);
       playerPos.set(ZONE1_OFFSET.x, 0, ZONE1_OFFSET.z + 9);
-      burst(playerPos.x, 1.6, playerPos.z, [0x9b8bff, 0xffffff, 0xffd400], 24);
+      burstAhead([0x9b8bff, 0xffffff, 0xffd400], 24, 1.8);
       toast('Bölge 2\'ye hoş geldin!');
       /* sis ve kamera menzilini geçici olarak uzat */
       state.inZone1 = true;
@@ -2709,11 +3983,11 @@ function tick(){
   const dBack = Math.hypot(playerPos.x - portalBack.position.x, playerPos.z - portalBack.position.z);
   if (dBack < 2.6 && portalCooldown === 0){
     portalCooldown = 1.6;
-    burst(playerPos.x, 1.6, playerPos.z, [0x54e0d0, 0xffffff], 24);
+    burstAhead([0x54e0d0, 0xffffff], 24, 1.8);
     whoosh();
     shake(0.1);
     playerPos.set(-13, 0, 0);
-    burst(playerPos.x, 1.6, playerPos.z, [0x54e0d0, 0xffffff], 24);
+    burstAhead([0x54e0d0, 0xffffff], 24, 1.8);
     toast('Ana Plaza');
     state.inZone1 = false;
   }
@@ -2723,28 +3997,71 @@ function tick(){
   const fogFar  = state.inZone1 ? 130 : 95;
   if (scene.fog.far !== fogFar){ scene.fog.far = fogFar; }
 
+  /* gün/gece + hava */
+  updateDayNight(dt);
+
   /* su animasyonu */
   for (const w of decorAnimated){ if (w) w.rotation.y += dt * 0.35; }
+
+  /* tezgah süsleri: balon sallanması, kraliyet halkası */
+  clockT += dt;
+  for (const p of pads){
+    if (!p.tier || !p.tier.userData.anim) continue;
+    for (const a of p.tier.userData.anim){
+      if (a.type === 'bob') a.obj.position.y = a.y0 + Math.sin(clockT * 1.5 + a.ph) * 0.07;
+      else if (a.type === 'breathe') a.obj.scale.setScalar(1 + Math.sin(clockT * 1.9 + a.ph) * 0.035);
+      else if (a.type === 'pulse') a.obj.material.opacity = 0.42 + 0.22 * Math.sin(clockT * 2.4 + a.ph);
+    }
+  }
 
   /* NPC müşteriler */
   if (npcSystem && npcSystem.update) npcSystem.update(dt);
 
+  /* yürüyen müşteriler oyuncunun kişisel alanına girmez (kamera içinden geçmesin) */
+  if (npcSystem && npcSystem.npcs){
+    for (const n of npcSystem.npcs){
+      /* kameranın içine giren müşteriyi gizle (yüz ekranı kaplamasın) */
+      if (n.state !== 'idle'){
+        const dc = Math.hypot(n.x - playerPos.x, n.z - playerPos.z);
+        n.obj.visible = dc > 1.2;
+      }
+      if (n.state === 'queue' || n.state === 'idle') continue;
+      const dx = n.x - playerPos.x, dz = n.z - playerPos.z;
+      const d = Math.hypot(dx, dz), R = 2.8;
+      if (d < R && d > 0.001){
+        n.x = playerPos.x + dx / d * R;
+        n.z = playerPos.z + dz / d * R;
+        n.obj.position.x = n.x;
+        n.obj.position.z = n.z;
+      }
+    }
+  }
+
   /* hedef oku: sıradaki açılmamış tezgahın üstünde zıplar */
   let nextIdx = -1;
-  for (let i=0;i<STATIONS.length;i++){ if (state.owned[i] === null){ nextIdx = i; break; } }
+  for (let i=0;i<STATIONS.length;i++){
+    if (state.owned[i] !== null) continue;
+    if (STATIONS[i].zone === 1 && !zone1Unlocked()) continue;  /* kilitli bölgeye ok göstermeyelim */
+    nextIdx = i;
+    break;
+  }
   if (nextIdx >= 0){
     const s = STATIONS[nextIdx];
-    const near = Math.hypot(playerPos.x - s.x, playerPos.z - s.z) < 3.1;
+    const near = Math.hypot(playerPos.x - s.x, playerPos.z - s.z) < 3.4;
     arrowGroup.visible = !near;
     if (!near){
-      arrowGroup.position.set(s.x, 5.4 + Math.sin(elapsed * 3.2) * 0.35, s.z);
-      arrowGroup.rotation.y = elapsed * 1.6;
+      arrowGroup.position.set(s.x, 2.0 + Math.sin(elapsed * 3.2) * 0.2, s.z + 1.7);
+      arrowGroup.scale.setScalar(0.55);
+      arrowGroup.rotation.y = Math.sin(elapsed * 1.6) * 0.3;
     }
   } else arrowGroup.visible = false;
 
+  updateCoinFx(dt);
   updateParticles(dt);
+  if (state.netMode !== 'client') quest.update(dt, questStats());
   updateHud();
   updateGoal(dt);
+  updateServiceUI();
   setZone1Visual();
   checkAchievements();
 
@@ -2782,13 +4099,35 @@ document.addEventListener('visibilitychange', () => {
   if (document.hidden){ saveBest(); saveGame(); }
 });
 
-/* isim girilince 3D yazıyı güncelle */
+/* isim girilince menüdeki alanı doldur */
 nameInput.value = localStorage.getItem('tatli_name') || '';
 
 setTimeout(() => {
   document.getElementById('loading')?.remove();
-  nameInput.focus();
+  if (!isTouch) nameInput.focus();
   loadSfx();
+  /* test/otomasyon kancası: ?auto=solo ile doğrudan oyuna gir */
+  const qs = new URLSearchParams(location.search);
+  if (qs.get('auto') === 'solo'){
+    setTimeout(() => beginSolo(), 300);
+  }
+  /* ?tod=night / dusk ile günün saatini zorla */
+  const tod = qs.get('tod');
+  if (tod === 'night') dayNight.t = 0.9;
+  else if (tod === 'dusk') dayNight.t = 0.765;
+  else if (tod === 'dawn') dayNight.t = 0.27;
+  /* hata ayıklama kancası: ?debug ile durum okunabilir */
+  if (new URLSearchParams(location.search).has('debug')){
+    window.__game = {
+      state, playerPos, pads, STATIONS, combo, rush, renderer, scene, camera, dayNight,
+      npcSys: () => npcSystem,
+      npcs: () => (npcSystem ? npcSystem.npcs : null),
+      queue: (i) => (npcSystem ? npcSystem.queueInfo(i) : null),
+      serve: serveAt, upgrade: upgradeAt, hire: hireAt, buy: tryBuy,
+      rhythm: () => rhythmPos,
+      setTod: (t) => { dayNight.t = t; updateDayNight(0); },
+    };
+  }
 }, 400);
 
 tick();
